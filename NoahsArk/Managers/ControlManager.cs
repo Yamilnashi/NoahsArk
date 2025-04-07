@@ -1,0 +1,174 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using NoahsArk.Controls;
+
+namespace NoahsArk.Managers
+{
+    public class ControlManager : List<Control>
+    {
+        #region Fields
+        private int _selectedControl = 0;
+        private static SpriteFont _spriteFont;
+        private bool _acceptInput = true;
+        #endregion
+
+        #region Events
+        public event EventHandler FocusChanged;
+        #endregion
+
+        #region Properties
+        public static SpriteFont SpriteFont { get { return _spriteFont; } }
+        #endregion
+
+        #region Constructor
+        public ControlManager(SpriteFont spriteFont) : base()
+        {
+            _spriteFont = spriteFont;
+        }
+        public ControlManager(SpriteFont spriteFont, int capacity) : base(capacity)
+        {
+            _spriteFont = spriteFont;
+        }
+        public ControlManager(SpriteFont spriteFont, IEnumerable<Control> collection) : base(collection)
+        {
+            _spriteFont = spriteFont;
+        }
+        #endregion
+
+        #region Methods
+        public void Update(GameTime gameTime, PlayerIndex playerIndex)
+        {
+            if (this.Count == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                Control control = this[i];
+                if (control.IsEnabled)
+                {
+                    control.Update(gameTime);
+                }
+                if (control.HasFocus)
+                {
+                    control.HandleInput(playerIndex);
+                }
+            }
+
+            if (!_acceptInput)
+            {
+                return;
+            }
+
+            if (InputHandler.ButtonPressed(Buttons.LeftThumbstickUp, playerIndex) ||
+                InputHandler.ButtonPressed(Buttons.DPadUp, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Up))
+            {
+                PreviousControl();
+            }
+
+            if (InputHandler.ButtonPressed(Buttons.LeftThumbstickDown, playerIndex) ||
+                InputHandler.ButtonPressed(Buttons.DPadDown, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Down))
+            {
+                NextControl();
+            }
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Vector2 mouse = InputHandler.MouseAsVector2;
+            for (int i = 0; i < this.Count;  i++)
+            {
+                Control control = this[i];
+                if (control.IsVisible)
+                {
+                    control.Draw(spriteBatch);
+                    if (control.GetBounds().Contains(mouse))
+                    {
+                        ResetFocusOnControls();
+                        control.HasFocus = true;
+                    }
+                }
+            }
+        }
+        public void NextControl()
+        {
+            if (this.Count == 0)
+            {
+                return;
+            }
+
+            int currentControl = _selectedControl;
+            this[_selectedControl].HasFocus = false;
+
+            do
+            {
+                _selectedControl++;
+                if (_selectedControl == this.Count)
+                {
+                    _selectedControl = 0;
+                }
+
+                if (this[_selectedControl].TabStop &&
+                    this[_selectedControl].IsEnabled)
+                {
+                    if (FocusChanged != null)
+                    {
+                        FocusChanged(this[_selectedControl], null);
+                    }
+                    break;
+                }
+            } while (currentControl != _selectedControl);
+
+            this[_selectedControl].HasFocus = true;
+        }
+
+        public void PreviousControl()
+        {
+            if (this.Count == 0)
+            {
+                return;
+            }
+
+            int currentControl = _selectedControl;
+            this[_selectedControl].HasFocus = false;
+
+            do
+            {
+                _selectedControl--;
+                if (_selectedControl < 0)
+                {
+                    _selectedControl = this.Count - 1; // go to the end
+                }
+
+                if (this[_selectedControl].TabStop &&
+                    this[_selectedControl].IsEnabled)
+                {
+                    if (FocusChanged != null)
+                    {
+                        FocusChanged(this[_selectedControl], null);
+                    }
+                    break;
+                }
+            } while (currentControl != _selectedControl);
+
+            this[_selectedControl].HasFocus = true;
+        }
+        #endregion
+
+        #region Private
+        private void ResetFocusOnControls()
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                Control control = this[i];
+                control.HasFocus = false;
+            }
+        }
+        #endregion
+    }
+}
