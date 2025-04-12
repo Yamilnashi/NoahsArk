@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Managers;
@@ -21,6 +22,7 @@ namespace NoahsArk.Controls
         protected Color _color;
         protected Color _focusColor;
         protected string _type;
+        protected Dictionary<string, object> _propertiesDict;
         #endregion
 
         #region Events
@@ -36,8 +38,9 @@ namespace NoahsArk.Controls
         public Vector2 Size { get { return _size; } set { _size = value; } }
         public Color Color { get { return _color; } set { _color = value; } }
         public Color FocusColor { get { return _focusColor; } set { _focusColor = value; } }
-        public SpriteFont SpriteFont { get { return _spriteFont; } }
+        public SpriteFont SpriteFont { get { return _spriteFont; } set { _spriteFont = value; } }
         public string Text { get { return _text; } set { _text = value; } }
+        public Dictionary<string, object> PropertiesDict {  get { return _propertiesDict; } set { _propertiesDict = value; } }
         #endregion
 
         #region Constructor
@@ -47,7 +50,8 @@ namespace NoahsArk.Controls
             _focusColor = Color.Red;
             _isEnabled = true;
             _isVisible = true;
-            _spriteFont = ControlManager.SpriteFont;
+            _spriteFont = ControlManager.SpriteFont("Silver", 28);
+            _propertiesDict = new Dictionary<string, object>();
         }
         #endregion
 

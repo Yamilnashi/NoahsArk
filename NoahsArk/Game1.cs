@@ -28,6 +28,8 @@ namespace NoahsArk
 
         private TitleScreen _titleScreen;
         private StartMenuScreen _startMenuScreen;
+        private LoadGameScreen _loadGameScreen;
+        private GamePlayScreen _gamePlayScreen;
         #endregion
 
         #region Properties
@@ -35,6 +37,8 @@ namespace NoahsArk
         public Rectangle ScreenRectangle { get { return _screenRectangle; } }   
         public TitleScreen TitleScreen { get { return _titleScreen; } }
         public StartMenuScreen StartMenuScreen {  get { return _startMenuScreen; } }
+        public LoadGameScreen LoadGameScreen {  get { return _loadGameScreen; } }
+        public GamePlayScreen GamePlayScreen { get { return _gamePlayScreen; } }
         #endregion
 
         #region Constructor
@@ -52,6 +56,8 @@ namespace NoahsArk
 
             _titleScreen = new TitleScreen(this, _gameStateManager);
             _startMenuScreen = new StartMenuScreen(this, _gameStateManager);
+            _loadGameScreen = new LoadGameScreen(this, _gameStateManager);
+            _gamePlayScreen = new GamePlayScreen(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
             IsFixedTimeStep = true;

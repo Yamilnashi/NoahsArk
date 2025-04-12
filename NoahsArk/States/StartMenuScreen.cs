@@ -71,7 +71,7 @@ namespace NoahsArk.States
         #region Private
         private LinkLabel CreateMenuOption(string optionText)
         {
-            LinkLabel label = new LinkLabel(optionText, Color.Brown, Color.Black);
+            LinkLabel label = new LinkLabel("Silver", 28, optionText, Color.Brown, Color.Black);
             label.Selected += new EventHandler(MenuItem_Selected);
             if (optionText.Equals("New Game", StringComparison.OrdinalIgnoreCase))
             {
@@ -88,7 +88,7 @@ namespace NoahsArk.States
             }
             if (label.Text.Equals("Load Game", StringComparison.OrdinalIgnoreCase))
             {
-                Transition(EChangeType.Push, _gameRef.TitleScreen);
+                Transition(EChangeType.Push, _gameRef.LoadGameScreen);
             }
             if (label.Text.Equals("Settings", StringComparison.OrdinalIgnoreCase))
             {
@@ -101,7 +101,7 @@ namespace NoahsArk.States
         }
         private void SetInitialControlPosition()
         {
-            float bottomPosition = _gameRef.ScreenRectangle.Height - (_controlManager.Count * 75);
+            float bottomPosition = _gameRef.ScreenRectangle.Bottom - (_controlManager.Count * 30f);
             var centerOfScreen = _gameRef.ScreenRectangle.GetCenter();
             for (int i = 0; i < _controlManager.Count; i++)
             {
@@ -127,13 +127,13 @@ namespace NoahsArk.States
                 // let's position the right arrow just to the left of the text
                 _arrowRightImage.SetPosition(new Vector2(
                     linkLabel.Position.X - _arrowLeftImage.Size.X - 25f,
-                    linkLabel.Position.Y + (linkLabel.Size.Y - _arrowLeftImage.Size.Y) / 2 - 5f
+                    linkLabel.Position.Y + (linkLabel.Size.Y - _arrowLeftImage.Size.Y) / 2 - 10f
                 ));
 
                 // let's position the left arrow kust to the right of the text
                 _arrowLeftImage.SetPosition(new Vector2(
-                    linkLabel.Position.X + linkLabel.Size.X + 5f,
-                    linkLabel.Position.Y + (linkLabel.Size.Y - _arrowRightImage.Size.Y) / 2 - 5f
+                    linkLabel.Position.X + linkLabel.Size.X + 3f,
+                    linkLabel.Position.Y + (linkLabel.Size.Y - _arrowRightImage.Size.Y) / 2 - 10f
                 ));
             }
         }

@@ -11,7 +11,7 @@ namespace NoahsArk.Managers
     {
         #region Fields
         private int _selectedControl = 0;
-        private static SpriteFont _spriteFont;
+        private static Dictionary<(string font, int size), SpriteFont> _spriteFontsDict = new Dictionary<(string font, int size), SpriteFont>();
         private bool _acceptInput = true;
         #endregion
 
@@ -19,26 +19,25 @@ namespace NoahsArk.Managers
         public event EventHandler FocusChanged;
         #endregion
 
-        #region Properties
-        public static SpriteFont SpriteFont { get { return _spriteFont; } }
+        #region Properties        
         #endregion
 
         #region Constructor
-        public ControlManager(SpriteFont spriteFont) : base()
+        public ControlManager(Dictionary<(string font, int size), SpriteFont> spriteFontsDict) : base()
         {
-            _spriteFont = spriteFont;
-        }
-        public ControlManager(SpriteFont spriteFont, int capacity) : base(capacity)
-        {
-            _spriteFont = spriteFont;
-        }
-        public ControlManager(SpriteFont spriteFont, IEnumerable<Control> collection) : base(collection)
-        {
-            _spriteFont = spriteFont;
+            _spriteFontsDict = spriteFontsDict;
         }
         #endregion
 
         #region Methods
+        public static SpriteFont SpriteFont(string font, int size)
+        {
+            if (_spriteFontsDict.TryGetValue((font, size), out SpriteFont spriteFont))
+            {
+                return spriteFont;
+            }
+            throw new InvalidOperationException($"Sprite Font: {font} with size: {size} does not exist.");
+        }
         public void Update(GameTime gameTime, PlayerIndex playerIndex)
         {
             if (this.Count == 0)
@@ -66,14 +65,24 @@ namespace NoahsArk.Managers
 
             if (InputHandler.ButtonPressed(Buttons.LeftThumbstickUp, playerIndex) ||
                 InputHandler.ButtonPressed(Buttons.DPadUp, playerIndex) ||
-                InputHandler.KeyPressed(Keys.Up))
+                InputHandler.KeyPressed(Keys.Up) ||
+                InputHandler.ButtonPressed(Buttons.LeftThumbstickLeft, playerIndex) ||
+                InputHandler.ButtonPressed(Buttons.DPadLeft, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Left) ||
+                InputHandler.KeyPressed(Keys.A) ||
+                InputHandler.KeyPressed(Keys.W))
             {
                 PreviousControl();
             }
 
             if (InputHandler.ButtonPressed(Buttons.LeftThumbstickDown, playerIndex) ||
                 InputHandler.ButtonPressed(Buttons.DPadDown, playerIndex) ||
-                InputHandler.KeyPressed(Keys.Down))
+                InputHandler.KeyPressed(Keys.Down) ||
+                InputHandler.ButtonPressed(Buttons.LeftThumbstickRight, playerIndex) ||
+                InputHandler.ButtonPressed(Buttons.DPadRight, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Right) ||
+                InputHandler.KeyPressed(Keys.D) ||
+                InputHandler.KeyPressed(Keys.S))
             {
                 NextControl();
             }
@@ -126,7 +135,6 @@ namespace NoahsArk.Managers
 
             this[_selectedControl].HasFocus = true;
         }
-
         public void PreviousControl()
         {
             if (this.Count == 0)

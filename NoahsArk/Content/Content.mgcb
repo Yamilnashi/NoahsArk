@@ -25,12 +25,24 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Backgrounds/title_background.png
 
-#begin Assets/Fonts/Silver.spritefont
+#begin Assets/Fonts/Silver28.spritefont
 /importer:FontDescriptionImporter
-/processor:LocalizedFontProcessor
+/processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Assets/Fonts/Silver.spritefont
+/build:Assets/Fonts/Silver28.spritefont
+
+#begin Assets/Menus/large-content-holder.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Menus/large-content-holder.png
 
 #begin Assets/Menus/selector_left.png
 /importer:TextureImporter

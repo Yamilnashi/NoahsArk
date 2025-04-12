@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,8 +35,19 @@ namespace NoahsArk.States
         protected override void LoadContent()
         {
             ContentManager Content = Game.Content;
-            SpriteFont menuFont = Content.Load<SpriteFont>("Assets/Fonts/Silver");
-            _controlManager = new ControlManager(menuFont);
+            Dictionary<(string font, int size), SpriteFont> spriteFontsDict = new Dictionary<(string font, int size), SpriteFont>()
+            {
+                {("Silver", 12), Content.Load<SpriteFont>("Assets/Fonts/Silver12")},
+                {("Silver", 14), Content.Load<SpriteFont>("Assets/Fonts/Silver14")},
+                {("Silver", 16), Content.Load<SpriteFont>("Assets/Fonts/Silver16")},
+                {("Silver", 18), Content.Load<SpriteFont>("Assets/Fonts/Silver18")},
+                {("Silver", 20), Content.Load<SpriteFont>("Assets/Fonts/Silver20")},
+                {("Silver", 22), Content.Load<SpriteFont>("Assets/Fonts/Silver22")},
+                {("Silver", 24), Content.Load<SpriteFont>("Assets/Fonts/Silver24")},
+                {("Silver", 26), Content.Load<SpriteFont>("Assets/Fonts/Silver26")},
+                {("Silver", 28), Content.Load<SpriteFont>("Assets/Fonts/Silver28")}
+            };
+            _controlManager = new ControlManager(spriteFontsDict);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)

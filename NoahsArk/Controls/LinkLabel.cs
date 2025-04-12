@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NoahsArk.Managers;
 
 namespace NoahsArk.Controls
 {
@@ -10,7 +11,7 @@ namespace NoahsArk.Controls
         #endregion
 
         #region Constructor
-        public LinkLabel(string text, Color textColor, Color textColorOnFocus)
+        public LinkLabel(string fontName, int fontSize, string text, Color textColor, Color textColorOnFocus)
         {
             TabStop = true;
             HasFocus = false;
@@ -18,6 +19,7 @@ namespace NoahsArk.Controls
             FocusColor = textColorOnFocus;
             Color = textColor;
             Text = text;
+            SpriteFont = ControlManager.SpriteFont(fontName, fontSize);
             Size = SpriteFont.MeasureString(text);
         }
         #endregion

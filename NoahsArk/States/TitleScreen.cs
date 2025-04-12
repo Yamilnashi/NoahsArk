@@ -31,7 +31,7 @@ namespace NoahsArk.States
             _backgroundImage = content.Load<Texture2D>("Assets/Backgrounds/title_background");
             base.LoadContent();
 
-            _startLabel = new LinkLabel("Press ENTER to begin", Color.Beige, Color.Black);
+            _startLabel = new LinkLabel("Silver", 28, "Press ENTER to begin", Color.Beige, Color.Black);
             Vector2 startLabelPosition = _gameRef.ScreenRectangle.GetBottomCenteredPosition(_startLabel.Size);
             _startLabel.Position = startLabelPosition;
             _startLabel.TabStop = true;
