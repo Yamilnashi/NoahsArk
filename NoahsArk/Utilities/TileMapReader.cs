@@ -18,7 +18,7 @@ namespace NoahsArk.Utilities
         private int _tileWidth = 0;
         private int _tileHeight = 0;
         private List<TileSet> _tileSets = new List<TileSet>();
-        private List<MapLayer> _mapLayers = new List<MapLayer>();
+        private List<ILayer> _mapLayers = new List<ILayer>();
         private int _currentLayerId = 0;
         private int _currentObjectGroupId = 0;
         private int _currentObjectId = 0;
@@ -53,6 +53,7 @@ namespace NoahsArk.Utilities
                                     _mapHeight,
                                     _tileWidth,
                                     _tileHeight,
+                                    _mapLayers,
                                     _tileSets);
         }
         #endregion
@@ -166,7 +167,7 @@ namespace NoahsArk.Utilities
                     (int)width,
                     (int)height
                 );
-
+            _objectPropertiesDict[(_currentObjectGroupId, objectId)] = new Dictionary<string, object>();
             _currentObjectId = objectId;
         }
         private void HandleProperties(XmlReader reader)
@@ -234,7 +235,7 @@ namespace NoahsArk.Utilities
                     props = properties;
                 }
 
-                MapLayer mapLayer = new MapLayer(layerName, data, props);
+                ILayer mapLayer = new MapLayer(layerName, data, props);
                 _mapLayers.Add(mapLayer);
             }
         }

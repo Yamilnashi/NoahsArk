@@ -19,6 +19,8 @@ namespace NoahsArk.Levels.Maps
         private int _columns;
         private int _tileCount;
         private Rectangle[] _sourceRectangles;
+        private string _tilesetpath;
+        private string _texturePath;
         //private Dictionary<int, AnimatedTile> _animatedTiles;
         #endregion
 
@@ -40,22 +42,23 @@ namespace NoahsArk.Levels.Maps
             _tileWidth = tileWidthInPixels; 
             _tileHeight = tileHeightInPixels;   
             _source = source;
+            _tilesetpath = Path.GetFullPath($"Content/Tiled/Tilesets/{Path.GetFileName(_source)}");
+            _texturePath = Path.GetFullPath($"Content/Tiled/Tilesets/{Path.GetFileNameWithoutExtension(_source)}");
         }
         #endregion
 
         #region Methods
         public void LoadTileSetTexture(ContentManager content)
-        {
-            string path = $"Tiled/{Path.GetFileNameWithoutExtension(_source)}";
-            Texture2D tilesetTexture = content.Load<Texture2D>(path);
+        {            
+
+            Texture2D tilesetTexture = content.Load<Texture2D>(_texturePath);
             Texture = tilesetTexture;
         }
 
         public void LoadTileSetData()
         {
-            string xmlPath = $"Content/Tiled/{_source}";
             // use XML parsing to read the file
-            using (var reader = XmlReader.Create(xmlPath))
+            using (var reader = XmlReader.Create(_tilesetpath))
             {
                 while (reader.Read())
                 {

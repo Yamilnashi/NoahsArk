@@ -43,7 +43,7 @@ namespace NoahsArk.Levels.Maps
         #region Methods
         public int GetTile(int x, int y)
         {
-            return _tiles[x, y];
+            return _tiles[y, x];
         }
         public void SetTile(int x, int y, int value)
         {
@@ -68,7 +68,7 @@ namespace NoahsArk.Levels.Maps
 
         public void Update(GameTime gameTime)
         {
-            throw new System.NotImplementedException();
+            // todo:
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<TileSet> tileSets)
         {
@@ -80,8 +80,8 @@ namespace NoahsArk.Levels.Maps
 
             min.X = Math.Max(0, cameraPoint.X - 1);
             min.Y = Math.Max(0, cameraPoint.Y - 1);
-            max.X = Math.Max(viewPoint.X + 1, Width);
-            max.Y = Math.Max(viewPoint.Y + 1, Height);
+            max.X = Math.Min(viewPoint.X + 1, Width);
+            max.Y = Math.Min(viewPoint.Y + 1, Height);
 
             Rectangle destination = new Rectangle(0, 0, Engine.TileWidth, Engine.TileHeight);
 

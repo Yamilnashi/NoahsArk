@@ -7,7 +7,7 @@ namespace NoahsArk.Extensions
         public static string TileMapFilePath(this EMapCode mapCode)
         {
             string fileName = GetTileMapFileName(mapCode);
-            return $"Content/Maps/GameMaps/{fileName}";
+            return $"Content/Tiled/GameMaps/{fileName}";
         }
 
         #region Private
@@ -15,7 +15,7 @@ namespace NoahsArk.Extensions
         {
             return mapCode switch
             {
-                EMapCode.Development => "Demo.tmx",
+                EMapCode.Development => "development.tmx",
                 _ => throw new System.Exception($"Missing TileMap file for map code: {mapCode}")
             };
         }

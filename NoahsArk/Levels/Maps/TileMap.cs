@@ -24,9 +24,9 @@ namespace NoahsArk.Levels.Maps
         #endregion
 
         #region Constructor
-        public TileMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, List<TileSet> tileSets)
+        public TileMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, List<ILayer> mapLayers, List<TileSet> tileSets)
         {
-            _mapLayers = new List<ILayer>();
+            _mapLayers = mapLayers;
             _mapWidth = mapWidth;
             _mapHeight = mapHeight;
             _tileSets = tileSets;

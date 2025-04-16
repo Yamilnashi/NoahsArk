@@ -1,0 +1,65 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx": {
+            "scale": 0.8915111940298507,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 536.1682536360784,
+                "y": 360.062781207492
+            }
+        },
+        "GameMaps/development..tmx": {
+            "scale": 2.0048958333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.16210318491193,
+                "y": 160.10806878994129
+            }
+        },
+        "GameMaps/development.tmx": {
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 236.5,
+                "y": 167
+            }
+        },
+        "GameMaps/full.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/tileset_floors.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 2
+        },
+        "Tilesets/vegetation.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/GameMaps",
+    "last.externalTilesetPath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/Tilesets",
+    "last.imagePath": "C:/Users/Yamil/Projects/Assets/Pixel Crawler/Environment/Props/Static",
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "world.tiled-project",
+    "recentFiles": [
+        "GameMaps/development..tmx",
+        "Tilesets/vegetation.tsx",
+        "Tilesets/tileset_floors.tsx",
+        "GameMaps/development.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

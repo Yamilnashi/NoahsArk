@@ -10,7 +10,7 @@ namespace NoahsArk.Levels.Maps
     public class World : DrawableGameComponent
     {
         #region Fields
-        private Game _gameRef;
+        private Game1 _gameRef;
         private Dictionary<EMapCode, Map> _maps = new Dictionary<EMapCode, Map>();
         private EMapCode _currentMap = EMapCode.Development;
         #endregion
@@ -26,7 +26,7 @@ namespace NoahsArk.Levels.Maps
         #endregion
 
         #region Constructor
-        public World(Game game) : base(game)
+        public World(Game1 game) : base(game)
         {
             _gameRef = game;
         }
@@ -71,6 +71,7 @@ namespace NoahsArk.Levels.Maps
         private void CreateMap(TileMap tileMap)
         {
             Map map = new Map(tileMap);
+            _maps[_currentMap] = map;
         }
         #endregion
     }
