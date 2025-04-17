@@ -1,5 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
+using NoahsArk.Controls;
+using NoahsArk.Entities;
+using NoahsArk.Entities.Players;
+using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Managers;
@@ -30,9 +38,8 @@ namespace NoahsArk.States
         protected override void LoadContent()
         {
             base.LoadContent();
-            // CreatePlayer();
-            // LoadMusic();
             LoadWorld();
+            CreatePlayers();
         }
         public override void Update(GameTime gameTime)
         {
@@ -59,6 +66,42 @@ namespace NoahsArk.States
         {
             _world = new World(_gameRef);
             Game.Components.Add(_world);
+        }
+        private void CreatePlayers()
+        {
+            string playerDataFilePath = Path.Combine(_gameRef.Content.RootDirectory, "Assets/GameData/Players/player-data.json");
+            string jsonContent = File.ReadAllText(playerDataFilePath);
+            PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(jsonContent);
+            PlayerObject p = playerData.PlayerObjects.FirstOrDefault(x => x.ClassType == EClassType.Rogue);
+            Vector2 initialPosition = new Vector2(10, 10);
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(p.Animations);
+            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, PlayerIndex.One);
+            _world.CurrentMap.Players.Add(player);
+        }
+        private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> GetAnimationData(Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> data)
+        {
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = new Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>>();
+            for (int i = 0; i < data.Count; i++)
+            {
+                EAnimationKey key = data.Keys.ElementAt(i);
+                animations.Add(key, new Dictionary<EDirection, AnimatedSprite>());
+                for (int j = 0; j < data[key].Count; j++)
+                {
+                    EDirection direction = data[key].Keys.ElementAt(j);
+                    AnimationData animationData = data[key][direction];
+                    string formattedFilePath = GetFormattedFilePath(animationData.TextureFilePath);
+                    Texture2D texture = _gameRef.Content.Load<Texture2D>(formattedFilePath);
+                    AnimatedSprite sprite = new AnimatedSprite(texture, animationData.FrameCount,
+                        animationData.FrameWidth, animationData.FrameHeight, animationData.FrameDuration);
+                    animations[key].Add(direction, sprite);
+                }                
+            }
+            return animations;
+        }
+        private string GetFormattedFilePath(string filePath)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath);
+            return Path.Combine(Path.GetDirectoryName(filePath), fileNameWithoutExtension); ;
         }
         #endregion
     }

@@ -3,10 +3,16 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "GameMaps/test.tmx",
     "expandedProjectPaths": [
+        "GameMaps",
+        ".",
+        "Tilesets"
     ],
     "fileStates": {
+        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx": {
             "scale": 0.8915111940298507,
             "selectedLayer": 0,
@@ -34,8 +40,19 @@
         "GameMaps/full.tsx": {
             "scaleInDock": 1
         },
+        "GameMaps/test.tmx": {
+            "scale": 0.8022222222222222,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 536.01108033241,
+                "y": 320.3601108033241
+            }
+        },
+        "Tilesets/full.tsx": {
+            "scaleInDock": 1
+        },
         "Tilesets/tileset_floors.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 1.5,
             "scaleInEditor": 2
         },
         "Tilesets/vegetation.tsx": {
@@ -49,13 +66,19 @@
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "GameMaps/development.tmx",
+        "Tilesets/vegetation.tsx",
+        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx",
+        "GameMaps/test.tmx"
     ],
     "project": "world.tiled-project",
     "recentFiles": [
-        "GameMaps/development..tmx",
+        "GameMaps/development.tmx",
         "Tilesets/vegetation.tsx",
-        "Tilesets/tileset_floors.tsx",
-        "GameMaps/development.tmx"
+        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx",
+        "GameMaps/test.tmx",
+        "GameMaps/development..tmx",
+        "Tilesets/tileset_floors.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

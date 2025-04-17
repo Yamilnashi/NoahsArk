@@ -1,0 +1,103 @@
+{
+	"playerData": [
+		{
+			"classType": "Rogue",
+			"level": 1,
+			"healthPoints": 50,
+			"manaPoints": 10,
+			"speed": 0.6,
+			"animations": {
+				"Walking": {
+					"Down": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/walk-down-spritesheet.png"
+					},
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/walk-right-spritesheet.png"
+					},
+					"Up": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/walk-up-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/walk-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Down": {
+						"frameCount": 4,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/idle-down-spritesheet.png"
+					},
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/idle-right-spritesheet.png"
+					},
+					"Up": {
+						"frameCount": 4,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/idle-up-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Down": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/run-down-spritesheet.png"
+					},
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/run-right-spritesheet.png"
+					},
+					"Up": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/run-up-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Character/A/run-right-spritesheet.png"
+					},
+				}
+			}
+		}
+	]
+}
