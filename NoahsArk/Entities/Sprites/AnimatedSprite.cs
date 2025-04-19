@@ -3,6 +3,7 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
+using NoahsArk.Levels;
 
 namespace NoahsArk.Entities.Sprites
 {
@@ -11,12 +12,16 @@ namespace NoahsArk.Entities.Sprites
         #region Fields
         private Texture2D _texture;
         private List<Rectangle> _frames;
+        private int _frameWidth;
+        private int _frameHeight;
         private int _currentFrame;
         private float _timer;
         private float _frameDuration;
         #endregion
 
         #region Properties
+        public int FrameWidth { get { return _frameWidth; } }
+        public int FrameHeight { get { return _frameHeight; } }
         #endregion
 
         #region Constructor
@@ -24,6 +29,8 @@ namespace NoahsArk.Entities.Sprites
         {
             _texture = texture;
             _frameDuration = frameDuration;
+            _frameWidth = frameWidth;
+            _frameHeight = frameHeight;
             _frames = new List<Rectangle>();
             for (int i = 0; i < frameCount; i++)
             {
@@ -70,7 +77,7 @@ namespace NoahsArk.Entities.Sprites
         {
             _currentFrame = 0;
             _timer = 0;
-        }
+        }        
         #endregion
     }
 }

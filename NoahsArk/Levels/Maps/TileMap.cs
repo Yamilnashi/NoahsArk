@@ -18,8 +18,8 @@ namespace NoahsArk.Levels.Maps
         #region Properties
         public List<TileSet> TileSets { get { return _tileSets; } set { _tileSets = value; } }
         public List<ILayer> MapLayers { get { return _mapLayers; } set { _mapLayers = value; } }
-        public int MapWidth { get { return _mapWidth; } set { _mapWidth = value; } }
-        public int MapHeight { get { return _mapHeight; } set { _mapHeight = value; } }
+        public int MapWidth { get { return _mapWidth * Engine.TileWidth; } }
+        public int MapHeight { get { return _mapHeight * Engine.TileHeight; } }
 
         #endregion
 

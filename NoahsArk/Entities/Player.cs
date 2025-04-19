@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
 using NoahsArk.Entities.Sprites;
+using NoahsArk.Rendering;
 
 namespace NoahsArk.Entities
 {
@@ -17,7 +18,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, PlayerIndex playerIndex) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera, PlayerIndex playerIndex) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, camera)
         {
             _playerIndex = playerIndex;
         }
@@ -26,16 +27,58 @@ namespace NoahsArk.Entities
         #region Methods
         public override void Update(GameTime gameTime)
         {
-            HandleInput();
+            HandleCameraControls();
+            HandleMovement();
             base.Update(gameTime);
         }
         #endregion
 
         #region Private
-        private void HandleInput()
+        private void HandleCameraControls()
+        {
+            if (InputHandler.KeyReleased(Keys.PageUp) ||
+                InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
+            {
+                Camera.ZoomIn(CurrentMap);
+                if (Camera.CameraMode == ECameraMode.Follow)
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
+            }
+            else if (InputHandler.KeyReleased(Keys.PageDown) ||
+                InputHandler.ButtonReleased(Buttons.RightShoulder, PlayerIndex.One))
+            {
+                Camera.ZoomOut(CurrentMap);
+                if (Camera.CameraMode == ECameraMode.Follow)
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
+            }
+
+            if (InputHandler.KeyReleased(Keys.F) ||
+                InputHandler.ButtonReleased(Buttons.RightStick, PlayerIndex.One))
+            {
+                Camera.ToggleCameraMode();
+
+                if (Camera.CameraMode == ECameraMode.Follow)
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
+            }
+
+            if (Camera.CameraMode != ECameraMode.Follow)
+            {
+                if (InputHandler.KeyReleased(Keys.C) ||
+                    InputHandler.ButtonReleased(Buttons.LeftStick, PlayerIndex.One))
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
+            }
+        }
+        private void HandleMovement()
         {
             GamePadState gamePadState = GamePad.GetState(_playerIndex);
-            KeyboardState keyboardState = Keyboard.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();           
             EDirection facingDirection = CurrentDirection;
             EAnimationKey animationState = EAnimationKey.Idle;
             Vector2 direction = Vector2.Zero;
@@ -86,8 +129,13 @@ namespace NoahsArk.Entities
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
-                SetAnimation(animationState, facingDirection);
+                SetAnimation(animationState, facingDirection);                
                 Move(direction * Speed * isRunningSpeed);
+                LockToMap();
+                if (Camera.CameraMode == ECameraMode.Follow)
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
             } else
             {
                 SetAnimation(EAnimationKey.Idle, facingDirection);

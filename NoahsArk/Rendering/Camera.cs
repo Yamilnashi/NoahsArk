@@ -59,7 +59,7 @@ namespace NoahsArk.Rendering
         }
         #endregion
         #region Methods
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Map currentMap)
         {
             if (_mode == ECameraMode.Follow)
             {
@@ -86,11 +86,11 @@ namespace NoahsArk.Rendering
                 motion.Normalize();
                 _position += motion * _speed;
 
-                LockCamera();
+                LockCamera(currentMap);
             }
         }
 
-        public void LockToPosition(Vector2 target, Texture2D textureOffset = null)
+        public void LockToPosition(Vector2 target, Map currentMap, Texture2D textureOffset = null)
         {
             float textureOffsetX = textureOffset != null
                 ? textureOffset.Width / 2
@@ -102,10 +102,10 @@ namespace NoahsArk.Rendering
             _position.X = (target.X + textureOffsetX) * _zoom - _viewportRectangle.Width / 2;
             _position.Y = (target.Y + textureOffsetY) * _zoom - _viewportRectangle.Height / 2;
 
-            LockCamera();
+            LockCamera(currentMap);
         }
 
-        public void ZoomIn()
+        public void ZoomIn(Map currentMap)
         {
             _zoom += .25f;
             if (_zoom > 3.5f)
@@ -114,10 +114,10 @@ namespace NoahsArk.Rendering
             }
 
             Vector2 newPosition = Position * _zoom;
-            SnapToPosition(newPosition);
+            SnapToPosition(newPosition, currentMap);
         }
 
-        public void ZoomOut()
+        public void ZoomOut(Map currentMap)
         {
             _zoom -= .25f;
             if (_zoom < .5f)
@@ -125,21 +125,21 @@ namespace NoahsArk.Rendering
                 _zoom = .5f;
             }
             Vector2 newPosition = Position * _zoom;
-            SnapToPosition(newPosition);
+            SnapToPosition(newPosition, currentMap);
         }
 
-        public void SnapToPosition(Vector2 newPosition)
+        public void SnapToPosition(Vector2 newPosition, Map currentMap)
         {
             _position.X = newPosition.X - _viewportRectangle.Width / 2;
             _position.Y = newPosition.Y - _viewportRectangle.Height / 2;
 
-            LockCamera();
+            LockCamera(currentMap);
         }
 
-        public void LockCamera()
+        public void LockCamera(Map currentMap)
         {
-            _position.X = MathHelper.Clamp(_position.X, 0, 1280 * _zoom - ViewportRectangle.Width);
-            _position.Y = MathHelper.Clamp(_position.Y, 0, 720 * _zoom - ViewportRectangle.Height);
+            _position.X = MathHelper.Clamp(_position.X, 0, currentMap.TileMap.MapWidth * _zoom - ViewportRectangle.Width);
+            _position.Y = MathHelper.Clamp(_position.Y, 0, currentMap.TileMap.MapHeight * _zoom - ViewportRectangle.Height);
         }
 
         public void ToggleCameraMode()

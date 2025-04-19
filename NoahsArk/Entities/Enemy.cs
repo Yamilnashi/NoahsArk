@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using NoahsArk.Controls;
 using NoahsArk.Entities.Sprites;
+using NoahsArk.Rendering;
 
 namespace NoahsArk.Entities
 {   
@@ -17,8 +18,8 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Enemy(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations,
-            IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations,Camera camera,
+            IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, camera)
         {
             _behavior = behavior;
         }

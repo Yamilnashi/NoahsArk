@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
+using NoahsArk.Rendering;
 
 namespace NoahsArk.Entities
 {
@@ -24,6 +25,7 @@ namespace NoahsArk.Entities
         private EAnimationKey _currentAnimationKey;
         private EDirection _currentDirection;
         private Map _currentMap;
+        private Camera _camera;
         #endregion
 
         #region Properties
@@ -38,11 +40,12 @@ namespace NoahsArk.Entities
         public Vector2 Position { get { return _position; } protected set { _position = value; } }
         public EDirection CurrentDirection { get { return _currentDirection; } }
         public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; } }
+        public Camera Camera { get { return _camera; } }
         #endregion
 
         #region Constructor
         public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
             _healthPoints = maxHealthPoints;
@@ -56,7 +59,7 @@ namespace NoahsArk.Entities
             _animations = animations;
             _currentAnimationKey = EAnimationKey.Idle;
             _currentDirection = EDirection.Down;
-
+            _camera = camera;
         }
         #endregion
 
@@ -120,6 +123,11 @@ namespace NoahsArk.Entities
         {
             // todo: customize calculation based on weapon, armor, stats, type, etc
             return 10;
+        }
+        public void LockToMap()
+        {
+            _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection].FrameWidth);
+            _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection].FrameHeight);
         }
         #endregion
     }

@@ -25,6 +25,7 @@ namespace NoahsArk.States
 
         #region Properties
         public Engine Engine { get { return _engine; } }
+        public Camera Camera { get { return _camera; } }
         #endregion
 
         #region Constructor
@@ -44,7 +45,6 @@ namespace NoahsArk.States
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            _camera.Update(gameTime);
             _world.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -75,8 +75,8 @@ namespace NoahsArk.States
             PlayerObject p = playerData.PlayerObjects.FirstOrDefault(x => x.ClassType == EClassType.Rogue);
             Vector2 initialPosition = new Vector2(10, 10);
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(p.Animations);
-            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, PlayerIndex.One);
-            _world.CurrentMap.Players.Add(player);
+            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One);
+            _world.CurrentMap.AddPlayer(player);
         }
         private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> GetAnimationData(Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> data)
         {
