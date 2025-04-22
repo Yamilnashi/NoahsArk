@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
+using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Rendering;
 
@@ -11,6 +13,7 @@ namespace NoahsArk.Entities
     {
         #region Fields
         private PlayerIndex _playerIndex;
+        private Vector2 _desiredMovement;
         #endregion
 
         #region Properties
@@ -18,7 +21,8 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera, PlayerIndex playerIndex) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, camera)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera, PlayerIndex playerIndex,
+            Texture2D shadow) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _playerIndex = playerIndex;
         }
@@ -29,7 +33,22 @@ namespace NoahsArk.Entities
         {
             HandleCameraControls();
             HandleMovement();
+            if (_desiredMovement != Vector2.Zero)
+            {
+                Move(_desiredMovement);
+                LockToMap();
+                if (Camera.CameraMode == ECameraMode.Follow)
+                {
+                    Camera.LockToPosition(Position, CurrentMap);
+                }
+            }
             base.Update(gameTime);
+        }
+
+        public override Circle GetHitbox(Vector2 desiredMovement)
+        {
+            Vector2 feetPosition = desiredMovement + new Vector2(8, 24); // 16px = bottom half, add another 8px to be at center of bottom 16px = 24px
+            return new Circle(feetPosition, 10f); // radius of 8 makes a circle 16px wide
         }
         #endregion
 
@@ -129,16 +148,12 @@ namespace NoahsArk.Entities
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
-                SetAnimation(animationState, facingDirection);                
-                Move(direction * Speed * isRunningSpeed);
-                LockToMap();
-                if (Camera.CameraMode == ECameraMode.Follow)
-                {
-                    Camera.LockToPosition(Position, CurrentMap);
-                }
+                SetAnimation(animationState, facingDirection);
+                _desiredMovement = direction * Speed * isRunningSpeed;                
             } else
             {
                 SetAnimation(EAnimationKey.Idle, facingDirection);
+                _desiredMovement = Vector2.Zero;
             }
         }
         #endregion

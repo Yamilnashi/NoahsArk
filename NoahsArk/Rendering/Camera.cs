@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
@@ -16,7 +17,17 @@ namespace NoahsArk.Rendering
         private ECameraMode _mode;
         #endregion
         #region Properties
-        public Vector2 Position {  get { return _position; } set { _position = value; } }
+        public Vector2 Position 
+        {  
+            get { return _position; } 
+            set
+            {
+                _position = value;
+                // snap to the pixel grid
+                _position.X = (float)Math.Round(_position.X);
+                _position.Y = (float)Math.Round(_position.Y);
+            } 
+        }
         public float Speed
         {
             get
@@ -53,7 +64,7 @@ namespace NoahsArk.Rendering
         public Camera(Rectangle viewportRect)
         {
             _speed = 4f;
-            _zoom = 3.5f;
+            _zoom = 3f;
             _viewportRectangle = viewportRect;
             _mode = ECameraMode.Follow;
         }
@@ -84,8 +95,7 @@ namespace NoahsArk.Rendering
             if (motion != Vector2.Zero)
             {
                 motion.Normalize();
-                _position += motion * _speed;
-
+                Position += motion * _speed;
                 LockCamera(currentMap);
             }
         }
@@ -93,24 +103,28 @@ namespace NoahsArk.Rendering
         public void LockToPosition(Vector2 target, Map currentMap, Texture2D textureOffset = null)
         {
             float textureOffsetX = textureOffset != null
-                ? textureOffset.Width / 2
+                ? textureOffset.Width / 2f
                 : 0f;
             float textureOffsetY = textureOffset != null
-                ? textureOffset.Height / 2
+                ? textureOffset.Height / 2f
                 : 0f;
 
-            _position.X = (target.X + textureOffsetX) * _zoom - _viewportRectangle.Width / 2;
-            _position.Y = (target.Y + textureOffsetY) * _zoom - _viewportRectangle.Height / 2;
+            float rawX = (target.X + textureOffsetX) * _zoom - _viewportRectangle.Width / 2f;
+            float rawY = (target.Y + textureOffsetY) * _zoom - _viewportRectangle.Height / 2f;
+
+            // snap to whole pixels
+            _position.X = (float)Math.Round(rawX);
+            _position.Y = (float)Math.Round(rawY);
 
             LockCamera(currentMap);
         }
 
         public void ZoomIn(Map currentMap)
         {
-            _zoom += .25f;
-            if (_zoom > 3.5f)
+            _zoom += 1f;
+            if (_zoom > 3f)
             {
-                _zoom = 3.5f;
+                _zoom = 3f;
             }
 
             Vector2 newPosition = Position * _zoom;
@@ -119,10 +133,10 @@ namespace NoahsArk.Rendering
 
         public void ZoomOut(Map currentMap)
         {
-            _zoom -= .25f;
-            if (_zoom < .5f)
+            _zoom -= 1f;
+            if (_zoom < 1f)
             {
-                _zoom = .5f;
+                _zoom = 1f;
             }
             Vector2 newPosition = Position * _zoom;
             SnapToPosition(newPosition, currentMap);
@@ -130,16 +144,26 @@ namespace NoahsArk.Rendering
 
         public void SnapToPosition(Vector2 newPosition, Map currentMap)
         {
-            _position.X = newPosition.X - _viewportRectangle.Width / 2;
-            _position.Y = newPosition.Y - _viewportRectangle.Height / 2;
+            float rawX = newPosition.X - _viewportRectangle.Width / 2;
+            float rawY = newPosition.Y - _viewportRectangle.Height / 2;
+
+            _position.X = (float)Math.Round(rawX);
+            _position.Y = (float)Math.Round(rawY);  
 
             LockCamera(currentMap);
         }
 
         public void LockCamera(Map currentMap)
         {
-            _position.X = MathHelper.Clamp(_position.X, 0, currentMap.TileMap.MapWidth * _zoom - ViewportRectangle.Width);
-            _position.Y = MathHelper.Clamp(_position.Y, 0, currentMap.TileMap.MapHeight * _zoom - ViewportRectangle.Height);
+            float maxX = currentMap.TileMap.MapWidth * _zoom - ViewportRectangle.Width;
+            float maxY = currentMap.TileMap.MapHeight * _zoom - ViewportRectangle.Height;
+
+            _position.X = MathHelper.Clamp(_position.X, 0, maxX);
+            _position.Y = MathHelper.Clamp(_position.Y, 0, maxY);
+
+            // snap after clamping
+            _position.X = (float)Math.Round(_position.X);
+            _position.Y = (float)Math.Round(_position.Y);
         }
 
         public void ToggleCameraMode()

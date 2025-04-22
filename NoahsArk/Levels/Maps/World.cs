@@ -13,6 +13,7 @@ namespace NoahsArk.Levels.Maps
         private Game1 _gameRef;
         private Dictionary<EMapCode, Map> _maps = new Dictionary<EMapCode, Map>();
         private EMapCode _currentMap = EMapCode.Development;
+        private Texture2D _debugTexture;
         #endregion
 
         #region Properties
@@ -26,9 +27,10 @@ namespace NoahsArk.Levels.Maps
         #endregion
 
         #region Constructor
-        public World(Game1 game) : base(game)
+        public World(Game1 game, Texture2D debugTexture) : base(game)
         {
             _gameRef = game;
+            _debugTexture = debugTexture;
         }
         #endregion
 
@@ -70,7 +72,7 @@ namespace NoahsArk.Levels.Maps
 
         private void CreateMap(TileMap tileMap)
         {
-            Map map = new Map(tileMap);
+            Map map = new Map(tileMap, _debugTexture);
             _maps[_currentMap] = map;
         }
         #endregion

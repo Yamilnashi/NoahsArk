@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
+using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Rendering;
+using NoahsArk.Utilities;
 
 namespace NoahsArk.Entities
 {
@@ -26,6 +28,7 @@ namespace NoahsArk.Entities
         private EDirection _currentDirection;
         private Map _currentMap;
         private Camera _camera;
+        private Texture2D _shadow;
         #endregion
 
         #region Properties
@@ -45,7 +48,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Texture2D shadow, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
             _healthPoints = maxHealthPoints;
@@ -60,6 +63,7 @@ namespace NoahsArk.Entities
             _currentAnimationKey = EAnimationKey.Idle;
             _currentDirection = EDirection.Down;
             _camera = camera;
+            _shadow = shadow;
         }
         #endregion
 
@@ -80,9 +84,14 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
-                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection);
+                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow);
                 }
             }
+        }
+        public virtual Circle GetHitbox(Vector2 desiredPosition)
+        {
+            Vector2 feetPosition = desiredPosition + new Vector2(8, 8); // on a 16px sprite, will be right in the middle
+            return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
         }
         public void SetAnimation(EAnimationKey key, EDirection direction)
         {
@@ -110,14 +119,30 @@ namespace NoahsArk.Entities
         }
         public void Move(Vector2 direction)
         {
-            _position += direction; // todo: collisions
-            if (_animations.ContainsKey(_currentAnimationKey))
+            Vector2 newPosition = _position + direction;
+            Circle newHitBox = GetHitbox(newPosition);
+            Vector2 totalDisplacement = Vector2.Zero;
+
+            if (_currentMap != null && 
+                _currentMap.TileMap.Obstacles != null)
             {
-                if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
+                for (int i = 0; i < _currentMap.TileMap.Obstacles.Count; i++)
                 {
-                    _animations[_currentAnimationKey][_currentDirection].UpdatePosition(_position);
-                }                
+                    Rectangle obstacle = _currentMap.TileMap.Obstacles[i];
+                    if (CollisionHelper.CircleIntersectsRectangle(newHitBox, obstacle, out Vector2 displacement))
+                    {
+                        totalDisplacement += displacement;
+                    }
+                }
             }
+            // Apply the total displacement to the new position
+            newPosition += totalDisplacement;
+
+            // Round to whole pixels to avoid sub-pixel jitter
+            //newPosition.X = (float)Math.Round(newPosition.X);
+            //newPosition.Y = (float)Math.Round(newPosition.Y);
+
+            CompleteMove(newPosition);
         }
         protected virtual int CalculateDamage()
         {
@@ -128,6 +153,20 @@ namespace NoahsArk.Entities
         {
             _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection].FrameWidth);
             _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection].FrameHeight);
+        }
+        #endregion
+
+        #region Private
+        private void CompleteMove(Vector2 newPosition)
+        {
+            _position = newPosition;
+            if (_animations.ContainsKey(_currentAnimationKey))
+            {
+                if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
+                {
+                    _animations[_currentAnimationKey][_currentDirection].UpdatePosition(_position);
+                }
+            }
         }
         #endregion
     }

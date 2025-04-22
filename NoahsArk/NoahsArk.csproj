@@ -13,9 +13,24 @@
   <ItemGroup>
     <None Remove="Content\Assets\GameData\Players\player-data.json" />
     <None Remove="Content\Tiled\GameMaps\development.tmx" />
+    <None Remove="Content\Tiled\GameMaps\home.tmx" />
+    <None Remove="Content\Tiled\GameMaps\infinite.tmx" />
+    <None Remove="Content\Tiled\GameMaps\obstacles.tmx" />
     <None Remove="Content\Tiled\GameMaps\test.tmx" />
     <None Remove="Content\Tiled\Tilesets\full.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_floors.png" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_floors.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_props.png" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_props.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_roofs.png" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_roofs.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_shadows.png" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_shadows.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_walls.png" />
+    <None Remove="Content\Tiled\Tilesets\tileset_buildings_walls.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_clouds.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_floors.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_vegetation.tsx" />
     <None Remove="Content\Tiled\Tilesets\vegetation.tsx" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
@@ -27,16 +42,55 @@
     <Content Include="Content\Tiled\GameMaps\development.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiled\GameMaps\home.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\GameMaps\obstacles.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tiled\GameMaps\test.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\full.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_floors.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_floors.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_props.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_props.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_roofs.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_roofs.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_shadows.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_shadows.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_walls.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_buildings_walls.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_clouds.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_floors.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tiled\Tilesets\vegetation.tsx">
+    <Content Include="Content\Tiled\Tilesets\tileset_vegetation.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -176,6 +176,18 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Character/A/walk-up-spritesheet.png
 
+#begin Assets/Sprites/Character/shadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/shadow.png
+
 #begin Tiled/Tilesets/full.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -187,6 +199,78 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tiled/Tilesets/full.png
+
+#begin Tiled/Tilesets/tileset_buildings_floors.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_buildings_floors.png
+
+#begin Tiled/Tilesets/tileset_buildings_props.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_buildings_props.png
+
+#begin Tiled/Tilesets/tileset_buildings_roofs.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_buildings_roofs.png
+
+#begin Tiled/Tilesets/tileset_buildings_shadows.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_buildings_shadows.png
+
+#begin Tiled/Tilesets/tileset_buildings_walls.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_buildings_walls.png
+
+#begin Tiled/Tilesets/tileset_clouds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_clouds.png
 
 #begin Tiled/Tilesets/tileset_floors.png
 /importer:TextureImporter
@@ -200,7 +284,7 @@
 /processorParam:TextureFormat=Color
 /build:Tiled/Tilesets/tileset_floors.png
 
-#begin Tiled/Tilesets/vegetation.png
+#begin Tiled/Tilesets/tileset_vegetation.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -210,5 +294,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Tiled/Tilesets/vegetation.png
+/build:Tiled/Tilesets/tileset_vegetation.png
 

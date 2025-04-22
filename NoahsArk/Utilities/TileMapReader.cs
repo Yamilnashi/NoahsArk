@@ -23,8 +23,9 @@ namespace NoahsArk.Utilities
         private int _currentObjectGroupId = 0;
         private int _currentObjectId = 0;
         private string _currentNodeType;
+        private List<Rectangle> _obstacles = new List<Rectangle>();
         private Dictionary<int, string> _mapLayerNameDict = new Dictionary<int, string>();
-        private Dictionary<int, int[,]> _mapLayerDataDict = new Dictionary<int, int[,]>();
+        private Dictionary<int, long[,]> _mapLayerDataDict = new Dictionary<int, long[,]>();
         private Dictionary<int, Dictionary<string, object>> _mapLayerPropertiesDict = new Dictionary<int, Dictionary<string, object>>();
         private Dictionary<int, string> _objectGroupNameDict = new Dictionary<int, string>();
         private Dictionary<(int, int), Rectangle> _objectRectangleDict = new Dictionary<(int, int), Rectangle>();
@@ -54,7 +55,8 @@ namespace NoahsArk.Utilities
                                     _tileWidth,
                                     _tileHeight,
                                     _mapLayers,
-                                    _tileSets);
+                                    _tileSets,
+                                    _obstacles);
         }
         #endregion
 
@@ -138,7 +140,7 @@ namespace NoahsArk.Utilities
             if (encoding.Equals("csv", StringComparison.OrdinalIgnoreCase))
             {
                 string csv = reader.ReadElementContentAsString().Trim();
-                int[,] data = ParseCsvData(csv, _mapWidth, _mapHeight);
+                long[,] data = ParseCsvData(csv, _mapWidth, _mapHeight);
                 _mapLayerDataDict[_currentLayerId] = data;
                 Write($"CsvData (First 50 chars): {csv.Substring(0, Math.Min(50, data.Length))}");
             }
@@ -207,9 +209,9 @@ namespace NoahsArk.Utilities
             }
             Write($"    Property: {name} = {valueString}");
         }
-        private int[,] ParseCsvData(string csvData, int width, int height)
+        private long[,] ParseCsvData(string csvData, int width, int height)
         {
-            int[,] tileData = new int[height, width];
+            long[,] tileData = new long[height, width];
             string[] rows = csvData.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
             for (int y = 0; y < height; y++)
@@ -217,7 +219,7 @@ namespace NoahsArk.Utilities
                 string[] tiles = rows[y].Split(',');
                 for (int x = 0; x < width; x++)
                 {
-                    tileData[y, x] = int.Parse(tiles[x]);
+                    tileData[y, x] = long.Parse(tiles[x]);
                 }
             }
             return tileData;
@@ -228,7 +230,7 @@ namespace NoahsArk.Utilities
             {
                 int layerId = _mapLayerNameDict.Keys.ElementAt(i);
                 string layerName = _mapLayerNameDict[layerId];
-                int[,] data = _mapLayerDataDict[layerId];
+                long[,] data = _mapLayerDataDict[layerId];
                 Dictionary<string, object> props = new Dictionary<string, object>();
                 if (_mapLayerPropertiesDict.TryGetValue(layerId, out var properties))
                 {
@@ -257,7 +259,7 @@ namespace NoahsArk.Utilities
 
                     if (objectGroupName.Equals("obstacles", StringComparison.OrdinalIgnoreCase))
                     {
-                        // add collisions
+                        _obstacles.Add(rectangle);
                     } else if (objectGroupName.Equals("signs", StringComparison.OrdinalIgnoreCase))
                     {
                         // add signs

@@ -58,7 +58,7 @@ namespace NoahsArk.States
         #region Private
         private void _startLabel_Selected(object sender, EventArgs e)
         {
-            Transition(EChangeType.Push, _gameRef.StartMenuScreen);
+            Transition(EChangeType.Push, _gameRef.GamePlayScreen);
         }
         #endregion
 

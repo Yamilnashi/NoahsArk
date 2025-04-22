@@ -21,6 +21,7 @@ namespace NoahsArk.States
         private Engine _engine = new Engine(16, 16);
         private World _world;
         private Camera _camera;
+        private Texture2D _debugTexture;
         #endregion
 
         #region Properties
@@ -51,9 +52,7 @@ namespace NoahsArk.States
         {
             _gameRef.SpriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
-                SamplerState.PointClamp,
-                null, null, null,
-                _camera.Transformation);
+                SamplerState.PointClamp, transformMatrix: _camera.Transformation);
             base.Draw(gameTime);
             _controlManager.Draw(_gameRef.SpriteBatch);
             _world.Draw(_gameRef.SpriteBatch, gameTime, _camera);
@@ -64,7 +63,9 @@ namespace NoahsArk.States
         #region Private
         private void LoadWorld()
         {
-            _world = new World(_gameRef);
+            _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
+            _debugTexture.SetData(new[] { Color.White });
+            _world = new World(_gameRef, _debugTexture);
             Game.Components.Add(_world);
         }
         private void CreatePlayers()
@@ -75,7 +76,8 @@ namespace NoahsArk.States
             PlayerObject p = playerData.PlayerObjects.FirstOrDefault(x => x.ClassType == EClassType.Rogue);
             Vector2 initialPosition = new Vector2(10, 10);
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(p.Animations);
-            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One);
+            Texture2D shadow = _gameRef.Content.Load<Texture2D>("Assets/Sprites/Character/shadow");
+            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One, shadow);
             _world.CurrentMap.AddPlayer(player);
         }
         private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> GetAnimationData(Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> data)

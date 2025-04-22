@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Entities;
+using NoahsArk.Extensions;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Rendering;
 
@@ -13,7 +14,8 @@ namespace NoahsArk.Levels
         private EMapCode _mapCode;
         private TileMap _tileMap;
         private List<Player> _players = new List<Player>();
-        private List<Enemy> _enemies = new List<Enemy>(); 
+        private List<Enemy> _enemies = new List<Enemy>();
+        private Texture2D _debugTexture;
         // characters
         // enemies
         #endregion
@@ -25,9 +27,10 @@ namespace NoahsArk.Levels
         #endregion
 
         #region Constructor
-        public Map(TileMap tileMap)
+        public Map(TileMap tileMap, Texture2D debugTexture)
         {
             _tileMap = tileMap;
+            _debugTexture = debugTexture;
         }
         #endregion
 
@@ -85,6 +88,7 @@ namespace NoahsArk.Levels
             {
                 Player player = _players[i];
                 player.Draw(spriteBatch);
+                //spriteBatch.Draw(_debugTexture, player.GetHitbox(player.Position).Center, null, Color.Blue, 0f, new Vector2(0.5f, 0.5f), 2f, SpriteEffects.None, 0f);
             }
 
             for (int i = 0; i <  layersToDrawAfterCharacter.Count; i++)
@@ -94,6 +98,11 @@ namespace NoahsArk.Levels
             }
 
             // draw collisions
+            //for (int i = 0; i < _tileMap.Obstacles.Count; i++)
+            //{
+            //    Rectangle obstacle = _tileMap.Obstacles[i];
+            //    spriteBatch.Draw(_debugTexture, obstacle, Color.Red * 0.5f);
+            //}
         }
         public void AddPlayer(Player player)
         {

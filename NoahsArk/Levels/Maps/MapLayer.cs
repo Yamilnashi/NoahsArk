@@ -10,9 +10,11 @@ namespace NoahsArk.Levels.Maps
     {
         #region Fields
         private string _name;
-        private int[,] _tiles;
+        private long[,] _tiles;
         private EMapLayerType _mapLayerType;
         private Dictionary<string, object> _properties;
+        private float _offsetX;
+        private float _moveSpeed;
         #endregion
         #region Properties
         public string Name { get { return _name; } set { _name = value; } }
@@ -32,16 +34,18 @@ namespace NoahsArk.Levels.Maps
         }
         #endregion
         #region Constructor
-        public MapLayer(string name, int[,] tiles, Dictionary<string, object> properties)
+        public MapLayer(string name, long[,] tiles, Dictionary<string, object> properties)
         {
             _name = name;
             _tiles = tiles;
             _properties = properties;
+            _offsetX = 0f;
+            _moveSpeed = 2f;
         }
         #endregion
 
         #region Methods
-        public int GetTile(int x, int y)
+        public long GetTile(int x, int y)
         {
             return _tiles[y, x];
         }
@@ -68,7 +72,11 @@ namespace NoahsArk.Levels.Maps
 
         public void Update(GameTime gameTime)
         {
-            // todo:
+            if (HasProperty("weatherTypeCode"))
+            {
+                EWeatherType weatherType = (EWeatherType)GetProperty<int>("weatherTypeCode");
+                UpdateWeather(gameTime, weatherType);                
+            }
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<TileSet> tileSets)
         {
@@ -83,6 +91,82 @@ namespace NoahsArk.Levels.Maps
             max.X = Math.Min(viewPoint.X + 1, Width);
             max.Y = Math.Min(viewPoint.Y + 1, Height);
 
+            if (_name.Equals("aboveall"))
+            {
+                DrawMovingLayer(spriteBatch, tileSets, gameTime, min, max);
+            }
+            else
+            {
+                DrawStaticLayer(spriteBatch, tileSets, gameTime, min, max);
+            }
+        }
+        #endregion
+        #region Private
+        private void UpdateWeather(GameTime gameTime, EWeatherType weatherType)
+        {
+            if (weatherType == EWeatherType.Clouds)
+            {
+                _offsetX -= _moveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                float layerWidthInPixels = Width * Engine.TileWidth;
+                if (Math.Abs(_offsetX) >= layerWidthInPixels)
+                {
+                    _offsetX += layerWidthInPixels; // reset the layer to start position
+                }
+            }
+        }
+        private bool IsTileIndexBelongInTileset(long tileIndex, TileSet tileSet)
+        {
+            if (tileIndex >= tileSet.FirstGid)
+            {
+                int maximumTileIndex = tileSet.FirstGid + tileSet.TileCount;
+                return tileIndex < maximumTileIndex;
+            }
+            return false;
+        }
+
+        private void DrawMovingLayer(SpriteBatch spriteBatch, List<TileSet> tileSets, GameTime gameTime, Point min, Point max)
+        {
+            float layerWidthInPixels = Width * Engine.TileWidth;
+
+            for (int y = min.Y; y < max.Y; y++)
+            {
+                for (int x = min.X; x < max.X; x++)
+                {
+                    long tileIndex = GetTile(x, y);
+
+                    // Skip drawing if TileIndex is invalid or represents an empty tile
+                    if (tileIndex <= 0)
+                    {
+                        continue; // Assuming 0 or negative numbers represent empty tiles
+                    }
+
+                    // Calculate the base position with the floating-point offset
+                    float baseX = x * Engine.TileWidth + _offsetX;
+                    float baseY = y * Engine.TileHeight;
+
+                    // Draw the tile at its current position
+                    Vector2 position = new Vector2(baseX, baseY);
+                    DrawTileWithPosition(spriteBatch, tileSets, tileIndex, position, gameTime);
+
+                    // Handle wrapping: draw an additional copy of the tile if it's near the edge
+                    if (baseX < 0)
+                    {
+                        // Draw a second copy on the right side for seamless looping
+                        Vector2 wrappedPosition = new Vector2(baseX + layerWidthInPixels, baseY);
+                        DrawTileWithPosition(spriteBatch, tileSets, tileIndex, wrappedPosition, gameTime);
+                    }
+                    else if (baseX >= layerWidthInPixels)
+                    {
+                        // Draw a second copy on the left side
+                        Vector2 wrappedPosition = new Vector2(baseX - layerWidthInPixels, baseY);
+                        DrawTileWithPosition(spriteBatch, tileSets, tileIndex, wrappedPosition, gameTime);
+                    }
+                }
+            }
+        }
+
+        private void DrawStaticLayer(SpriteBatch spriteBatch, List<TileSet> tileSets, GameTime gameTime, Point min, Point max)
+        {
             Rectangle destination = new Rectangle(0, 0, Engine.TileWidth, Engine.TileHeight);
 
             for (int y = min.Y; y < max.Y; y++)
@@ -91,46 +175,62 @@ namespace NoahsArk.Levels.Maps
 
                 for (int x = min.X; x < max.X; x++)
                 {
-                    int tileIndex = GetTile(x, y);
+                    long tileIndex = GetTile(x, y);
 
-                    // skip drawing if TileIndex is invalid or represents an empty tile
+                    // Skip drawing if TileIndex is invalid or represents an empty tile
                     if (tileIndex <= 0)
                     {
-                        continue; // we are assuming that 0 or negative numbers represents empty tiles
+                        continue; // Assuming 0 or negative numbers represent empty tiles
                     }
 
                     destination.X = x * Engine.TileWidth;
 
-                    if (tileSets.Count > 0)
-                    {
-                        foreach (TileSet tileSet in tileSets)
-                        {
-                            if (IsTileIndexBelongInTileset(tileIndex, tileSet))
-                            {
-                                int localId = tileIndex - tileSet.FirstGid;
-                                Rectangle sourceRect = tileSet.GetCurrentSourceRectangle(localId, gameTime);
+                    DrawTile(spriteBatch, tileSets, tileIndex, destination, gameTime);
+                }
+            }
+        }
 
-                                if (sourceRect != Rectangle.Empty)
-                                {
-                                    spriteBatch.Draw(tileSet.Texture, destination, sourceRect, Color.White);
-                                }
-                                break; // we have found the correct tileset for this tile, we can break the loop
-                            }
+        private void DrawTileWithPosition(SpriteBatch spriteBatch, List<TileSet> tileSets, long tileIndex, Vector2 position, GameTime gameTime)
+        {
+            if (tileSets.Count > 0)
+            {
+                foreach (TileSet tileSet in tileSets)
+                {
+                    if (IsTileIndexBelongInTileset(tileIndex, tileSet))
+                    {
+                        long localId = tileIndex - tileSet.FirstGid;
+                        Rectangle sourceRect = tileSet.GetCurrentSourceRectangle(localId, gameTime);
+
+                        if (sourceRect != Rectangle.Empty)
+                        {
+                            // Use Vector2 position for smooth movement, scale to maintain tile size
+                            spriteBatch.Draw(tileSet.Texture, position, sourceRect, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                         }
+                        break; // Found the correct tileset for this tile, break the loop
                     }
                 }
             }
         }
-        #endregion
-        #region Private
-        private bool IsTileIndexBelongInTileset(int tileIndex, TileSet tileSet)
+
+        private void DrawTile(SpriteBatch spriteBatch, List<TileSet> tileSets, long tileIndex, Rectangle destination, GameTime gameTime)
         {
-            if (tileIndex >= tileSet.FirstGid)
+            if (tileSets.Count > 0)
             {
-                int maximumTileIndex = tileSet.FirstGid + tileSet.TileCount;
-                return tileIndex < maximumTileIndex;
+                foreach (TileSet tileSet in tileSets)
+                {
+                    if (IsTileIndexBelongInTileset(tileIndex, tileSet))
+                    {
+                        long localId = tileIndex - tileSet.FirstGid;
+                        Rectangle sourceRect = tileSet.GetCurrentSourceRectangle(localId, gameTime);
+
+                        if (sourceRect != Rectangle.Empty)
+                        {
+                            spriteBatch.Draw(tileSet.Texture, destination, sourceRect, Color.White);
+                        }
+                        break; // we have found the correct tileset for this tile, we can break the loop
+                    }
+                }
             }
-            return false;
         }
         #endregion
     }

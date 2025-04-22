@@ -15,7 +15,7 @@ namespace NoahsArk.Extensions
         {
             return mapCode switch
             {
-                EMapCode.Development => "development.tmx",
+                EMapCode.Development => "home.tmx",
                 _ => throw new System.Exception($"Missing TileMap file for map code: {mapCode}")
             };
         }

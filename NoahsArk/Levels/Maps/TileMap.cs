@@ -13,6 +13,7 @@ namespace NoahsArk.Levels.Maps
         private List<ILayer> _mapLayers;
         private int _mapWidth;
         private int _mapHeight;
+        private List<Rectangle> _obstacles;
         #endregion
 
         #region Properties
@@ -20,16 +21,19 @@ namespace NoahsArk.Levels.Maps
         public List<ILayer> MapLayers { get { return _mapLayers; } set { _mapLayers = value; } }
         public int MapWidth { get { return _mapWidth * Engine.TileWidth; } }
         public int MapHeight { get { return _mapHeight * Engine.TileHeight; } }
-
+        public List<Rectangle> Obstacles { get { return _obstacles; } }
         #endregion
 
         #region Constructor
-        public TileMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, List<ILayer> mapLayers, List<TileSet> tileSets)
+        public TileMap(int mapWidth, int mapHeight, int tileWidth, 
+            int tileHeight, List<ILayer> mapLayers, List<TileSet> tileSets, 
+            List<Rectangle> obstacles)
         {
             _mapLayers = mapLayers;
             _mapWidth = mapWidth;
             _mapHeight = mapHeight;
             _tileSets = tileSets;
+            _obstacles = obstacles ?? new List<Rectangle>();
         }
         #endregion
 

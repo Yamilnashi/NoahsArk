@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -21,7 +22,7 @@ namespace NoahsArk.Levels.Maps
         private Rectangle[] _sourceRectangles;
         private string _tilesetpath;
         private string _texturePath;
-        //private Dictionary<int, AnimatedTile> _animatedTiles;
+        private Dictionary<long, AnimatedTile> _animatedTiles;
         #endregion
 
         #region Properties
@@ -42,6 +43,7 @@ namespace NoahsArk.Levels.Maps
             _tileWidth = tileWidthInPixels; 
             _tileHeight = tileHeightInPixels;   
             _source = source;
+            _animatedTiles = new Dictionary<long, AnimatedTile>();
             _tilesetpath = Path.GetFullPath($"Content/Tiled/Tilesets/{Path.GetFileName(_source)}");
             _texturePath = Path.GetFullPath($"Content/Tiled/Tilesets/{Path.GetFileNameWithoutExtension(_source)}");
         }
@@ -82,33 +84,33 @@ namespace NoahsArk.Levels.Maps
             }
         }
 
-        public Rectangle GetCurrentSourceRectangle(int tileId, GameTime gameTime)
+        public Rectangle GetCurrentSourceRectangle(long tileId, GameTime gameTime)
         {
             if (tileId >= _tileCount)
             {
                 return Rectangle.Empty;
             }
 
-            //if (AnimatedTiles.TryGetValue(tileId, out AnimatedTile animatedTile))
-            //{
-            //    int totalElapsedMilliseconds = (int)gameTime.TotalGameTime.TotalMilliseconds;
-            //    int totalDuration = animatedTile.Frames.Sum(f => f.Duration);
-            //    int currentCycleTime = totalElapsedMilliseconds % totalDuration;
-            //    int accumulatedTime = 0;
-            //    foreach (var frame in animatedTile.Frames)
-            //    {
-            //        accumulatedTime += frame.Duration;
-            //        if (currentCycleTime < accumulatedTime)
-            //        {
-            //            // If the duration of frames is off, adjust here:
-            //            //int adjustedTileId = frame.TileId; // This would be frame.TileId if each frame is exactly 300ms
-            //            // But if you want to ensure each frame lasts 300ms, adjust like this:
-            //            int frameIndex = (int)Math.Floor((double)currentCycleTime / 150);
-            //            //return sourceRectangles[adjustedTileId];
-            //            return sourceRectangles[animatedTile.Frames[frameIndex % animatedTile.Frames.Count].TileId];
-            //        }
-            //    }
-            //}
+            if (_animatedTiles.TryGetValue(tileId, out AnimatedTile animatedTile))
+            {
+                int totalElapsedMilliseconds = (int)gameTime.TotalGameTime.TotalMilliseconds;
+                int totalDuration = animatedTile.Frames.Sum(f => f.Duration);
+                int currentCycleTime = totalElapsedMilliseconds % totalDuration;
+                int accumulatedTime = 0;
+                foreach (var frame in animatedTile.Frames)
+                {
+                    accumulatedTime += frame.Duration;
+                    if (currentCycleTime < accumulatedTime)
+                    {
+                        // If the duration of frames is off, adjust here:
+                        //int adjustedTileId = frame.TileId; // This would be frame.TileId if each frame is exactly 300ms
+                        // But if you want to ensure each frame lasts 300ms, adjust like this:
+                        int frameIndex = (int)Math.Floor((double)currentCycleTime / 150);
+                        //return sourceRectangles[adjustedTileId];
+                        return _sourceRectangles[animatedTile.Frames[frameIndex % animatedTile.Frames.Count].TileId];
+                    }
+                }
+            }
             return _sourceRectangles[tileId];
         }
 
@@ -145,26 +147,26 @@ namespace NoahsArk.Levels.Maps
             int tileId = int.Parse(reader.GetAttribute("id"));
             if (reader.ReadToFollowing("animation"))
             {
-                ReadTileAnimation(reader);
+                ReadTileAnimation(reader, tileId);
             }
         }
 
-        private void ReadTileAnimation(XmlReader reader)
+        private void ReadTileAnimation(XmlReader reader, int tileId)
         {
-            //AnimatedTile animation = new AnimatedTile();
-            //while (reader.Read() && 
-            //    reader.NodeType != XmlNodeType.EndElement)
-            //{
-            //    if (reader.Name.Equals("frame", StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        animation.Frames.Add(new AnimationFrame
-            //        {
-            //            TileId = int.Parse(reader.GetAttribute("tileid")),
-            //            Duration = int.Parse(reader.GetAttribute("duration"))
-            //        });
-            //    }
-            //}
-            //AnimatedTiles.Add(animation);
+            AnimatedTile animation = new AnimatedTile();
+            while (reader.Read() &&
+                reader.NodeType != XmlNodeType.EndElement)
+            {
+                if (reader.Name.Equals("frame", StringComparison.OrdinalIgnoreCase))
+                {
+                    animation.Frames.Add(new AnimatedTileFrame
+                    {
+                        TileId = int.Parse(reader.GetAttribute("tileid")),
+                        Duration = int.Parse(reader.GetAttribute("duration"))
+                    });
+                }
+            }
+            _animatedTiles.Add(tileId, animation);
         }
         #endregion
     }

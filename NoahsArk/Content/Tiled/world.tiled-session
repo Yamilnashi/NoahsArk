@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/test.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
-        "GameMaps",
+        "Tilesets",
         ".",
-        "Tilesets"
+        "GameMaps"
     ],
     "fileStates": {
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
@@ -31,29 +31,83 @@
         },
         "GameMaps/development.tmx": {
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 236.5,
-                "y": 167
+                "x": 166.75,
+                "y": 184.5
             }
         },
         "GameMaps/full.tsx": {
             "scaleInDock": 1
         },
-        "GameMaps/test.tmx": {
-            "scale": 0.8022222222222222,
+        "GameMaps/home.tmx": {
+            "expandedObjectLayers": [
+                16
+            ],
+            "scale": 3,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 536.01108033241,
-                "y": 320.3601108033241
+                "x": 225.99999999999997,
+                "y": 96
             }
+        },
+        "GameMaps/infinite.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 211.33333333333331,
+                "y": 200
+            }
+        },
+        "GameMaps/obstacles.tmx": {
+            "scale": 2.078125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.12030075187965,
+                "y": 159.75939849624058
+            }
+        },
+        "GameMaps/test.tmx": {
+            "scale": 0.8022222222222222,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 447.50692520775635,
+                "y": 198.19944598337958
+            }
+        },
+        "GameMaps/tileset_buildings_shadows.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/clouds.tsx": {
+            "scaleInEditor": 8
         },
         "Tilesets/full.tsx": {
             "scaleInDock": 1
         },
+        "Tilesets/tileset_buildings_floors.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/tileset_buildings_roofs.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/tileset_buildings_walls.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/tileset_clouds.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 8
+        },
         "Tilesets/tileset_floors.tsx": {
             "scaleInDock": 1.5,
             "scaleInEditor": 2
+        },
+        "Tilesets/tileset_vegetation.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Tilesets/vegetation.tsx": {
             "scaleInDock": 1,
@@ -62,24 +116,31 @@
     },
     "last.exportedFilePath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/GameMaps",
     "last.externalTilesetPath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/Tilesets",
-    "last.imagePath": "C:/Users/Yamil/Projects/Assets/Pixel Crawler/Environment/Props/Static",
+    "last.imagePath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/Tilesets",
+    "map.fixedSize": true,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
     "openFiles": [
-        "GameMaps/development.tmx",
-        "Tilesets/vegetation.tsx",
-        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx",
-        "GameMaps/test.tmx"
     ],
     "project": "world.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "GameMaps/development.tmx",
-        "Tilesets/vegetation.tsx",
-        "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/test.tmx",
         "GameMaps/test.tmx",
-        "GameMaps/development..tmx",
-        "Tilesets/tileset_floors.tsx"
+        "GameMaps/tileset_buildings_shadows.tsx",
+        "Tilesets/tileset_buildings_floors.tsx",
+        "Tilesets/tileset_buildings_walls.tsx",
+        "Tilesets/tileset_buildings_roofs.tsx",
+        "GameMaps/infinite.tmx",
+        "Tilesets/tileset_clouds.tsx",
+        "Tilesets/tileset_floors.tsx",
+        "Tilesets/tileset_vegetation.tsx",
+        "Tilesets/vegetation.tsx",
+        "Tilesets/clouds.tsx"
     ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
