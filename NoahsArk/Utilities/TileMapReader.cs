@@ -277,7 +277,7 @@ namespace NoahsArk.Utilities
                         {
                             // add interactables
                             string s = string.Empty;
-                            Dictionary<string, object> properties = _objectPropertiesDict[(_currentObjectGroupId, _currentObjectId)];
+                            Dictionary<string, object> properties = _objectPropertiesDict[(objectGroupId, obj.objectId)];
                             if (properties.TryGetValue("type", out var foundType))
                             {
                                 string typeString = foundType.ToString();

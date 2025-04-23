@@ -18,6 +18,10 @@ namespace NoahsArk.Entities
         private PlayerIndex _playerIndex;
         private Vector2 _desiredMovement;
         private World _world;
+        private bool _isTransitioningMaps;
+        private float _transitionCooldown;
+        private const float _transition_cooldown_duration = 0.5f;
+        private bool _isInteracting;
         #endregion
 
         #region Properties
@@ -30,15 +34,21 @@ namespace NoahsArk.Entities
         {
             _playerIndex = playerIndex;
             _world = world;
+            _transitionCooldown = 0f;
+            _isInteracting = false;
         }
         #endregion
 
         #region Methods
         public override void Update(GameTime gameTime)
         {
+            UpdateTransitionCooldownTimer(gameTime);
             HandleCameraControls();
             HandleMovement();
-            HandleDoorTransitions();
+            if (!_isTransitioningMaps)
+            {
+                HandleDoorTransitions();
+            }            
             if (_desiredMovement != Vector2.Zero)
             {
                 Move(_desiredMovement);
@@ -48,6 +58,7 @@ namespace NoahsArk.Entities
                     Camera.LockToPosition(Position, CurrentMap);
                 }
             }
+            UpdateInteractionState();
             base.Update(gameTime);
         }
 
@@ -59,6 +70,26 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Private
+        private void UpdateTransitionCooldownTimer(GameTime gameTime)
+        {
+            if (_transitionCooldown > 0)
+            {
+                _transitionCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_transitionCooldown <= 0)
+                {
+                    _transitionCooldown = 0;
+                    _isTransitioningMaps = false; // allow new transitions after cooldown
+                }
+            }
+        }
+        private void UpdateInteractionState()
+        {
+            if (InputHandler.KeyReleased(Keys.E) || 
+                InputHandler.ButtonReleased(Buttons.A, _playerIndex))
+            {
+                _isInteracting = false;
+            }
+        }
         private void HandleCameraControls()
         {
             if (InputHandler.KeyReleased(Keys.PageUp) ||
@@ -164,15 +195,22 @@ namespace NoahsArk.Entities
         }
         private void HandleDoorTransitions()
         {
+            if (_isInteracting || _transitionCooldown > 0)
+            {
+                return; // dont handle door transitions
+            }
+            
             if (InputHandler.KeyPressed(Keys.E) || 
                 InputHandler.ButtonPressed(Buttons.A, _playerIndex))
             {
+                _isInteracting = true;
                 Circle playerHitbox = GetHitbox(Position);
                 for (int i = 0; i < CurrentMap.TileMap.Doors.Count; i++)
                 {
                     DoorTransition door = CurrentMap.TileMap.Doors[i];
                     if (CollisionHelper.CircleIntersectsRectangle(playerHitbox, door.TriggerArea))
                     {
+                        _isTransitioningMaps = true;
                         _desiredMovement = Vector2.Zero;
                         EMapCode targetMapCode = door.TargetMap;
                         CurrentMap.RemovePlayer(this);
@@ -181,6 +219,7 @@ namespace NoahsArk.Entities
                         CurrentMap.AddPlayer(this);
                         Position = door.SpawnPosition;
                         Camera.LockToPosition(Position, CurrentMap);
+                        _transitionCooldown = _transition_cooldown_duration; // start the transition cooldown
                         break;
                     }
                 }

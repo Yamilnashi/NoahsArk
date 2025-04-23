@@ -57,23 +57,22 @@
                 10,
                 5
             ],
-            "scale": 8,
-            "selectedLayer": 6,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 135.875,
-                "y": 175.3125
+                "x": 95.375,
+                "y": 91.5
             }
         },
         "GameMaps/homeoutside.tmx": {
             "expandedObjectLayers": [
-                16,
                 17
             ],
             "scale": 4,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 311,
-                "y": 281.375
+                "x": 250.125,
+                "y": 255.5
             }
         },
         "GameMaps/infinite.tmx": {
@@ -234,7 +233,7 @@
     "openFiles": [
     ],
     "project": "world.tiled-project",
-    "property.type": "string",
+    "property.type": "bool",
     "recentFiles": [
         "GameMaps/home.tmx",
         "GameMaps/homeinside.tmx",
