@@ -3,6 +3,9 @@
     public enum EMapCode
     {
         Development = 0,
-
+        Test,
+        Obstacles,
+        HomeOutside,
+        HomeInside,
     }
 }

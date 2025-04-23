@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Extensions;
@@ -12,7 +14,7 @@ namespace NoahsArk.Levels.Maps
         #region Fields
         private Game1 _gameRef;
         private Dictionary<EMapCode, Map> _maps = new Dictionary<EMapCode, Map>();
-        private EMapCode _currentMap = EMapCode.Development;
+        private EMapCode _currentMap;
         private Texture2D _debugTexture;
         #endregion
 
@@ -31,19 +33,24 @@ namespace NoahsArk.Levels.Maps
         {
             _gameRef = game;
             _debugTexture = debugTexture;
+            EMapCode[] codes = Enum.GetValues(typeof(EMapCode)).Cast<EMapCode>().ToArray();
+            for (int i = 0; i < codes.Length; i++)
+            {
+                EMapCode mapCode = codes[i];
+                string filePath = mapCode.TileMapFilePath();
+                TileMapReader tmr = new TileMapReader(filePath);
+                tmr.ProcessTileMap();
+                TileMap tileMap = tmr.CreateTileMap();
+                ConfigureTileSetsInMap(tileMap);
+                CreateMap(mapCode, tileMap);
+            }
         }
         #endregion
 
         #region Methods
         protected override void LoadContent()
         {
-            base.LoadContent();
-            string filePath = _currentMap.TileMapFilePath();
-            TileMapReader tmr = new TileMapReader(filePath);
-            tmr.ProcessTileMap();
-            TileMap tileMap = tmr.CreateTileMap();
-            ConfigureTileSetsInMap(tileMap);
-            CreateMap(tileMap);
+            base.LoadContent();         
         }
 
         public override void Update(GameTime gameTime)
@@ -56,6 +63,14 @@ namespace NoahsArk.Levels.Maps
         {
             CurrentMap.Draw(spriteBatch, gameTime, camera);
         }
+        public void SetCurrentMap(EMapCode mapCode)
+        {
+            if (_maps.ContainsKey(mapCode))
+            {
+                _currentMap = mapCode;
+            }
+        }
+            
         #endregion
 
         #region Private
@@ -70,10 +85,10 @@ namespace NoahsArk.Levels.Maps
             }
         }
 
-        private void CreateMap(TileMap tileMap)
+        private void CreateMap(EMapCode mapCode, TileMap tileMap)
         {
             Map map = new Map(tileMap, _debugTexture);
-            _maps[_currentMap] = map;
+            _maps.Add(mapCode, map);
         }
         #endregion
     }

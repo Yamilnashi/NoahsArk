@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="17">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="33">
  <tileset firstgid="1" source="../Tilesets/tileset_buildings_roofs.tsx"/>
  <tileset firstgid="626" source="../Tilesets/tileset_buildings_walls.tsx"/>
  <tileset firstgid="2726" source="../Tilesets/tileset_buildings_props.tsx"/>
@@ -126,8 +126,8 @@
 0,0,0,0,0,0,0,0,3051,0,0,0,0,0,0,0,0,0,0,0,0,3051,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,3055,0,0,0,0,0,0,0,0,0,0,0,0,3051,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,3076,3103,3103,3103,3103,3103,3103,3103,3103,3004,0,0,3029,3080,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3055,0,0,3055,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3055,0,0,3055,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="1" name="house-lower" width="30" height="20">
@@ -156,19 +156,25 @@
  </layer>
  <objectgroup id="16" name="obstacles">
   <object id="1" name="houseleft" x="134.5" y="207" width="146" height="80.5"/>
-  <object id="3" x="280.909" y="207.091" width="9.81818" height="64.9091"/>
-  <object id="4" x="291.091" y="207.636" width="55.0909" height="24.5455"/>
-  <object id="5" x="289.818" y="231.091" width="56.5455" height="20.9091"/>
-  <object id="6" x="316.545" y="252.364" width="29.0909" height="19.4545"/>
   <object id="7" x="326.545" y="272.545" width="18.3636" height="15.2727"/>
-  <object id="8" x="326.545" y="288.182" width="2.72727" height="31.6364"/>
-  <object id="10" x="278.364" y="272.182" width="3.27273" height="47.6364"/>
   <object id="11" x="388" y="274.333" width="92.3333" height="45.3333"/>
   <object id="12" x="401.333" y="256" width="45" height="18"/>
   <object id="13" x="401" y="112" width="46" height="14.3333"/>
   <object id="14" x="177" y="80.3333" width="46" height="14.3333"/>
   <object id="15" x="65" y="128.333" width="45.6667" height="14.3333"/>
   <object id="16" x="17" y="208" width="45.6667" height="15"/>
+  <object id="20" x="326.25" y="207.75" width="19.75" height="79.75"/>
+  <object id="22" x="280" y="207.75" width="47" height="47.5"/>
+ </objectgroup>
+ <objectgroup id="17" name="interactables">
+  <object id="32" name="door" x="294.957" y="237.957" width="18.9565" height="33.0435">
+   <properties>
+    <property name="spawnX" type="int" value="136"/>
+    <property name="spawnY" type="int" value="165"/>
+    <property name="targetMap" value="homeinside"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="14" name="house_upper" width="30" height="20">
   <properties>
@@ -216,7 +222,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2751,2752,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,2854,0,0,0,2935,2936,0,0,2776,2777,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2801,2802,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2828,2829,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
@@ -240,7 +246,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2757,2758,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2782,2783,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2807,2808,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2828,2829,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>

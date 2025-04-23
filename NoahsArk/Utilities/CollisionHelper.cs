@@ -32,5 +32,14 @@ namespace NoahsArk.Utilities
             }
             return intersects;
         }
+        public static bool CircleIntersectsRectangle(Circle circle, Rectangle rectangle)
+        {
+            float closestX = MathHelper.Clamp(circle.Center.X, rectangle.X, rectangle.X + rectangle.Width);
+            float closestY = MathHelper.Clamp(circle.Center.Y, rectangle.Y, rectangle.Y + rectangle.Height);
+            float dx = circle.Center.X - closestX;
+            float dy = circle.Center.Y - closestY;
+            float distanceSquared = dx * dx + dy * dy;
+            return distanceSquared < (circle.Radius * circle.Radius);
+        }
     }
 }

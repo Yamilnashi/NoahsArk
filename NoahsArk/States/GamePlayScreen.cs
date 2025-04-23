@@ -66,6 +66,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
+            _world.SetCurrentMap(EMapCode.HomeOutside);
             Game.Components.Add(_world);
         }
         private void CreatePlayers()
@@ -77,7 +78,7 @@ namespace NoahsArk.States
             Vector2 initialPosition = new Vector2(10, 10);
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(p.Animations);
             Texture2D shadow = _gameRef.Content.Load<Texture2D>("Assets/Sprites/Character/shadow");
-            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One, shadow);
+            var player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One, shadow, _world);
             _world.CurrentMap.AddPlayer(player);
         }
         private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> GetAnimationData(Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> data)

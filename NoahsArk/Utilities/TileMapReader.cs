@@ -5,7 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using NoahsArk.Entities;
+using NoahsArk.Entities.GameObjects;
+using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NoahsArk.Utilities
 {
@@ -24,6 +28,7 @@ namespace NoahsArk.Utilities
         private int _currentObjectId = 0;
         private string _currentNodeType;
         private List<Rectangle> _obstacles = new List<Rectangle>();
+        private List<DoorTransition> _doors = new List<DoorTransition>();
         private Dictionary<int, string> _mapLayerNameDict = new Dictionary<int, string>();
         private Dictionary<int, long[,]> _mapLayerDataDict = new Dictionary<int, long[,]>();
         private Dictionary<int, Dictionary<string, object>> _mapLayerPropertiesDict = new Dictionary<int, Dictionary<string, object>>();
@@ -56,7 +61,8 @@ namespace NoahsArk.Utilities
                                     _tileHeight,
                                     _mapLayers,
                                     _tileSets,
-                                    _obstacles);
+                                    _obstacles,
+                                    _doors);
         }
         #endregion
 
@@ -255,20 +261,49 @@ namespace NoahsArk.Utilities
                     if (_objectRectangleDict.TryGetValue((objectGroupId, obj.objectId), out var rect))
                     {
                         rectangle = rect;
-                    }
-
-                    if (objectGroupName.Equals("obstacles", StringComparison.OrdinalIgnoreCase))
-                    {
-                        _obstacles.Add(rectangle);
-                    } else if (objectGroupName.Equals("signs", StringComparison.OrdinalIgnoreCase))
-                    {
-                        // add signs
-                    } else if (objectGroupName.Equals("enemy spawner", StringComparison.OrdinalIgnoreCase))
-                    {
-                        // add enemy spawners
-                    }
+                        if (objectGroupName.Equals("obstacles", StringComparison.OrdinalIgnoreCase))
+                        {
+                            _obstacles.Add(rectangle);
+                        }
+                        else if (objectGroupName.Equals("signs", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // add signs
+                        }
+                        else if (objectGroupName.Equals("enemy spawner", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // add enemy spawners
+                        }
+                        else if (objectGroupName.Equals("interactables", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // add interactables
+                            string s = string.Empty;
+                            Dictionary<string, object> properties = _objectPropertiesDict[(_currentObjectGroupId, _currentObjectId)];
+                            if (properties.TryGetValue("type", out var foundType))
+                            {
+                                string typeString = foundType.ToString();
+                                EInteractableType type = (EInteractableType)Enum.Parse(typeof(EInteractableType), typeString, true);
+                                AddObject(properties, type, rectangle);
+                            }
+                        }
+                    } 
                 }
             }
+        }
+        private void AddObject(Dictionary<string, object> properties, EInteractableType type, Rectangle rectangle)
+        {
+            if (type == EInteractableType.door)
+            {
+                AddDoor(properties, rectangle);
+            }
+        }
+        private void AddDoor(Dictionary<string, object> properties, Rectangle rectangle)
+        {
+            string targetMap = properties["targetMap"].ToString();
+            EMapCode targetMapCode = (EMapCode)Enum.Parse(typeof(EMapCode), targetMap, true);
+            int spawnX = int.Parse(properties["spawnX"].ToString());
+            int spawnY = int.Parse(properties["spawnY"].ToString());
+            DoorTransition door = new DoorTransition(rectangle, targetMapCode, new Vector2(spawnX, spawnY));
+            _doors.Add(door);
         }
         private static void Write(string text)
         {

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="10" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="26">
+ <tileset firstgid="1" source="../Tilesets/tileset_buildings_floors.tsx"/>
+ <tileset firstgid="626" source="../Tilesets/tileset_buildings_props.tsx"/>
+ <tileset firstgid="1251" source="../Tilesets/tileset_dungeon_props.tsx"/>
+ <tileset firstgid="1876" source="../Tilesets/tileset_esoteric.tsx"/>
+ <tileset firstgid="2501" source="../Tilesets/tileset_farm.tsx"/>
+ <tileset firstgid="3126" source="../Tilesets/tileset_furniture.tsx"/>
+ <tileset firstgid="5826" source="../Tilesets/tileset_meat.tsx"/>
+ <tileset firstgid="5862" source="../Tilesets/tileset_pan.tsx"/>
+ <tileset firstgid="5972" source="../Tilesets/tileset_resources.tsx"/>
+ <tileset firstgid="6597" source="../Tilesets/tileset_rocks.tsx"/>
+ <tileset firstgid="6844" source="../Tilesets/tileset_shadows.tsx"/>
+ <tileset firstgid="7469" source="../Tilesets/tileset_tools.tsx"/>
+ <tileset firstgid="8094" source="../Tilesets/tileset_trees_2.tsx"/>
+ <tileset firstgid="8174" source="../Tilesets/tileset_trees_3.tsx"/>
+ <tileset firstgid="8390" source="../Tilesets/tileset_trees_4.tsx"/>
+ <tileset firstgid="8606" source="../Tilesets/tileset_trees_5.tsx"/>
+ <tileset firstgid="9256" source="../Tilesets/tileset_trees_6.tsx"/>
+ <tileset firstgid="9724" source="../Tilesets/tileset_trees_7.tsx"/>
+ <tileset firstgid="10192" source="../Tilesets/tileset_trees_8.tsx"/>
+ <tileset firstgid="10960" source="../Tilesets/tileset_water.tsx"/>
+ <tileset firstgid="11585" source="../Tilesets/tileset_buildings_walls.tsx"/>
+ <layer id="1" name="floor" width="10" height="11">
+  <data encoding="csv">
+1,2,2,2,2,2,2,2,2,3,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+51,52,52,52,52,52,52,52,52,53,
+26,27,27,27,27,27,27,27,27,28,
+26,27,27,27,27,27,27,27,27,28,
+51,52,52,52,52,52,52,52,52,53
+</data>
+ </layer>
+ <layer id="3" name="walls" width="10" height="11">
+  <data encoding="csv">
+11681,11641,11641,11641,11642,11641,11642,11641,11642,11686,
+11723,11683,11683,11683,11684,11683,11684,11683,11684,11728,
+11765,11725,11725,11725,11726,11725,11726,11725,11726,11770,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11892,11893,11893,11893,11893,11893,11893,11893,0,11895
+</data>
+ </layer>
+ <layer id="6" name="furnitureobjs" width="10" height="11">
+  <data encoding="csv">
+0,0,3426,3427,0,0,0,0,0,0,
+0,0,3476,3477,0,0,0,0,0,0,
+0,0,3526,3527,0,0,0,0,3578,3579,
+3422,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,3728,3729,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,3422,
+0,0,0,0,0,0,0,0,0,0,
+0,0,3229,3230,4684,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="8" name="furnitureInFront" width="10" height="11">
+  <properties>
+   <property name="drawAfterCharacter" type="bool" value="true"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+3372,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,3628,3629,
+0,0,0,0,0,0,0,0,3678,3679,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,3372,
+0,0,0,0,0,0,0,0,0,0,
+0,0,3179,3180,4634,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="7" name="abovefurniture" width="10" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+0,0,0,0,0,0,0,0,0,11812,
+0,0,0,0,0,0,0,0,0,11812,
+0,0,0,0,0,0,0,0,0,11812,
+0,0,0,0,0,0,0,0,0,11812,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="obstacles">
+  <object id="10" x="64" y="48" width="31.8182" height="15.8182"/>
+  <object id="11" x="32" y="144" width="32" height="16"/>
+  <object id="12" x="4.36364" y="47.8182" width="11.6364" height="16"/>
+  <object id="13" x="127.667" y="79" width="31.3333" height="13"/>
+  <object id="14" x="127.667" y="37.3333" width="31.6667" height="10.6667"/>
+  <object id="15" x="0" y="-0.666667" width="159.333" height="37.3333"/>
+  <object id="16" x="0" y="36.6667" width="4" height="139.333"/>
+  <object id="17" x="155.333" y="-0.666667" width="4.33333" height="177"/>
+  <object id="18" x="143.667" y="112" width="15.3333" height="16"/>
+  <object id="19" x="143.667" y="173.333" width="15.3333" height="2.33333"/>
+  <object id="20" x="0" y="173.333" width="128" height="2.66667"/>
+ </objectgroup>
+ <objectgroup id="10" name="interactables">
+  <object id="4" name="chestbottom" gid="3723" x="64" y="64.1818" width="16" height="16">
+   <properties>
+    <property name="chestId" type="int" value="1"/>
+    <property name="state" value="closed"/>
+    <property name="type" value="chest"/>
+   </properties>
+  </object>
+  <object id="5" name="chesttop" gid="3673" x="64" y="47.4545" width="16" height="16">
+   <properties>
+    <property name="chestId" type="int" value="1"/>
+    <property name="state" value="closed"/>
+    <property name="type" value="chest"/>
+   </properties>
+  </object>
+  <object id="6" name="chestopenbottom" gid="3722" x="64" y="64.1818" width="16" height="16">
+   <properties>
+    <property name="chestId" type="int" value="1"/>
+    <property name="state" value="opened"/>
+    <property name="type" value="chest"/>
+   </properties>
+  </object>
+  <object id="7" name="chestopentop" gid="3672" x="64" y="47.8182" width="16" height="16" visible="0">
+   <properties>
+    <property name="chestId" type="int" value="1"/>
+    <property name="state" value="opened"/>
+    <property name="type" value="chest"/>
+   </properties>
+  </object>
+  <object id="22" name="bookshelf" x="33.6667" y="4" width="29" height="42.3333">
+   <properties>
+    <property name="type" value="bookshelf"/>
+   </properties>
+  </object>
+  <object id="25" name="door" x="128.125" y="174.625" width="15.5" height="1.375">
+   <properties>
+    <property name="spawnX" type="int" value="304"/>
+    <property name="spawnY" type="int" value="277"/>
+    <property name="targetMap" value="homeoutside"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="9" name="decorations" width="10" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,3323,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

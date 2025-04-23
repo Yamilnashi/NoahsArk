@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NoahsArk.Entities.GameObjects;
 using NoahsArk.Rendering;
 
 namespace NoahsArk.Levels.Maps
@@ -14,6 +15,7 @@ namespace NoahsArk.Levels.Maps
         private int _mapWidth;
         private int _mapHeight;
         private List<Rectangle> _obstacles;
+        private List<DoorTransition> _doors;
         #endregion
 
         #region Properties
@@ -22,18 +24,21 @@ namespace NoahsArk.Levels.Maps
         public int MapWidth { get { return _mapWidth * Engine.TileWidth; } }
         public int MapHeight { get { return _mapHeight * Engine.TileHeight; } }
         public List<Rectangle> Obstacles { get { return _obstacles; } }
+        public List<DoorTransition> Doors { get { return _doors; } }
         #endregion
 
         #region Constructor
         public TileMap(int mapWidth, int mapHeight, int tileWidth, 
             int tileHeight, List<ILayer> mapLayers, List<TileSet> tileSets, 
-            List<Rectangle> obstacles)
+            List<Rectangle> obstacles,
+            List<DoorTransition> doors)
         {
             _mapLayers = mapLayers;
             _mapWidth = mapWidth;
             _mapHeight = mapHeight;
             _tileSets = tileSets;
             _obstacles = obstacles ?? new List<Rectangle>();
+            _doors = doors ?? new List<DoorTransition>();
         }
         #endregion
 

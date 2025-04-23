@@ -5,7 +5,10 @@ using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
+using NoahsArk.Levels;
+using NoahsArk.Levels.Maps;
 using NoahsArk.Rendering;
+using NoahsArk.Utilities;
 
 namespace NoahsArk.Entities
 {
@@ -14,6 +17,7 @@ namespace NoahsArk.Entities
         #region Fields
         private PlayerIndex _playerIndex;
         private Vector2 _desiredMovement;
+        private World _world;
         #endregion
 
         #region Properties
@@ -22,9 +26,10 @@ namespace NoahsArk.Entities
         #region Constructor
         public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera, PlayerIndex playerIndex,
-            Texture2D shadow) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
+            Texture2D shadow, World world) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _playerIndex = playerIndex;
+            _world = world;
         }
         #endregion
 
@@ -33,6 +38,7 @@ namespace NoahsArk.Entities
         {
             HandleCameraControls();
             HandleMovement();
+            HandleDoorTransitions();
             if (_desiredMovement != Vector2.Zero)
             {
                 Move(_desiredMovement);
@@ -154,6 +160,30 @@ namespace NoahsArk.Entities
             {
                 SetAnimation(EAnimationKey.Idle, facingDirection);
                 _desiredMovement = Vector2.Zero;
+            }
+        }
+        private void HandleDoorTransitions()
+        {
+            if (InputHandler.KeyPressed(Keys.E) || 
+                InputHandler.ButtonPressed(Buttons.A, _playerIndex))
+            {
+                Circle playerHitbox = GetHitbox(Position);
+                for (int i = 0; i < CurrentMap.TileMap.Doors.Count; i++)
+                {
+                    DoorTransition door = CurrentMap.TileMap.Doors[i];
+                    if (CollisionHelper.CircleIntersectsRectangle(playerHitbox, door.TriggerArea))
+                    {
+                        _desiredMovement = Vector2.Zero;
+                        EMapCode targetMapCode = door.TargetMap;
+                        CurrentMap.RemovePlayer(this);
+                        _world.SetCurrentMap(targetMapCode);
+                        CurrentMap = _world.CurrentMap;
+                        CurrentMap.AddPlayer(this);
+                        Position = door.SpawnPosition;
+                        Camera.LockToPosition(Position, CurrentMap);
+                        break;
+                    }
+                }
             }
         }
         #endregion
