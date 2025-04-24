@@ -58,7 +58,7 @@
                 10
             ],
             "scale": 4,
-            "selectedLayer": 6,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 135.875,
                 "y": 175.25
@@ -68,11 +68,11 @@
             "expandedObjectLayers": [
                 17
             ],
-            "scale": 4,
-            "selectedLayer": 7,
+            "scale": 1.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 304.375,
-                "y": 254.5
+                "x": 265.66666666666663,
+                "y": 177.33333333333334
             }
         },
         "GameMaps/infinite.tmx": {
@@ -90,16 +90,16 @@
             "scale": 2.078125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 89.02255639097743,
-                "y": 98.88721804511279
+                "x": 88.78195488721803,
+                "y": 99.12781954887217
             }
         },
         "GameMaps/test.tmx": {
             "scale": 0.8022222222222222,
-            "selectedLayer": 2,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 44.8753462603878,
-                "y": 192.59002770083106
+                "x": 44.25207756232692,
+                "y": 191.96675900277012
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {

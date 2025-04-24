@@ -127,7 +127,7 @@
  <layer id="6" name="aboveall" width="30" height="20">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
-   <property name="weatherTypeCode" type="int" value="1"/>
+   <property name="weatherTypeCode" value="clouds"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1326,1327,1328,0,0,0,0,0,0,0,0,0,

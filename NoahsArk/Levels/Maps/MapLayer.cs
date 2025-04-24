@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NoahsArk.Entities;
 using NoahsArk.Rendering;
 
 namespace NoahsArk.Levels.Maps
@@ -74,8 +75,9 @@ namespace NoahsArk.Levels.Maps
         {
             if (HasProperty("weatherTypeCode"))
             {
-                EWeatherType weatherType = (EWeatherType)GetProperty<int>("weatherTypeCode");
-                UpdateWeather(gameTime, weatherType);                
+                string typeString = GetProperty<string>("weatherTypeCode").ToString();
+                EWeatherType type = (EWeatherType)Enum.Parse(typeof(EWeatherType), typeString, true);
+                UpdateWeather(gameTime, type);                
             }
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<TileSet> tileSets)
@@ -91,7 +93,7 @@ namespace NoahsArk.Levels.Maps
             max.X = Math.Min(viewPoint.X + 1, Width);
             max.Y = Math.Min(viewPoint.Y + 1, Height);
 
-            if (_name.Equals("aboveall"))
+            if (HasProperty("weatherTypeCode"))
             {
                 DrawMovingLayer(spriteBatch, tileSets, gameTime, min, max);
             }
