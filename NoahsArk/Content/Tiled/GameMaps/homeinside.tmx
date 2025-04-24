@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="10" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="26">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="10" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="28">
  <tileset firstgid="1" source="../Tilesets/tileset_buildings_floors.tsx"/>
  <tileset firstgid="626" source="../Tilesets/tileset_buildings_props.tsx"/>
  <tileset firstgid="1251" source="../Tilesets/tileset_dungeon_props.tsx"/>
@@ -57,12 +57,12 @@
 0,0,3476,3477,0,0,0,0,0,0,
 0,0,3526,3527,0,0,0,0,3578,3579,
 3422,0,0,0,0,0,0,0,3628,3629,
-0,0,0,0,0,0,0,0,0,0,
+2573,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,3728,3729,
+3276,3277,4634,0,0,0,0,0,0,0,
+3326,3327,4684,0,0,0,0,0,0,3422,
+3376,3377,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,3422,
-0,0,0,0,4634,0,0,0,0,0,
-0,0,3229,3230,4684,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -77,9 +77,27 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,3678,3679,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,3372,
+0,2102,0,0,0,0,0,0,0,3372,
+0,1610614887,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,3179,3180,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="11" name="propsInFront" width="10" height="11">
+  <properties>
+   <property name="drawAfterCharacter" type="bool" value="true"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>
@@ -90,18 +108,17 @@
 0,0,0,0,0,0,835,836,0,0,
 11807,0,0,0,0,0,0,0,0,11812,
 11807,0,0,0,0,3323,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
 0,0,0,0,0,0,0,0,0,11812,
-0,0,0,0,0,0,0,0,0,11812,
-0,0,0,0,0,0,0,0,0,11812,
-0,0,0,0,0,0,0,0,0,11812,
-0,0,0,0,0,0,0,0,0,0,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,11812,
+11807,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="5" name="obstacles">
   <object id="10" x="64" y="48" width="31.8182" height="15.8182"/>
-  <object id="11" x="32" y="144" width="32" height="16"/>
   <object id="12" x="4.36364" y="47.8182" width="11.6364" height="16"/>
   <object id="13" x="127.667" y="79" width="31.3333" height="13"/>
   <object id="14" x="127.667" y="37.3333" width="31.6667" height="10.6667"/>
@@ -111,6 +128,8 @@
   <object id="18" x="143.667" y="112" width="15.3333" height="16"/>
   <object id="19" x="143.667" y="173.333" width="15.3333" height="2.33333"/>
   <object id="20" x="0" y="173.333" width="128" height="2.66667"/>
+  <object id="26" x="4.25" y="96" width="24.25" height="43.5"/>
+  <object id="27" x="1.5" y="63.75" width="14" height="15.75"/>
  </objectgroup>
  <objectgroup id="10" name="interactables">
   <object id="4" name="chestbottom" gid="3723" x="64" y="64.1818" width="16" height="16">
@@ -134,7 +153,7 @@
     <property name="type" value="chest"/>
    </properties>
   </object>
-  <object id="7" name="chestopentop" gid="3672" x="64" y="47.8182" width="16" height="16" visible="0">
+  <object id="7" name="chestopentop" gid="3672" x="64" y="47.8182" width="16" height="16">
    <properties>
     <property name="chestId" type="int" value="1"/>
     <property name="state" value="opened"/>
@@ -148,6 +167,7 @@
   </object>
   <object id="25" name="door" x="128.125" y="174.625" width="15.5" height="1.375">
    <properties>
+    <property name="direction" value="down"/>
     <property name="spawnX" type="int" value="295"/>
     <property name="spawnY" type="int" value="240"/>
     <property name="targetMap" value="homeoutside"/>
@@ -168,7 +188,7 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,11812,
 0,0,0,0,0,0,0,0,0,0,
-0,0,5966,5936,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>

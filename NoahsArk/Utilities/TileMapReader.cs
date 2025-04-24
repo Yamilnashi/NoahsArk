@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using NoahsArk.Controls;
 using NoahsArk.Entities;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Levels;
@@ -302,7 +303,9 @@ namespace NoahsArk.Utilities
             EMapCode targetMapCode = (EMapCode)Enum.Parse(typeof(EMapCode), targetMap, true);
             int spawnX = int.Parse(properties["spawnX"].ToString());
             int spawnY = int.Parse(properties["spawnY"].ToString());
-            DoorTransition door = new DoorTransition(rectangle, targetMapCode, new Vector2(spawnX, spawnY));
+            string directionValue = properties["direction"].ToString();
+            EDirection direction = (EDirection)Enum.Parse(typeof(EDirection), directionValue, true);
+            DoorTransition door = new DoorTransition(rectangle, targetMapCode, new Vector2(spawnX, spawnY), direction);
             _doors.Add(door);
         }
         private static void Write(string text)

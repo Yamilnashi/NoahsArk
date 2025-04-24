@@ -169,6 +169,7 @@
  <objectgroup id="17" name="interactables">
   <object id="32" name="door" x="294.957" y="237.957" width="18.9565" height="33.0435">
    <properties>
+    <property name="direction" value="up"/>
     <property name="spawnX" type="int" value="127"/>
     <property name="spawnY" type="int" value="139"/>
     <property name="targetMap" value="homeinside"/>

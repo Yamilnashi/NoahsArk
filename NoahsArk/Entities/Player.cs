@@ -208,22 +208,27 @@ namespace NoahsArk.Entities
                 for (int i = 0; i < CurrentMap.TileMap.Doors.Count; i++)
                 {
                     DoorTransition door = CurrentMap.TileMap.Doors[i];
-                    if (CollisionHelper.CircleIntersectsRectangle(playerHitbox, door.TriggerArea))
+                    if (door.Direction == CurrentDirection &&
+                        CollisionHelper.CircleIntersectsRectangle(playerHitbox, door.TriggerArea))
                     {
-                        _isTransitioningMaps = true;
-                        _desiredMovement = Vector2.Zero;
-                        EMapCode targetMapCode = door.TargetMap;
-                        CurrentMap.RemovePlayer(this);
-                        _world.SetCurrentMap(targetMapCode);
-                        CurrentMap = _world.CurrentMap;
-                        CurrentMap.AddPlayer(this);
-                        Position = door.SpawnPosition;
-                        Camera.LockToPosition(Position, CurrentMap);
-                        _transitionCooldown = _transition_cooldown_duration; // start the transition cooldown
+                        TransitionThroughDoor(door.TargetMap, door.SpawnPosition);
                         break;
                     }
                 }
             }
+        }
+        private void TransitionThroughDoor(EMapCode targetMap, Vector2 playerSpawnPosition)
+        {
+            _isTransitioningMaps = true;
+            _desiredMovement = Vector2.Zero;
+            EMapCode targetMapCode = targetMap;
+            CurrentMap.RemovePlayer(this);
+            _world.SetCurrentMap(targetMapCode);
+            CurrentMap = _world.CurrentMap;
+            CurrentMap.AddPlayer(this);
+            Position = playerSpawnPosition;
+            Camera.LockToPosition(Position, CurrentMap);
+            _transitionCooldown = _transition_cooldown_duration; // start the transition cooldown
         }
         #endregion
     }
