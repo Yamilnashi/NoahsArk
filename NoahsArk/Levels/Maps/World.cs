@@ -26,6 +26,7 @@ namespace NoahsArk.Levels.Maps
                 return _maps[_currentMap];
             }
         }
+        public EMapCode CurrentMapCode { get { return _currentMap; } }  
         #endregion
 
         #region Constructor

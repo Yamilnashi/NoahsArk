@@ -31,6 +31,7 @@ namespace NoahsArk.States
         #region Properties
         public Engine Engine { get { return _engine; } }
         public Camera Camera { get { return _camera; } }
+        public World World { get { return _world; } }
         #endregion
 
         #region Constructor
@@ -54,6 +55,10 @@ namespace NoahsArk.States
             if (InputHandler.KeyPressed(Keys.F1))
             {
                 _isDebugEnabled = !_isDebugEnabled;
+            }
+            if (InputHandler.KeyPressed(Keys.Escape))
+            {
+                _gameStateManager.PushState(new PauseMenuScreen(_gameRef, _gameStateManager, _player, _camera));
             }
         }
         public override void Draw(GameTime gameTime)
@@ -96,7 +101,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
-            _world.SetCurrentMap(EMapCode.Development);
+            _world.SetCurrentMap(EMapCode.HomeOutside);
             Game.Components.Add(_world);
         }
         private void CreatePlayers()

@@ -4,6 +4,7 @@
  <tileset firstgid="651" source="../Tilesets/tileset_vegetation.tsx"/>
  <tileset firstgid="1326" source="../Tilesets/tileset_clouds.tsx"/>
  <tileset firstgid="1350" source="../Tilesets/full.tsx"/>
+ <tileset firstgid="3374" source="../Tilesets/tileset_smoke.tsx"/>
  <layer id="1" name="base" width="30" height="20">
   <data encoding="csv">
 383,359,483,484,333,558,560,559,556,582,585,581,359,483,557,359,559,358,582,483,582,558,483,484,557,483,383,557,558,483,

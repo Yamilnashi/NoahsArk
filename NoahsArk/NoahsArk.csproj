@@ -41,6 +41,7 @@
     <None Remove="Content\Tiled\Tilesets\tileset_resources.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_rocks.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_shadows.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_smoke.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_tools.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_trees_2.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_trees_3.tsx" />
@@ -138,6 +139,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_shadows.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_smoke.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_tools.tsx">

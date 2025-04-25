@@ -3,10 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/homeinside.tmx",
+    "activeFile": "GameMaps/development.tmx",
     "expandedProjectPaths": [
-        "Tilesets",
         ".",
+        "Tilesets",
         "GameMaps"
     ],
     "fileStates": {
@@ -31,9 +31,9 @@
         },
         "GameMaps/development.tmx": {
             "scale": 2,
-            "selectedLayer": 5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 166.75,
+                "x": 250.75,
                 "y": 184.5
             }
         },
@@ -68,11 +68,11 @@
             "expandedObjectLayers": [
                 17
             ],
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 3,
+            "selectedLayer": 15,
             "viewCenter": {
-                "x": 265.66666666666663,
-                "y": 177.33333333333334
+                "x": 278.16666666666663,
+                "y": 152
             }
         },
         "GameMaps/infinite.tmx": {
@@ -90,16 +90,16 @@
             "scale": 2.078125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 88.78195488721803,
-                "y": 99.12781954887217
+                "x": 240.12030075187968,
+                "y": 160
             }
         },
         "GameMaps/test.tmx": {
             "scale": 0.8022222222222222,
-            "selectedLayer": 7,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 44.25207756232692,
-                "y": 191.96675900277012
+                "x": 536.01108033241,
+                "y": 359.62603878116346
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {
@@ -110,7 +110,8 @@
             "scaleInEditor": 8
         },
         "Tilesets/full.tsx": {
-            "scaleInDock": 0.75
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
         },
         "Tilesets/tileset_buildings_floors.tsx": {
             "scaleInDock": 1,
@@ -129,7 +130,7 @@
             "scaleInEditor": 1
         },
         "Tilesets/tileset_buildings_walls.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "Tilesets/tileset_clouds.tsx": {
@@ -141,11 +142,11 @@
             "scaleInEditor": 1
         },
         "Tilesets/tileset_esoteric.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 4,
             "scaleInEditor": 1
         },
         "Tilesets/tileset_farm.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "Tilesets/tileset_floors.tsx": {
@@ -154,7 +155,7 @@
         },
         "Tilesets/tileset_furniture.tsx": {
             "scaleInDock": 1.5,
-            "scaleInEditor": 1
+            "scaleInEditor": 5.5
         },
         "Tilesets/tileset_meat.tsx": {
             "scaleInDock": 3,
@@ -173,6 +174,10 @@
             "scaleInEditor": 1
         },
         "Tilesets/tileset_shadows.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/tileset_smoke.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -221,6 +226,7 @@
             "scaleInEditor": 2
         }
     },
+    "frame.defaultDuration": 100,
     "last.exportedFilePath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/GameMaps",
     "last.externalTilesetPath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/Tilesets",
     "last.imagePath": "C:/Users/Yamil/source/repos/NoahsArk/NoahsArk/Content/Tiled/Tilesets",
@@ -232,29 +238,34 @@
     "map.tileWidth": 16,
     "map.width": 10,
     "openFiles": [
+        "GameMaps/homeoutside.tmx",
+        "GameMaps/test.tmx",
+        "GameMaps/obstacles.tmx",
         "GameMaps/homeinside.tmx",
-        "GameMaps/homeoutside.tmx"
+        "GameMaps/development.tmx",
+        "Tilesets/tileset_smoke.tsx"
     ],
     "project": "world.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "GameMaps/homeoutside.tmx",
-        "GameMaps/homeinside.tmx",
-        "GameMaps/home.tmx",
-        "Tilesets/tileset_water.tsx",
         "GameMaps/test.tmx",
         "GameMaps/obstacles.tmx",
-        "Tilesets/tileset_buildings_props.tsx",
-        "Tilesets/tileset_buildings_shadows.tsx",
-        "Tilesets/tileset_buildings_floors.tsx",
+        "GameMaps/homeinside.tmx",
+        "Tilesets/tileset_smoke.tsx",
+        "GameMaps/development.tmx",
+        "Tilesets/full.tsx",
+        "Tilesets/tileset_furniture.tsx",
+        "Tilesets/tileset_floors.tsx",
         "Tilesets/tileset_buildings_roofs.tsx",
-        "Tilesets/tileset_buildings_walls.tsx",
-        "Tilesets/tileset_clouds.tsx"
+        "Tilesets/tileset_buildings_shadows.tsx",
+        "Tilesets/tileset_buildings_walls.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
         "width": 16
-    }
+    },
+    "tileset.useTransparentColor": true
 }
