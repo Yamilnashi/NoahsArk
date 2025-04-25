@@ -85,8 +85,7 @@ namespace NoahsArk.Levels
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
         {
             DrawLayersBeforeCharacter(spriteBatch, gameTime, camera, out List<ILayer> layersToDrawAfterCharacter);
-            DrawEnemies(spriteBatch, gameTime, camera);
-            DrawCharacter(spriteBatch, gameTime, camera);
+            DrawEntities(spriteBatch);
             DrawLayersAfterCharacter(spriteBatch, gameTime, camera, layersToDrawAfterCharacter);
         }
         public void AddPlayer(Player player)
@@ -133,25 +132,20 @@ namespace NoahsArk.Levels
                 layer.Draw(spriteBatch, gameTime, camera, _tileMap.TileSets);
             }
         }
-        private void DrawEnemies(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
+        private void DrawEntities(SpriteBatch spriteBatch)
         {
+            List<Entity> entitiesToDraw = new List<Entity>();
+            entitiesToDraw.AddRange(_players);
             for (int i = 0; i < _enemies.Keys.Count; i++)
             {
                 EEnemyType enemyType = _enemies.Keys.ElementAt(i);
-                for (int j = 0; j < _enemies[enemyType].Count; j++)
-                {
-                    Enemy enemy = _enemies[enemyType][j];
-                    enemy.Draw(spriteBatch);
-                }
+                entitiesToDraw.AddRange(_enemies[enemyType]);
             }
-        }
-        private void DrawCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
-        {
-            for (int i = 0; i < _players.Count; i++)
+            List<Entity> sortedEntities = entitiesToDraw.OrderBy(x => x.Position.Y).ToList();
+            for (int i = 0; i < sortedEntities.Count; i++)
             {
-                Player player = _players[i];
-                player.Draw(spriteBatch);
-                //spriteBatch.Draw(_debugTexture, player.GetHitbox(player.Position).Center, null, Color.Blue, 0f, new Vector2(0.5f, 0.5f), 2f, SpriteEffects.None, 0f);
+                Entity entity = sortedEntities[i];
+                entity.Draw(spriteBatch);
             }
         }
         private void DrawLayersAfterCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<ILayer> layersToDrawAfterCharacter)
