@@ -56,8 +56,11 @@ namespace NoahsArk.Levels.Maps
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            CurrentMap.Update(gameTime);
+            if (!_gameRef.GamePlayScreen.IsPaused)
+            {
+                base.Update(gameTime);
+                CurrentMap.Update(gameTime);
+            }            
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)

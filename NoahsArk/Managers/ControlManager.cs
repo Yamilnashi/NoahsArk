@@ -112,7 +112,7 @@ namespace NoahsArk.Managers
             }
 
             int currentControl = _selectedControl;
-            this[_selectedControl].HasFocus = false;
+            ResetFocusOnControls(); // Reset focus for all controls
 
             do
             {
@@ -143,7 +143,7 @@ namespace NoahsArk.Managers
             }
 
             int currentControl = _selectedControl;
-            this[_selectedControl].HasFocus = false;
+            ResetFocusOnControls(); // Reset focus for all controls
 
             do
             {

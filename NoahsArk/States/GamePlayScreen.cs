@@ -26,12 +26,15 @@ namespace NoahsArk.States
         private Texture2D _debugTexture;
         private bool _isDebugEnabled = true;
         private Player _player;
+        private PauseMenuScreen _pauseMenuScreen;
+        private bool _isPaused = false;
         #endregion
 
         #region Properties
         public Engine Engine { get { return _engine; } }
         public Camera Camera { get { return _camera; } }
         public World World { get { return _world; } }
+        public bool IsPaused { get { return _isPaused; } }  
         #endregion
 
         #region Constructor
@@ -47,18 +50,30 @@ namespace NoahsArk.States
             base.LoadContent();
             LoadWorld();
             CreatePlayers();
+            _pauseMenuScreen = new PauseMenuScreen(_gameRef, _gameStateManager, _player, _camera);
         }
         public override void Update(GameTime gameTime)
         {
+
             base.Update(gameTime);
-            _world.Update(gameTime);
+
+            if (InputHandler.KeyPressed(Keys.Escape))
+            {
+                _isPaused = !_isPaused;
+            }
+
+            if (_isPaused)
+            {
+                _pauseMenuScreen.Update(gameTime);
+            } else
+            {
+                
+                _world.Update(gameTime);
+            }
+
             if (InputHandler.KeyPressed(Keys.F1))
             {
                 _isDebugEnabled = !_isDebugEnabled;
-            }
-            if (InputHandler.KeyPressed(Keys.Escape))
-            {
-                _gameStateManager.PushState(new PauseMenuScreen(_gameRef, _gameStateManager, _player, _camera));
             }
         }
         public override void Draw(GameTime gameTime)
@@ -88,6 +103,12 @@ namespace NoahsArk.States
                 _gameRef.SpriteBatch.Draw(_debugTexture, playerHitboxRectangle, Color.Blue * 0.8f);
             }
             _gameRef.SpriteBatch.End();
+
+            if (_isPaused)
+            {
+                _pauseMenuScreen.Draw(gameTime);
+            }
+
             if (_isDebugEnabled)
             {
                 DrawDebug();

@@ -40,6 +40,7 @@ namespace NoahsArk.States
             _camera = camera;
             GamePlayScreen screen = (GamePlayScreen)_gameStateManager.CurrentState;
             _currentMap = screen.World.CurrentMapCode;
+            LoadContent();
         }
         #endregion
 
@@ -48,8 +49,13 @@ namespace NoahsArk.States
         {
             base.LoadContent();
             ContentManager content = _gameRef.Content;
+            Texture2D backgroundImage = content.Load<Texture2D>("Assets/Menus/pause-menu-base");
             Texture2D arrowRightTexture = content.Load<Texture2D>("Assets/Menus/selector_right");
             Texture2D arrowLeftTexture = content.Load<Texture2D>("Assets/Menus/selector_left");
+            _backgroundImage = new PictureBox(
+                backgroundImage,
+                new Rectangle(0, 0, backgroundImage.Width, backgroundImage.Height)
+            );
             _arrowRightImage = new PictureBox(
                 arrowRightTexture,
                 new Rectangle(0, 0, arrowRightTexture.Width, arrowRightTexture.Height)
@@ -58,6 +64,7 @@ namespace NoahsArk.States
                 arrowLeftTexture,
                 new Rectangle(0, 0, arrowLeftTexture.Width, arrowLeftTexture.Height)
             );
+            _controlManager.Add(_backgroundImage);
             _controlManager.Add(_arrowRightImage);
             _controlManager.Add(_arrowLeftImage);
 
@@ -83,8 +90,7 @@ namespace NoahsArk.States
         }
         public override void Draw(GameTime gameTime)
         {
-            _gameRef.SpriteBatch.Begin();
-            base.Draw(gameTime);
+            _gameRef.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             _controlManager.Draw(_gameRef.SpriteBatch);
             _gameRef.SpriteBatch.End();
         }
@@ -93,7 +99,7 @@ namespace NoahsArk.States
         #region Private
         private LinkLabel CreateMenuOption(string optionText)
         {
-            LinkLabel label = new LinkLabel("Silver", 28, optionText, Color.Brown, Color.Yellow);
+            LinkLabel label = new LinkLabel("Silver", 28, optionText, Color.Black, Color.Red);
             label.Selected += new EventHandler(MenuItem_Selected);
             label.HasFocus = _currentMap.ToString().Equals(optionText, StringComparison.OrdinalIgnoreCase);
             return label;
@@ -102,13 +108,13 @@ namespace NoahsArk.States
         {
             LinkLabel label = (LinkLabel)sender;
             EMapCode mapCode = (EMapCode)Enum.Parse(typeof(EMapCode), label.Text, true);
-            _gameStateManager.PopState();
             if (_gameStateManager.CurrentState is GamePlayScreen gamePlayScreen)
             {
                 gamePlayScreen.World.CurrentMap.RemovePlayer(_player);
                 gamePlayScreen.World.SetCurrentMap(mapCode);
                 gamePlayScreen.World.CurrentMap.AddPlayer(_player);
                 _camera.LockToPosition(_player.Position, gamePlayScreen.World.CurrentMap);
+                _currentMap = mapCode;
             }
         }
         private void ControlManager_FocusChanged(object sender, EventArgs e)
@@ -131,22 +137,27 @@ namespace NoahsArk.States
         }
         private void SetInitialControlPosition()
         {
-            float bottomPosition = _gameRef.ScreenRectangle.Bottom - (_controlManager.Count * 30f);
-            var centerOfScreen = _gameRef.ScreenRectangle.GetCenter();
-            for (int i = 0; i < _controlManager.Count; i++)
+            // Calculate the left page bounds (approximate)
+            float leftPageStartX = 225f; // 10% of 1280
+            float leftPageWidth = 512f;  // Half of the content width (80% of 1280)
+            float leftPageCenterX = leftPageStartX + (leftPageWidth / 2f); // Center of the left page
+            float startY = 72f + 200f; // 10% of 720 + padding
+            float currentY = startY;
+
+            foreach (Control control in _controlManager)
             {
-                Control control = _controlManager[i];
-                if (control is LinkLabel)
+                if (control is LinkLabel label)
                 {
                     if (control.Size.X > _maxItemWidth)
                     {
                         _maxItemWidth = control.Size.X;
                     }
-                    control.Position = new Vector2(
-                            centerOfScreen.X - control.Size.X / 2,
-                            bottomPosition
-                        );
-                    bottomPosition += control.Size.Y + 5f;
+                    // Center the label horizontally in the left page
+                    label.Position = new Vector2(
+                        leftPageCenterX - (label.Size.X / 2f),
+                        currentY
+                    );
+                    currentY += label.Size.Y + 5f; // Space between items
                 }
             }
         }
