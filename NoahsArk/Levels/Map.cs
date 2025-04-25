@@ -24,6 +24,7 @@ namespace NoahsArk.Levels
         #region Properties
         public List<Player> Players { get { return _players; } }
         public TileMap TileMap { get { return _tileMap; } }
+        public Dictionary<EEnemyType, List<Enemy>> Enemies {  get { return _enemies; } }    
         #endregion
 
         #region Constructor

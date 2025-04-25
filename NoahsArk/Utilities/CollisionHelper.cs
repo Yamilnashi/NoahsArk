@@ -41,5 +41,41 @@ namespace NoahsArk.Utilities
             float distanceSquared = dx * dx + dy * dy;
             return distanceSquared < (circle.Radius * circle.Radius);
         }
+        public static bool CircleIntersectsCircle(Circle circle1, Circle circle2, out Vector2 displacement)
+        {
+            displacement = Vector2.Zero;
+            // Vector from circle1 to circle2
+            Vector2 vectorBetweenCenters = circle2.Center - circle1.Center;
+            float distanceSquared = vectorBetweenCenters.LengthSquared();
+            float sumRadii = circle1.Radius + circle2.Radius;
+
+            if (distanceSquared < sumRadii * sumRadii)
+            {
+                float distance = (float)Math.Sqrt(distanceSquared);
+                if (distance == 0)
+                {
+                    // Circles are coincident; displace along X-axis arbitrarily
+                    displacement = new Vector2(sumRadii, 0);
+                }
+                else
+                {
+                    // Direction from circle1 to circle2
+                    Vector2 direction = vectorBetweenCenters / distance;
+                    // Amount of overlap
+                    float overlap = sumRadii - distance;
+                    // Displacement to move circle1 away from circle2
+                    displacement = -direction * overlap;
+                }
+                return true;
+            }
+            return false;
+        }
+        public static bool CircleIntersectsCircle(Circle circle1, Circle circle2)
+        {
+            Vector2 vectorBetweenCenters = circle2.Center - circle1.Center;
+            float distanceSquared = vectorBetweenCenters.LengthSquared();
+            float sumRadii = circle1.Radius + circle2.Radius;
+            return distanceSquared < sumRadii * sumRadii;
+        }
     }
 }

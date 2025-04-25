@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
@@ -132,6 +133,23 @@ namespace NoahsArk.Entities
                     if (CollisionHelper.CircleIntersectsRectangle(newHitBox, obstacle, out Vector2 displacement))
                     {
                         totalDisplacement += displacement;
+                    }
+                }
+            }
+            if (_currentMap.Enemies.Values.Count > 0)
+            {
+                for (int i = 0; i < _currentMap.Enemies.Keys.Count; i++)
+                {
+                    EEnemyType enemyType = _currentMap.Enemies.Keys.ElementAt(i);
+                    List<Enemy> enemies = _currentMap.Enemies[enemyType];
+                    for (int j = 0;  j < enemies.Count; j++)
+                    {
+                        Enemy enemy = enemies[j];
+                        Circle enemyHitbox = enemy.GetHitbox(enemy.Position);
+                        if (CollisionHelper.CircleIntersectsCircle(newHitBox, enemyHitbox, out Vector2 displacement))
+                        {
+                            totalDisplacement += displacement;
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
+using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Rendering;
 
@@ -30,6 +31,11 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Methods
+        public override Circle GetHitbox(Vector2 desiredPosition)
+        {
+            Vector2 feetPosition = desiredPosition + new Vector2(16, 24); // on a 16px sprite, will be right in the middle
+            return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
+        }
         public override void Update(GameTime gameTime)
         {
             SetAnimation(EAnimationKey.Idle, EDirection.Right);            
