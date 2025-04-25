@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
+using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NoahsArk.Utilities
 {
@@ -30,6 +29,7 @@ namespace NoahsArk.Utilities
         private string _currentNodeType;
         private List<Rectangle> _obstacles = new List<Rectangle>();
         private List<DoorTransition> _doors = new List<DoorTransition>();
+        private List<EnemySpawner> _enemySpawners = new List<EnemySpawner>();
         private Dictionary<int, string> _mapLayerNameDict = new Dictionary<int, string>();
         private Dictionary<int, long[,]> _mapLayerDataDict = new Dictionary<int, long[,]>();
         private Dictionary<int, Dictionary<string, object>> _mapLayerPropertiesDict = new Dictionary<int, Dictionary<string, object>>();
@@ -63,7 +63,8 @@ namespace NoahsArk.Utilities
                                     _mapLayers,
                                     _tileSets,
                                     _obstacles,
-                                    _doors);
+                                    _doors,
+                                    _enemySpawners);
         }
         #endregion
 
@@ -273,24 +274,25 @@ namespace NoahsArk.Utilities
                         else if (objectGroupName.Equals("enemy spawner", StringComparison.OrdinalIgnoreCase))
                         {
                             // add enemy spawners
+                            Dictionary<string, object> properties = _objectPropertiesDict[(objectGroupId, obj.objectId)];
+                            AddEnemySpawner(properties, rectangle);
                         }
                         else if (objectGroupName.Equals("interactables", StringComparison.OrdinalIgnoreCase))
                         {
                             // add interactables
-                            string s = string.Empty;
                             Dictionary<string, object> properties = _objectPropertiesDict[(objectGroupId, obj.objectId)];
                             if (properties.TryGetValue("type", out var foundType))
                             {
                                 string typeString = foundType.ToString();
                                 EInteractableType type = (EInteractableType)Enum.Parse(typeof(EInteractableType), typeString, true);
-                                AddObject(properties, type, rectangle);
+                                AddInteractable(properties, type, rectangle);
                             }
                         }
                     } 
                 }
             }
         }
-        private void AddObject(Dictionary<string, object> properties, EInteractableType type, Rectangle rectangle)
+        private void AddInteractable(Dictionary<string, object> properties, EInteractableType type, Rectangle rectangle)
         {
             if (type == EInteractableType.door)
             {
@@ -307,6 +309,17 @@ namespace NoahsArk.Utilities
             EDirection direction = (EDirection)Enum.Parse(typeof(EDirection), directionValue, true);
             DoorTransition door = new DoorTransition(rectangle, targetMapCode, new Vector2(spawnX, spawnY), direction);
             _doors.Add(door);
+        }
+        private void AddEnemySpawner(Dictionary<string, object> properties, Rectangle rectangle)
+        {
+            object foundEnemyTypeCode = properties["enemyTypeCode"];
+            object foundMaxSpawnCount = properties["maxSpawnCount"];
+            string enemyTypeValue = foundEnemyTypeCode.ToString();
+            int maxSpawnCount = int.Parse(foundMaxSpawnCount.ToString());
+            EEnemyType enemyType = (EEnemyType)Enum.Parse(typeof(EEnemyType), enemyTypeValue, true);
+            Vector2 enemySpawnerPosition = new Vector2(rectangle.X, rectangle.Y);
+            EnemySpawner enemySpawner = new EnemySpawner(enemySpawnerPosition, rectangle.Width, rectangle.Height, enemyType, maxSpawnCount);
+            _enemySpawners.Add(enemySpawner);
         }
         private static void Write(string text)
         {

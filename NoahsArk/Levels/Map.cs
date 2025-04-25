@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Entities;
-using NoahsArk.Extensions;
+using NoahsArk.Entities.Enemies;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Rendering;
 
@@ -14,7 +15,7 @@ namespace NoahsArk.Levels
         private EMapCode _mapCode;
         private TileMap _tileMap;
         private List<Player> _players = new List<Player>();
-        private List<Enemy> _enemies = new List<Enemy>();
+        private Dictionary<EEnemyType, List<Enemy>> _enemies = new Dictionary<EEnemyType, List<Enemy>>();
         private Texture2D _debugTexture;
         // characters
         // enemies
@@ -22,7 +23,6 @@ namespace NoahsArk.Levels
 
         #region Properties
         public List<Player> Players { get { return _players; } }
-        public List<Enemy> Enemies { get { return _enemies; } }
         public TileMap TileMap { get { return _tileMap; } }
         #endregion
 
@@ -31,6 +31,11 @@ namespace NoahsArk.Levels
         {
             _tileMap = tileMap;
             _debugTexture = debugTexture;
+            for (int i = 0; i < _tileMap.EnemySpawners.Count; i++)
+            {
+                EnemySpawner enemySpawner = _tileMap.EnemySpawners[i];
+                _enemies[enemySpawner.EnemyType] = new List<Enemy>();
+            }
         }
         #endregion
 
@@ -43,10 +48,31 @@ namespace NoahsArk.Levels
                 player.Update(gameTime);
             }
 
-            for (int i = 0; i < _enemies.Count; i++)
+            for (int i = 0; i < _tileMap.EnemySpawners.Count; i++)
             {
-                Enemy enemy = _enemies[i];
-                enemy.Update(gameTime);
+                EnemySpawner enemySpawner = _tileMap.EnemySpawners[i];
+                enemySpawner.Update(gameTime);
+                
+                if (enemySpawner.IsReadyToSpawn && 
+                    enemySpawner.MaxSpawnCount > _enemies[enemySpawner.EnemyType].Count)
+                {
+                    // spawn enemies until we reach the max spawn count
+                    while (_enemies[enemySpawner.EnemyType].Count < enemySpawner.MaxSpawnCount)
+                    {
+                        enemySpawner.SpawnEnemy(this);
+                    }
+                    enemySpawner.IsReadyToSpawn = false;
+                }
+            }
+
+            for (int i = 0; i < _enemies.Keys.Count; i++)
+            {
+                EEnemyType enemyType = _enemies.Keys.ElementAt(i);
+                for (int j = 0; j < _enemies[enemyType].Count; j++)
+                {
+                    Enemy enemy = _enemies[enemyType][j];
+                    enemy.Update(gameTime);
+                }                
             }
 
             for (int i = 0; i < _tileMap.MapLayers.Count; i++)
@@ -57,7 +83,37 @@ namespace NoahsArk.Levels
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
         {
-            List<ILayer> layersToDrawAfterCharacter = new List<ILayer>();
+            DrawLayersBeforeCharacter(spriteBatch, gameTime, camera, out List<ILayer> layersToDrawAfterCharacter);
+            DrawEnemies(spriteBatch, gameTime, camera);
+            DrawCharacter(spriteBatch, gameTime, camera);
+            DrawLayersAfterCharacter(spriteBatch, gameTime, camera, layersToDrawAfterCharacter);
+        }
+        public void AddPlayer(Player player)
+        {
+            _players.Add(player);
+            player.CurrentMap = this;
+        }
+        public void RemovePlayer(Player player)
+        {
+            _players.Remove(player);
+            player.CurrentMap = null;
+        }
+        public void AddEnemy(EEnemyType enemyType, Enemy enemy)
+        {
+            _enemies[enemyType].Add(enemy);
+            enemy.CurrentMap = this;
+        }
+        public void RemoveEnemy(EEnemyType enemyType, Enemy enemy)
+        {
+            _enemies[enemyType].Remove(enemy);
+            enemy.CurrentMap = null;    
+        }
+
+        #endregion
+        #region Private
+        private void DrawLayersBeforeCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera,out List<ILayer> layersToDrawAfterCharacter)
+        {
+            layersToDrawAfterCharacter = new List<ILayer>();
             for (int i = 0; i < _tileMap.MapLayers.Count; i++)
             {
                 ILayer layer = _tileMap.MapLayers[i];
@@ -75,56 +131,36 @@ namespace NoahsArk.Levels
 
                 layer.Draw(spriteBatch, gameTime, camera, _tileMap.TileSets);
             }
-
-            // draw enemies
-            for (int i = 0; i < _enemies.Count; i++)
+        }
+        private void DrawEnemies(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
+        {
+            for (int i = 0; i < _enemies.Keys.Count; i++)
             {
-                Enemy enemy = _enemies[i];
-                enemy.Draw(spriteBatch);
+                EEnemyType enemyType = _enemies.Keys.ElementAt(i);
+                for (int j = 0; j < _enemies[enemyType].Count; j++)
+                {
+                    Enemy enemy = _enemies[enemyType][j];
+                    enemy.Draw(spriteBatch);
+                }
             }
-
-            // draw character
+        }
+        private void DrawCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
+        {
             for (int i = 0; i < _players.Count; i++)
             {
                 Player player = _players[i];
                 player.Draw(spriteBatch);
                 //spriteBatch.Draw(_debugTexture, player.GetHitbox(player.Position).Center, null, Color.Blue, 0f, new Vector2(0.5f, 0.5f), 2f, SpriteEffects.None, 0f);
             }
-
-            for (int i = 0; i <  layersToDrawAfterCharacter.Count; i++)
+        }
+        private void DrawLayersAfterCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<ILayer> layersToDrawAfterCharacter)
+        {
+            for (int i = 0; i < layersToDrawAfterCharacter.Count; i++)
             {
                 ILayer layer = layersToDrawAfterCharacter[i];
                 layer.Draw(spriteBatch, gameTime, camera, _tileMap.TileSets);
             }
-
-            // draw collisions
-            //for (int i = 0; i < _tileMap.Obstacles.Count; i++)
-            //{
-            //    Rectangle obstacle = _tileMap.Obstacles[i];
-            //    spriteBatch.Draw(_debugTexture, obstacle, Color.Red * 0.5f);
-            //}
         }
-        public void AddPlayer(Player player)
-        {
-            _players.Add(player);
-            player.CurrentMap = this;
-        }
-        public void RemovePlayer(Player player)
-        {
-            _players.Remove(player);
-            player.CurrentMap = null;
-        }
-        public void AddEnemy(Enemy enemy)
-        {
-            _enemies.Add(enemy);
-            enemy.CurrentMap = this;
-        }
-        public void RemoveEnemy(Enemy enemy)
-        {
-            _enemies.Remove(enemy);
-            enemy.CurrentMap = null;    
-        }
-        
         #endregion
     }
 }

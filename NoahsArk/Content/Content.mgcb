@@ -200,6 +200,30 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Character/shadow.png
 
+#begin Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png
+
+#begin Assets/Sprites/Enemies/Orc/run-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/Orc/run-right-spritesheet.png
+
 #begin Tiled/Tilesets/full.png
 /importer:TextureImporter
 /processor:TextureProcessor

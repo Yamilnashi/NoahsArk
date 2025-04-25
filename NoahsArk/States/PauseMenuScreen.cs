@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
-using NoahsArk.Extensions;
 using NoahsArk.Levels;
 using NoahsArk.Managers;
 using NoahsArk.Rendering;

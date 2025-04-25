@@ -23,15 +23,20 @@ namespace NoahsArk.Entities
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _behavior = behavior;
+            SetAnimation(EAnimationKey.Idle, EDirection.Right);
+            SetAnimation(EAnimationKey.Walking, EDirection.Right);
+            SetAnimation(EAnimationKey.Running, EDirection.Right);
         }
         #endregion
 
         #region Methods
         public override void Update(GameTime gameTime)
         {
-            _behavior.Update(this, gameTime);
+            SetAnimation(EAnimationKey.Idle, EDirection.Right);            
+            //_behavior.Update(this, gameTime);
             base.Update(gameTime);
         }
+
         #endregion
     }
 }

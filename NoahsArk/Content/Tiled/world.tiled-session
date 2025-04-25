@@ -30,11 +30,14 @@
             }
         },
         "GameMaps/development.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
             "scale": 2,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 250.75,
-                "y": 184.5
+                "x": 227.75,
+                "y": 149.5
             }
         },
         "GameMaps/full.tsx": {
@@ -90,16 +93,19 @@
             "scale": 2.078125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.12030075187968,
-                "y": 160
+                "x": 88.78195488721803,
+                "y": 99.12781954887217
             }
         },
         "GameMaps/test.tmx": {
+            "expandedObjectLayers": [
+                11
+            ],
             "scale": 0.8022222222222222,
-            "selectedLayer": 0,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 536.01108033241,
-                "y": 359.62603878116346
+                "x": 231.2326869806094,
+                "y": 402.6315789473685
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {

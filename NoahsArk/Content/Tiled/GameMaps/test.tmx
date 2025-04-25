@@ -231,13 +231,13 @@
  <objectgroup id="11" name="enemy spawner">
   <object id="48" name="black roaches" x="232" y="392" width="1" height="1">
    <properties>
-    <property name="enemyTypeCode" type="int" value="0"/>
+    <property name="enemyTypeCode" value="orc"/>
     <property name="maxSpawnCount" type="int" value="200"/>
    </properties>
   </object>
   <object id="49" name="pink roaches" x="231.33" y="401.67" width="1" height="1">
    <properties>
-    <property name="enemyTypeCode" type="int" value="1"/>
+    <property name="enemyTypeCode" value="orc"/>
     <property name="maxSpawnCount" type="int" value="1"/>
    </properties>
   </object>

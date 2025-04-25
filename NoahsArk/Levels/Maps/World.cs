@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NoahsArk.Entities.Enemies;
 using NoahsArk.Extensions;
 using NoahsArk.Rendering;
 using NoahsArk.Utilities;

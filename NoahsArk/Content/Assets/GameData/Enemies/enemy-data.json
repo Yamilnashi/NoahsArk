@@ -1,0 +1,61 @@
+{
+	"enemyData": [
+		{
+			"enemyType": "Orc",
+			"level": 1,
+			"healthPoints": 50,
+			"manaPoints": 10,
+			"speed": 0.4,
+			"animations": {
+				"Walking": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				}
+			}
+		}
+	]
+}

@@ -61,7 +61,7 @@ namespace NoahsArk.Entities
             _position = initialPosition;
             _animations = animations;
             _currentAnimationKey = EAnimationKey.Idle;
-            _currentDirection = EDirection.Down;
+            _currentDirection = EDirection.Right;
             _camera = camera;
             _shadow = shadow;
         }

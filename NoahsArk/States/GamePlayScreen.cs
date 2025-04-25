@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
+using NoahsArk.Entities.Behaviors;
+using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Players;
 using NoahsArk.Entities.Sprites;
@@ -28,6 +30,7 @@ namespace NoahsArk.States
         private Player _player;
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
+        private static Dictionary<EEnemyType, EnemyEntity> _enemyEntityDict = new Dictionary<EEnemyType, EnemyEntity>();
         #endregion
 
         #region Properties
@@ -35,6 +38,7 @@ namespace NoahsArk.States
         public Camera Camera { get { return _camera; } }
         public World World { get { return _world; } }
         public bool IsPaused { get { return _isPaused; } }  
+        public static Dictionary<EEnemyType, EnemyEntity> EnemyEntityDict {  get  { return _enemyEntityDict; } }
         #endregion
 
         #region Constructor
@@ -49,7 +53,8 @@ namespace NoahsArk.States
         {
             base.LoadContent();
             LoadWorld();
-            CreatePlayers();
+            LoadEnemies();
+            CreatePlayers();            
             _pauseMenuScreen = new PauseMenuScreen(_gameRef, _gameStateManager, _player, _camera);
         }
         public override void Update(GameTime gameTime)
@@ -66,8 +71,7 @@ namespace NoahsArk.States
             {
                 _pauseMenuScreen.Update(gameTime);
             } else
-            {
-                
+            {                
                 _world.Update(gameTime);
             }
 
@@ -124,6 +128,20 @@ namespace NoahsArk.States
             _world = new World(_gameRef, _debugTexture);
             _world.SetCurrentMap(EMapCode.HomeOutside);
             Game.Components.Add(_world);
+        }
+        private void LoadEnemies()
+        {
+            string enemyDataFilePath = Path.Combine(_gameRef.Content.RootDirectory, "Assets/GameData/Enemies/enemy-data.json");
+            string jsonContent = File.ReadAllText(enemyDataFilePath);
+            EnemyData data = JsonConvert.DeserializeObject<EnemyData>(jsonContent); 
+            for (int i = 0; i < data.EnemyObjects.Count; i++)
+            {
+                EnemyObject obj = data.EnemyObjects[i];
+                Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(obj.Animations);
+                EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, 
+                    animations, _camera, new PatrolAI());
+                _enemyEntityDict[obj.EnemyType] = entity;
+            }
         }
         private void CreatePlayers()
         {

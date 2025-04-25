@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="2">
  <tileset firstgid="1" source="../Tilesets/tileset_floors.tsx"/>
  <tileset firstgid="651" source="../Tilesets/tileset_vegetation.tsx"/>
  <tileset firstgid="1326" source="../Tilesets/tileset_clouds.tsx"/>
@@ -101,6 +101,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="7" name="enemy spawner">
+  <object id="1" name="orcs" x="228" y="149.5" width="1" height="1">
+   <properties>
+    <property name="enemyTypeCode" value="orc"/>
+    <property name="maxSpawnCount" type="int" value="4"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer id="5" name="vegetation" width="30" height="20">
   <data encoding="csv">
 0,0,0,1261,0,0,0,866,0,0,0,0,0,0,0,0,0,0,654,655,0,0,0,0,0,0,0,0,0,0,
