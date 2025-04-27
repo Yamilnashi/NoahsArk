@@ -29,7 +29,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Camera camera, PlayerIndex playerIndex,
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Camera camera, PlayerIndex playerIndex,
             Texture2D shadow, World world) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _playerIndex = playerIndex;

@@ -12,14 +12,14 @@
 						"frameCount": 6,
 						"frameWidth": 64,
 						"frameHeight": 64,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
 					},
 					"Left": {
 						"frameCount": 6,
 						"frameWidth": 64,
 						"frameHeight": 64,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
 					},
 				},
@@ -28,14 +28,14 @@
 						"frameCount": 4,
 						"frameWidth": 32,
 						"frameHeight": 32,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
 					},
 					"Left": {
 						"frameCount": 4,
 						"frameWidth": 32,
 						"frameHeight": 32,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
 					},
 				},
@@ -44,14 +44,14 @@
 						"frameCount": 6,
 						"frameWidth": 64,
 						"frameHeight": 64,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
 					},
 					"Left": {
 						"frameCount": 6,
 						"frameWidth": 64,
 						"frameHeight": 64,
-						"frameDuration": 400,
+						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
 					},
 				}

@@ -6,6 +6,7 @@ using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Rendering;
+using NoahsArk.States;
 using NoahsArk.Utilities;
 
 namespace NoahsArk.Entities
@@ -48,7 +49,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Texture2D shadow, Camera camera)
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
             _healthPoints = maxHealthPoints;
@@ -59,7 +60,7 @@ namespace NoahsArk.Entities
             _inventory = new Inventory();
             _equippedItems = new Dictionary<EEquipmentSlot, Item>();
             _position = initialPosition;
-            _animations = animations;
+            _animations = AnimatedSpriteHelper.GetAnimationData(GamePlayScreen.ContentRef, animations);
             _currentAnimationKey = EAnimationKey.Idle;
             _currentDirection = EDirection.Right;
             _camera = camera;

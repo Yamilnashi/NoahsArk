@@ -18,8 +18,7 @@ namespace NoahsArk.Levels
         private Dictionary<EEnemyType, List<Enemy>> _enemies = new Dictionary<EEnemyType, List<Enemy>>();
         private List<Entity> _entities = new List<Entity>();
         private Texture2D _debugTexture;
-        // characters
-        // enemies
+        private Game1 _gameRef;
         #endregion
 
         #region Properties
@@ -27,10 +26,11 @@ namespace NoahsArk.Levels
         public TileMap TileMap { get { return _tileMap; } }
         public Dictionary<EEnemyType, List<Enemy>> Enemies {  get { return _enemies; } }    
         public List<Entity> Entities { get { return _entities; } }
+        public Game1 GameRef { get { return _gameRef; } }   
         #endregion
 
         #region Constructor
-        public Map(TileMap tileMap, Texture2D debugTexture)
+        public Map(Game1 gameRef, TileMap tileMap, Texture2D debugTexture)
         {
             _tileMap = tileMap;
             _debugTexture = debugTexture;

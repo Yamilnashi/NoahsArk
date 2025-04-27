@@ -20,7 +20,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Enemy(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, Texture2D shadow, Camera camera,
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Camera camera,
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _behavior = behavior;

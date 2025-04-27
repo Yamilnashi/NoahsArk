@@ -92,7 +92,7 @@ namespace NoahsArk.Levels.Maps
 
         private void CreateMap(EMapCode mapCode, TileMap tileMap)
         {
-            Map map = new Map(tileMap, _debugTexture);
+            Map map = new Map(_gameRef, tileMap, _debugTexture);
             _maps.Add(mapCode, map);
         }
         #endregion

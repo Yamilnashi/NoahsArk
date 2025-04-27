@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Managers;
 using NoahsArk.Rendering;
+using NoahsArk.Utilities;
 
 namespace NoahsArk.States
 {
@@ -29,6 +31,7 @@ namespace NoahsArk.States
         private Player _player;
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
+        public static ContentManager _contentRef;
         private static Dictionary<EEnemyType, EnemyEntity> _enemyEntityDict = new Dictionary<EEnemyType, EnemyEntity>();
         #endregion
 
@@ -38,12 +41,14 @@ namespace NoahsArk.States
         public World World { get { return _world; } }
         public bool IsPaused { get { return _isPaused; } }  
         public static Dictionary<EEnemyType, EnemyEntity> EnemyEntityDict {  get  { return _enemyEntityDict; } }
+        public static ContentManager ContentRef { get { return _contentRef; } }
         #endregion
 
         #region Constructor
         public GamePlayScreen(Game game, GameStateManager manager) : base(game, manager)
         {
             _camera = new Camera(_gameRef.ScreenRectangle);
+            _contentRef = game.Content;
         }
         #endregion
 
@@ -136,49 +141,22 @@ namespace NoahsArk.States
             for (int i = 0; i < data.EnemyObjects.Count; i++)
             {
                 EnemyObject obj = data.EnemyObjects[i];
-                Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(obj.Animations);
                 EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, 
-                    animations, _camera);
+                    obj.Animations, _camera);
                 _enemyEntityDict[obj.EnemyType] = entity;
             }
         }
         private void CreatePlayers()
         {
-            string playerDataFilePath = Path.Combine(_gameRef.Content.RootDirectory, "Assets/GameData/Players/player-data.json");
+            string playerDataFilePath = Path.Combine(_contentRef.RootDirectory, "Assets/GameData/Players/player-data.json");
             string jsonContent = File.ReadAllText(playerDataFilePath);
             PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(jsonContent);
             PlayerObject p = playerData.PlayerObjects.FirstOrDefault(x => x.ClassType == EClassType.Rogue);
             Vector2 initialPosition = new Vector2(295, 240);
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(p.Animations);
-            Texture2D shadow = _gameRef.Content.Load<Texture2D>("Assets/Sprites/Character/shadow");
-            _player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, animations, _camera, PlayerIndex.One, shadow, _world);
+            Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
+            _player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, p.Animations, _camera, PlayerIndex.One, shadow, _world);
             _world.CurrentMap.AddPlayer(_player);
             _camera.LockToPosition(initialPosition, _player.CurrentMap);
-        }
-        private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> GetAnimationData(Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> data)
-        {
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = new Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>>();
-            for (int i = 0; i < data.Count; i++)
-            {
-                EAnimationKey key = data.Keys.ElementAt(i);
-                animations.Add(key, new Dictionary<EDirection, AnimatedSprite>());
-                for (int j = 0; j < data[key].Count; j++)
-                {
-                    EDirection direction = data[key].Keys.ElementAt(j);
-                    AnimationData animationData = data[key][direction];
-                    string formattedFilePath = GetFormattedFilePath(animationData.TextureFilePath);
-                    Texture2D texture = _gameRef.Content.Load<Texture2D>(formattedFilePath);
-                    AnimatedSprite sprite = new AnimatedSprite(texture, animationData.FrameCount,
-                        animationData.FrameWidth, animationData.FrameHeight, animationData.FrameDuration);
-                    animations[key].Add(direction, sprite);
-                }                
-            }
-            return animations;
-        }
-        private string GetFormattedFilePath(string filePath)
-        {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath);
-            return Path.Combine(Path.GetDirectoryName(filePath), fileNameWithoutExtension); ;
         }
         private void DrawDebug()
         {

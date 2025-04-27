@@ -13,7 +13,7 @@ namespace NoahsArk.Entities.Enemies
         private int _maxHealthPoints;
         private int _maxManaPoints;
         private float _speed;
-        private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> _animations;
+        private Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> _animations;
         private Texture2D _shadow;
         private Camera _camera;
         #endregion
@@ -23,14 +23,14 @@ namespace NoahsArk.Entities.Enemies
         public int MaxHealthPoints { get { return _maxHealthPoints; } }
         public int MaxManaPoints { get { return _maxManaPoints; } } 
         public float Speed { get {  return _speed; } }
-        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> Animations { get { return _animations; } }
+        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> Animations { get { return _animations; } }
         public Texture2D Shadow { get { return _shadow; } }
         public Camera Camera { get { return _camera; } }
         #endregion
 
         #region Constructor
         public EnemyEntity(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, float speed,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, 
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, 
             Camera camera, Texture2D shadow = null)
         {
             _enemyType = enemyType;

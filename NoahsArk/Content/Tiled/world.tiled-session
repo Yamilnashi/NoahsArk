@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/test.tmx",
+    "activeFile": "GameMaps/homeoutside.tmx",
     "expandedProjectPaths": [
+        ".",
         "Tilesets",
-        "GameMaps",
-        "."
+        "GameMaps"
     ],
     "fileStates": {
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
@@ -69,13 +69,14 @@
         },
         "GameMaps/homeoutside.tmx": {
             "expandedObjectLayers": [
+                18,
                 17
             ],
-            "scale": 3,
-            "selectedLayer": 7,
+            "scale": 1.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 135.16666666666666,
-                "y": 99.66666666666667
+                "x": 265,
+                "y": 258.6666666666667
             }
         },
         "GameMaps/infinite.tmx": {
@@ -254,12 +255,12 @@
     "project": "world.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "GameMaps/homeoutside.tmx",
         "Tilesets/tileset_smoke.tsx",
         "GameMaps/development.tmx",
         "GameMaps/homeinside.tmx",
         "GameMaps/obstacles.tmx",
         "GameMaps/test.tmx",
+        "GameMaps/homeoutside.tmx",
         "Tilesets/full.tsx",
         "Tilesets/tileset_furniture.tsx",
         "Tilesets/tileset_floors.tsx",
