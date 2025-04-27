@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using NoahsArk.Entities.Behaviors;
 using NoahsArk.Levels;
 using NoahsArk.States;
 
@@ -59,7 +60,7 @@ namespace NoahsArk.Entities.Enemies
                 e != null)
             {                
                 Vector2 spawnPosition = GetRandomSpawnPosition();
-                Enemy enemy = new Enemy(e.MaxHealthPoints, e.MaxManaPoints, spawnPosition, e.Speed, e.Animations, e.Shadow, e.Camera, e.IAIBehavior);
+                Enemy enemy = new Enemy(e.MaxHealthPoints, e.MaxManaPoints, spawnPosition, e.Speed, e.Animations, e.Shadow, e.Camera, new PatrolAI());
                 currentMap.AddEnemy(_enemyType, enemy);
             }
             

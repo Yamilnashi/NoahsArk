@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
-using NoahsArk.Entities.Behaviors;
 using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Players;
@@ -139,7 +138,7 @@ namespace NoahsArk.States
                 EnemyObject obj = data.EnemyObjects[i];
                 Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations = GetAnimationData(obj.Animations);
                 EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, 
-                    animations, _camera, new PatrolAI());
+                    animations, _camera);
                 _enemyEntityDict[obj.EnemyType] = entity;
             }
         }

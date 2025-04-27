@@ -105,7 +105,7 @@
   <object id="1" name="orcs" x="228" y="149.5" width="1" height="1">
    <properties>
     <property name="enemyTypeCode" value="orc"/>
-    <property name="maxSpawnCount" type="int" value="4"/>
+    <property name="maxSpawnCount" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

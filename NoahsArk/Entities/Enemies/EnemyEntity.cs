@@ -9,7 +9,6 @@ namespace NoahsArk.Entities.Enemies
     public class EnemyEntity
     {
         #region Fields
-        private IAIBehavior _iAiBehavior;
         private EEnemyType _enemyType;
         private int _maxHealthPoints;
         private int _maxManaPoints;
@@ -20,7 +19,6 @@ namespace NoahsArk.Entities.Enemies
         #endregion
 
         #region Properties
-        public IAIBehavior IAIBehavior {  get { return _iAiBehavior; } }
         public EEnemyType EnemyType { get { return _enemyType; } }
         public int MaxHealthPoints { get { return _maxHealthPoints; } }
         public int MaxManaPoints { get { return _maxManaPoints; } } 
@@ -33,7 +31,7 @@ namespace NoahsArk.Entities.Enemies
         #region Constructor
         public EnemyEntity(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, float speed,
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> animations, 
-            Camera camera, IAIBehavior aiBehavior, Texture2D shadow = null)
+            Camera camera, Texture2D shadow = null)
         {
             _enemyType = enemyType;
             _maxHealthPoints = maxHealthPoints;

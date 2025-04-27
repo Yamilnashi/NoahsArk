@@ -16,6 +16,7 @@ namespace NoahsArk.Levels
         private TileMap _tileMap;
         private List<Player> _players = new List<Player>();
         private Dictionary<EEnemyType, List<Enemy>> _enemies = new Dictionary<EEnemyType, List<Enemy>>();
+        private List<Entity> _entities = new List<Entity>();
         private Texture2D _debugTexture;
         // characters
         // enemies
@@ -25,6 +26,7 @@ namespace NoahsArk.Levels
         public List<Player> Players { get { return _players; } }
         public TileMap TileMap { get { return _tileMap; } }
         public Dictionary<EEnemyType, List<Enemy>> Enemies {  get { return _enemies; } }    
+        public List<Entity> Entities { get { return _entities; } }
         #endregion
 
         #region Constructor
@@ -43,12 +45,6 @@ namespace NoahsArk.Levels
         #region Methods
         public void Update(GameTime gameTime)
         {
-            for (int i = 0; i < _players.Count; i++)
-            {
-                Player player = _players[i];
-                player.Update(gameTime);
-            }
-
             for (int i = 0; i < _tileMap.EnemySpawners.Count; i++)
             {
                 EnemySpawner enemySpawner = _tileMap.EnemySpawners[i];
@@ -65,15 +61,10 @@ namespace NoahsArk.Levels
                     enemySpawner.IsReadyToSpawn = false;
                 }
             }
-
-            for (int i = 0; i < _enemies.Keys.Count; i++)
+            for (int i = 0; i < _entities.Count; i++)
             {
-                EEnemyType enemyType = _enemies.Keys.ElementAt(i);
-                for (int j = 0; j < _enemies[enemyType].Count; j++)
-                {
-                    Enemy enemy = _enemies[enemyType][j];
-                    enemy.Update(gameTime);
-                }                
+                Entity entity = _entities[i];
+                entity.Update(gameTime);
             }
 
             for (int i = 0; i < _tileMap.MapLayers.Count; i++)
@@ -91,21 +82,25 @@ namespace NoahsArk.Levels
         public void AddPlayer(Player player)
         {
             _players.Add(player);
+            _entities.Add(player);
             player.CurrentMap = this;
         }
         public void RemovePlayer(Player player)
         {
             _players.Remove(player);
+            _entities.Remove(player);
             player.CurrentMap = null;
         }
         public void AddEnemy(EEnemyType enemyType, Enemy enemy)
         {
             _enemies[enemyType].Add(enemy);
+            _entities.Add(enemy);
             enemy.CurrentMap = this;
         }
         public void RemoveEnemy(EEnemyType enemyType, Enemy enemy)
         {
             _enemies[enemyType].Remove(enemy);
+            _entities.Remove(enemy);
             enemy.CurrentMap = null;    
         }
 
@@ -134,14 +129,7 @@ namespace NoahsArk.Levels
         }
         private void DrawEntities(SpriteBatch spriteBatch)
         {
-            List<Entity> entitiesToDraw = new List<Entity>();
-            entitiesToDraw.AddRange(_players);
-            for (int i = 0; i < _enemies.Keys.Count; i++)
-            {
-                EEnemyType enemyType = _enemies.Keys.ElementAt(i);
-                entitiesToDraw.AddRange(_enemies[enemyType]);
-            }
-            List<Entity> sortedEntities = entitiesToDraw.OrderBy(x => x.Position.Y).ToList();
+            List<Entity> sortedEntities = _entities.OrderBy(x => x.GetDepthY()).ToList();
             for (int i = 0; i < sortedEntities.Count; i++)
             {
                 Entity entity = sortedEntities[i];

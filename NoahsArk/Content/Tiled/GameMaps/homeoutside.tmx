@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="33">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="34">
  <tileset firstgid="1" source="../Tilesets/tileset_buildings_roofs.tsx"/>
  <tileset firstgid="626" source="../Tilesets/tileset_buildings_walls.tsx"/>
  <tileset firstgid="2726" source="../Tilesets/tileset_buildings_props.tsx"/>
@@ -175,6 +175,14 @@
     <property name="spawnY" type="int" value="139"/>
     <property name="targetMap" value="homeinside"/>
     <property name="type" value="door"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="18" name="enemy spawner">
+  <object id="33" name="orc" x="124.333" y="92.3333" width="22" height="14.6667">
+   <properties>
+    <property name="enemyTypeCode" value="orc"/>
+    <property name="maxSpawnCount" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>

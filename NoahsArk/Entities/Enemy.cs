@@ -24,25 +24,27 @@ namespace NoahsArk.Entities
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _behavior = behavior;
-            SetAnimation(EAnimationKey.Idle, EDirection.Right);
-            SetAnimation(EAnimationKey.Walking, EDirection.Right);
-            SetAnimation(EAnimationKey.Running, EDirection.Right);
         }
         #endregion
 
         #region Methods
         public override Circle GetHitbox(Vector2 desiredPosition)
         {
-            Vector2 feetPosition = desiredPosition + new Vector2(16, 24); // on a 16px sprite, will be right in the middle
-            return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
+            if (CurrentAnimation == EAnimationKey.Idle)
+            {
+                Vector2 feetPosition = desiredPosition + new Vector2(16, 24); // on a 16px sprite, will be right in the middle
+                return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
+            } else
+            {
+                Vector2 feetPosition = desiredPosition + new Vector2(32, 56); // on a 64px sprite, will be right in the middle
+                return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
+            }            
         }
         public override void Update(GameTime gameTime)
-        {
-            SetAnimation(EAnimationKey.Idle, EDirection.Right);            
-            //_behavior.Update(this, gameTime);
+        {       
+            _behavior.Update(this, gameTime);
             base.Update(gameTime);
         }
-
         #endregion
     }
 }

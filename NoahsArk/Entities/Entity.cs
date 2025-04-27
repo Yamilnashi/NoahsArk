@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
@@ -43,6 +41,7 @@ namespace NoahsArk.Entities
         public Dictionary<EEquipmentSlot, Item> EquippedItems { get { return _equippedItems; } protected set { _equippedItems = value; } }
         public Vector2 Position { get { return _position; } protected set { _position = value; } }
         public EDirection CurrentDirection { get { return _currentDirection; } }
+        public EAnimationKey CurrentAnimation { get { return _currentAnimationKey; } }
         public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; } }
         public Camera Camera { get { return _camera; } }
         #endregion
@@ -94,6 +93,11 @@ namespace NoahsArk.Entities
             Vector2 feetPosition = desiredPosition + new Vector2(8, 8); // on a 16px sprite, will be right in the middle
             return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
         }
+        public virtual float GetDepthY()
+        {
+            Circle hitbox = GetHitbox(Position);
+            return hitbox.Center.Y;
+        }
         public void SetAnimation(EAnimationKey key, EDirection direction)
         {
             if (_animations.ContainsKey(key))
@@ -124,42 +128,38 @@ namespace NoahsArk.Entities
             Circle newHitBox = GetHitbox(newPosition);
             Vector2 totalDisplacement = Vector2.Zero;
 
-            if (_currentMap != null && 
-                _currentMap.TileMap.Obstacles != null)
+            if (_currentMap != null)
             {
-                for (int i = 0; i < _currentMap.TileMap.Obstacles.Count; i++)
+                if (_currentMap.TileMap.Obstacles != null)
                 {
-                    Rectangle obstacle = _currentMap.TileMap.Obstacles[i];
-                    if (CollisionHelper.CircleIntersectsRectangle(newHitBox, obstacle, out Vector2 displacement))
+                    for (int i = 0; i < _currentMap.TileMap.Obstacles.Count; i++)
                     {
-                        totalDisplacement += displacement;
-                    }
-                }
-            }
-            if (_currentMap.Enemies.Values.Count > 0)
-            {
-                for (int i = 0; i < _currentMap.Enemies.Keys.Count; i++)
-                {
-                    EEnemyType enemyType = _currentMap.Enemies.Keys.ElementAt(i);
-                    List<Enemy> enemies = _currentMap.Enemies[enemyType];
-                    for (int j = 0;  j < enemies.Count; j++)
-                    {
-                        Enemy enemy = enemies[j];
-                        Circle enemyHitbox = enemy.GetHitbox(enemy.Position);
-                        if (CollisionHelper.CircleIntersectsCircle(newHitBox, enemyHitbox, out Vector2 displacement))
+                        Rectangle obstacle = _currentMap.TileMap.Obstacles[i];
+                        if (CollisionHelper.CircleIntersectsRectangle(newHitBox, obstacle, out Vector2 displacement))
                         {
                             totalDisplacement += displacement;
                         }
                     }
                 }
+                if (_currentMap.Entities.Count > 0)
+                {
+                    for (int i = 0; i < _currentMap.Entities.Count; i++)
+                    {
+                        Entity entity = _currentMap.Entities[i];
+                        if (entity != this) // don't check against yourself
+                        {
+                            Circle enemyHitbox = entity.GetHitbox(entity.Position);
+                            if (CollisionHelper.CircleIntersectsCircle(newHitBox, enemyHitbox, out Vector2 displacement))
+                            {
+                                totalDisplacement += displacement;
+                            }
+                        }
+                    }
+                }
             }
+               
             // Apply the total displacement to the new position
             newPosition += totalDisplacement;
-
-            // Round to whole pixels to avoid sub-pixel jitter
-            //newPosition.X = (float)Math.Round(newPosition.X);
-            //newPosition.Y = (float)Math.Round(newPosition.Y);
-
             CompleteMove(newPosition);
         }
         protected virtual int CalculateDamage()
