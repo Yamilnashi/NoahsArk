@@ -37,8 +37,10 @@
     <None Remove="Content\Tiled\Tilesets\tileset_farm.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_floors.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_furniture.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_lightrain.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_meat.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_pan.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_rainimpact.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_resources.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_rocks.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_shadows.tsx" />
@@ -130,10 +132,16 @@
     <Content Include="Content\Tiled\Tilesets\tileset_furniture.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_lightrain.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_meat.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_pan.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_rainimpact.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_resources.tsx">

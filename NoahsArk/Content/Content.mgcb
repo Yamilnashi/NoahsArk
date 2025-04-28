@@ -368,6 +368,18 @@
 /processorParam:TextureFormat=Color
 /build:Tiled/Tilesets/tileset_furniture.png
 
+#begin Tiled/Tilesets/tileset_lightrain.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_lightrain.png
+
 #begin Tiled/Tilesets/tileset_meat.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -391,6 +403,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tiled/Tilesets/tileset_pan.png
+
+#begin Tiled/Tilesets/tileset_rainimpact.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_rainimpact.png
 
 #begin Tiled/Tilesets/tileset_resources.png
 /importer:TextureImporter

@@ -16,6 +16,7 @@ namespace NoahsArk.Levels.Maps
         private Dictionary<string, object> _properties;
         private float _offsetX;
         private float _moveSpeed;
+        private float _opacity;
         #endregion
         #region Properties
         public string Name { get { return _name; } set { _name = value; } }
@@ -35,13 +36,18 @@ namespace NoahsArk.Levels.Maps
         }
         #endregion
         #region Constructor
-        public MapLayer(string name, long[,] tiles, Dictionary<string, object> properties)
+        public MapLayer(string name, long[,] tiles, float opacity, Dictionary<string, object> properties)
         {
             _name = name;
             _tiles = tiles;
             _properties = properties;
             _offsetX = 0f;
             _moveSpeed = 2f;
+            _opacity = opacity;
+            if (properties.TryGetValue("weatherSpeed", out object speed))
+            {
+                _moveSpeed = float.Parse(speed.ToString());
+            }
         }
         #endregion
 
@@ -130,11 +136,18 @@ namespace NoahsArk.Levels.Maps
         {
             float layerWidthInPixels = Width * Engine.TileWidth;
 
+            // calculate extra tiles needed based on the maximum offset
+            int extraTiles = (int)Math.Ceiling(layerWidthInPixels / Engine.TileWidth);
+            int extendedMinX = min.X - extraTiles;
+            int extendedMaxX = max.X + extraTiles;
+
             for (int y = min.Y; y < max.Y; y++)
             {
-                for (int x = min.X; x < max.X; x++)
+                for (int x = extendedMinX; x < extendedMaxX; x++)
                 {
-                    long tileIndex = GetTile(x, y);
+                    // wrap the x-coordinate to get the correct tile index
+                    int wrappedX = (x % Width + Width) % Width;
+                    long tileIndex = GetTile(wrappedX, y);
 
                     // Skip drawing if TileIndex is invalid or represents an empty tile
                     if (tileIndex <= 0)
@@ -149,20 +162,6 @@ namespace NoahsArk.Levels.Maps
                     // Draw the tile at its current position
                     Vector2 position = new Vector2(baseX, baseY);
                     DrawTileWithPosition(spriteBatch, tileSets, tileIndex, position, gameTime);
-
-                    // Handle wrapping: draw an additional copy of the tile if it's near the edge
-                    if (baseX < 0)
-                    {
-                        // Draw a second copy on the right side for seamless looping
-                        Vector2 wrappedPosition = new Vector2(baseX + layerWidthInPixels, baseY);
-                        DrawTileWithPosition(spriteBatch, tileSets, tileIndex, wrappedPosition, gameTime);
-                    }
-                    else if (baseX >= layerWidthInPixels)
-                    {
-                        // Draw a second copy on the left side
-                        Vector2 wrappedPosition = new Vector2(baseX - layerWidthInPixels, baseY);
-                        DrawTileWithPosition(spriteBatch, tileSets, tileIndex, wrappedPosition, gameTime);
-                    }
                 }
             }
         }
@@ -206,7 +205,7 @@ namespace NoahsArk.Levels.Maps
                         if (sourceRect != Rectangle.Empty)
                         {
                             // Use Vector2 position for smooth movement, scale to maintain tile size
-                            spriteBatch.Draw(tileSet.Texture, position, sourceRect, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(tileSet.Texture, position, sourceRect, Color.White * _opacity, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                         }
                         break; // Found the correct tileset for this tile, break the loop
                     }
@@ -227,7 +226,7 @@ namespace NoahsArk.Levels.Maps
 
                         if (sourceRect != Rectangle.Empty)
                         {
-                            spriteBatch.Draw(tileSet.Texture, destination, sourceRect, Color.White);
+                            spriteBatch.Draw(tileSet.Texture, destination, sourceRect, Color.White * _opacity);
                         }
                         break; // we have found the correct tileset for this tile, we can break the loop
                     }

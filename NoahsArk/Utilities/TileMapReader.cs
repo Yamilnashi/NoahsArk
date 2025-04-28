@@ -30,7 +30,7 @@ namespace NoahsArk.Utilities
         private List<Rectangle> _obstacles = new List<Rectangle>();
         private List<DoorTransition> _doors = new List<DoorTransition>();
         private List<EnemySpawner> _enemySpawners = new List<EnemySpawner>();
-        private Dictionary<int, string> _mapLayerNameDict = new Dictionary<int, string>();
+        private Dictionary<int, (string, float)> _mapLayerNameDict = new Dictionary<int, (string, float)>();
         private Dictionary<int, long[,]> _mapLayerDataDict = new Dictionary<int, long[,]>();
         private Dictionary<int, Dictionary<string, object>> _mapLayerPropertiesDict = new Dictionary<int, Dictionary<string, object>>();
         private Dictionary<int, string> _objectGroupNameDict = new Dictionary<int, string>();
@@ -137,8 +137,13 @@ namespace NoahsArk.Utilities
         {
             int layerId = int.Parse(reader.GetAttribute("id"));
             string layerName = reader.GetAttribute("name");
+            float opacity = 1f;
+            if (reader.GetAttribute("opacity") != null)
+            {
+                opacity = float.Parse(reader.GetAttribute("opacity"));
+            }
             Write($"Layer: {layerName}");
-            _mapLayerNameDict[layerId] = layerName;
+            _mapLayerNameDict[layerId] = (layerName, opacity);
             _mapLayerPropertiesDict[layerId] = new Dictionary<string, object>();
             _currentLayerId = layerId;            
         }
@@ -237,7 +242,7 @@ namespace NoahsArk.Utilities
             for (int i = 0; i < _mapLayerNameDict.Keys.Count; i++)
             {
                 int layerId = _mapLayerNameDict.Keys.ElementAt(i);
-                string layerName = _mapLayerNameDict[layerId];
+                (string layerName, float opacity) = _mapLayerNameDict[layerId];
                 long[,] data = _mapLayerDataDict[layerId];
                 Dictionary<string, object> props = new Dictionary<string, object>();
                 if (_mapLayerPropertiesDict.TryGetValue(layerId, out var properties))
@@ -245,7 +250,7 @@ namespace NoahsArk.Utilities
                     props = properties;
                 }
 
-                ILayer mapLayer = new MapLayer(layerName, data, props);
+                ILayer mapLayer = new MapLayer(layerName, data, opacity, props);
                 _mapLayers.Add(mapLayer);
             }
         }
