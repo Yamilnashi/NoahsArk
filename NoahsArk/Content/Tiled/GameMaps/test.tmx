@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="67" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="50">
  <tileset firstgid="1" source="../Tilesets/full.tsx"/>
  <tileset firstgid="2025" source="../Tilesets/tileset_clouds.tsx"/>
- <layer id="1" name="gound" width="67" height="45">
+ <layer id="1" name="gound" width="67" height="45" visible="0">
   <data encoding="csv">
 14,13,13,13,14,14,14,14,14,14,13,14,14,14,13,13,13,14,14,13,13,13,14,14,14,14,14,13,14,13,14,13,14,14,14,13,14,13,14,14,13,14,13,13,14,14,14,13,13,13,14,14,14,13,13,14,14,13,14,14,13,14,14,13,13,13,13,
 14,14,13,13,14,13,13,13,14,13,13,13,14,13,13,13,14,13,13,13,13,14,14,14,13,13,13,13,14,14,13,13,13,14,14,13,14,14,13,13,14,14,13,13,13,14,14,14,13,13,13,14,13,14,13,14,14,13,14,14,13,14,13,14,13,13,13,
@@ -51,7 +51,7 @@
 13,14,13,13,13,13,13,13,13,13,14,13,14,14,13,13,13,14,14,14,14,13,14,13,14,13,13,13,13,13,14,13,13,13,13,14,14,13,13,13,13,13,14,14,13,14,13,14,14,13,14,13,13,14,14,14,14,14,13,14,14,14,13,14,13,13,13
 </data>
  </layer>
- <layer id="10" name="water" width="67" height="45">
+ <layer id="10" name="water" width="67" height="45" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -100,7 +100,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="collision" width="67" height="45">
+ <layer id="2" name="collision" width="67" height="45" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -149,7 +149,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="3" name="top" width="67" height="45">
+ <layer id="3" name="top" width="67" height="45" visible="0">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
   </properties>
@@ -201,7 +201,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="obstacles">
+ <objectgroup id="8" name="obstacles" visible="0">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
   </properties>
@@ -218,7 +218,7 @@
   <object id="46" x="242.182" y="34.1818" width="27.4545" height="8.72727"/>
   <object id="47" x="434" y="193.091" width="26.9091" height="10.1818"/>
  </objectgroup>
- <objectgroup id="9" name="signs">
+ <objectgroup id="9" name="signs" visible="0">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
   </properties>
@@ -228,7 +228,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="11" name="enemy spawner">
+ <objectgroup id="11" name="enemy spawner" visible="0">
   <object id="48" name="black roaches" x="232" y="392" width="1" height="1">
    <properties>
     <property name="enemyTypeCode" value="orc"/>

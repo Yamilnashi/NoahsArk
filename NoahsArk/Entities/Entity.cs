@@ -85,7 +85,7 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
-                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow);
+                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition());
                 }
             }
         }
@@ -93,6 +93,10 @@ namespace NoahsArk.Entities
         {
             Vector2 feetPosition = desiredPosition + new Vector2(8, 8); // on a 16px sprite, will be right in the middle
             return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
+        }
+        public virtual Vector2 GetShadowPosition()
+        {
+            return new Vector2(_position.X, _position.Y + 2);
         }
         public virtual float GetDepthY()
         {

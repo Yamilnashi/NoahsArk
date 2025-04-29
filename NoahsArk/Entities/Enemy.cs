@@ -40,6 +40,17 @@ namespace NoahsArk.Entities
                 return new Circle(feetPosition, 8f); // radius of 8 makes a circle 16px wide
             }            
         }
+        public override Vector2 GetShadowPosition()
+        {
+            if (CurrentAnimation == EAnimationKey.Idle)
+            {
+                return Position + new Vector2(16, 24); // on a 16px sprite, will be right in the middle
+            }
+            else
+            {
+                return Position + new Vector2(24, 34); // on a 64px sprite, will be right in the middle
+            }
+        }
         public override void Update(GameTime gameTime)
         {       
             _behavior.Update(this, gameTime);

@@ -60,14 +60,14 @@ namespace NoahsArk.Entities.Sprites
                 _currentFrame = (_currentFrame + 1) % _frames.Count;
             }
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, Texture2D shadow)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, Texture2D shadow, Vector2 shadowPosition)
         {            
             SpriteEffects spriteEffects = direction == EDirection.Left
                 ? SpriteEffects.FlipHorizontally
                 : SpriteEffects.None;
             if (shadow != null)
             {
-                spriteBatch.Draw(shadow, new Vector2(position.X, position.Y + 2), new Rectangle(0, 0, 16, 32), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(shadow, shadowPosition, new Rectangle(0, 0, 16, 32), Color.White * 0.3f, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
             }            
             spriteBatch.Draw(_texture, position, _frames[_currentFrame], Color.White, 0f, new Vector2(0, 0), 1f, spriteEffects, 0f);
         }

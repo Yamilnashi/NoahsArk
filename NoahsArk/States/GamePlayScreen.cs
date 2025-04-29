@@ -137,12 +137,13 @@ namespace NoahsArk.States
         {
             string enemyDataFilePath = Path.Combine(_gameRef.Content.RootDirectory, "Assets/GameData/Enemies/enemy-data.json");
             string jsonContent = File.ReadAllText(enemyDataFilePath);
-            EnemyData data = JsonConvert.DeserializeObject<EnemyData>(jsonContent); 
+            EnemyData data = JsonConvert.DeserializeObject<EnemyData>(jsonContent);
+            Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
             for (int i = 0; i < data.EnemyObjects.Count; i++)
             {
                 EnemyObject obj = data.EnemyObjects[i];
                 EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, 
-                    obj.Animations, _camera);
+                    obj.Animations, _camera, shadow);
                 _enemyEntityDict[obj.EnemyType] = entity;
             }
         }
