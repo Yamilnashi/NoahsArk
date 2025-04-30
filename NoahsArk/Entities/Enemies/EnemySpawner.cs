@@ -60,7 +60,7 @@ namespace NoahsArk.Entities.Enemies
                 e != null)
             {                
                 Vector2 spawnPosition = GetRandomSpawnPosition();
-                Enemy enemy = new Enemy(e.MaxHealthPoints, e.MaxManaPoints, spawnPosition, e.Speed, e.Animations, e.Shadow, e.Camera, new PatrolAI());
+                Enemy enemy = new Enemy(e.EnemyType, e.MaxHealthPoints, e.MaxManaPoints, spawnPosition, e.Speed, e.Animations, e.Shadow, e.Camera, new PatrolAI());
                 currentMap.AddEnemy(_enemyType, enemy);
             }
             

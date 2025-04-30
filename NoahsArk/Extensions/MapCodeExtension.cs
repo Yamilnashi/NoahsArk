@@ -20,6 +20,7 @@ namespace NoahsArk.Extensions
                 EMapCode.Test => "test.tmx",
                 EMapCode.HomeInside => "homeinside.tmx",
                 EMapCode.HomeOutside => "homeoutside.tmx",
+                EMapCode.Restaurant => "restaurant.tmx",
                 _ => throw new System.Exception($"Missing TileMap file for map code: {mapCode}")
             };
         }

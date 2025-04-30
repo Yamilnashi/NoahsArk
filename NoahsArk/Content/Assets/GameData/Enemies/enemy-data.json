@@ -3,7 +3,7 @@
 		{
 			"enemyType": "Orc",
 			"level": 1,
-			"healthPoints": 50,
+			"healthPoints": 100,
 			"manaPoints": 10,
 			"speed": 25,
 			"animations": {

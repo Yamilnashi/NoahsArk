@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/development.tmx",
+    "activeFile": "GameMaps/restaurant.tmx",
     "expandedProjectPaths": [
-        "GameMaps",
         ".",
-        "Tilesets"
+        "Tilesets",
+        "GameMaps"
     ],
     "fileStates": {
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
@@ -31,13 +31,14 @@
         },
         "GameMaps/development.tmx": {
             "expandedObjectLayers": [
+                12,
                 7
             ],
-            "scale": 2,
+            "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 243.75,
-                "y": 185.5
+                "x": 97.16666666666666,
+                "y": 247.33333333333331
             }
         },
         "GameMaps/full.tsx": {
@@ -61,10 +62,10 @@
                 10
             ],
             "scale": 4,
-            "selectedLayer": 7,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 79.875,
-                "y": 88
+                "x": 70.375,
+                "y": 78.5
             }
         },
         "GameMaps/homeoutside.tmx": {
@@ -75,8 +76,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 250.66666666666663,
-                "y": 210.33333333333331
+                "x": 265,
+                "y": 258.6666666666667
             }
         },
         "GameMaps/infinite.tmx": {
@@ -98,15 +99,23 @@
                 "y": 159.75939849624058
             }
         },
+        "GameMaps/restaurant.tmx": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 100.25,
+                "y": 64.25
+            }
+        },
         "GameMaps/test.tmx": {
             "expandedObjectLayers": [
                 11
             ],
-            "scale": 0.8022222222222222,
-            "selectedLayer": 7,
+            "scale": 2,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 535.3878116343491,
-                "y": 359.0027700831025
+                "x": 366.25,
+                "y": 217
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {
@@ -142,7 +151,7 @@
         },
         "Tilesets/tileset_clouds.tsx": {
             "scaleInDock": 1,
-            "scaleInEditor": 8
+            "scaleInEditor": 5.5
         },
         "Tilesets/tileset_dungeon_props.tsx": {
             "scaleInDock": 1,
@@ -164,6 +173,14 @@
             "scaleInDock": 1.5,
             "scaleInEditor": 5.5
         },
+        "Tilesets/tileset_kitchen.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "Tilesets/tileset_lightrain.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Tilesets/tileset_meat.tsx": {
             "scaleInDock": 3,
             "scaleInEditor": 1
@@ -171,6 +188,10 @@
         "Tilesets/tileset_pan.tsx": {
             "scaleInDock": 1.5,
             "scaleInEditor": 1
+        },
+        "Tilesets/tileset_rainimpact.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
         },
         "Tilesets/tileset_resources.tsx": {
             "scaleInDock": 1,
@@ -245,34 +266,30 @@
     "map.tileWidth": 16,
     "map.width": 10,
     "openFiles": [
-        "GameMaps/homeoutside.tmx",
-        "GameMaps/test.tmx",
-        "GameMaps/obstacles.tmx",
-        "GameMaps/homeinside.tmx",
-        "GameMaps/development.tmx",
-        "Tilesets/tileset_smoke.tsx"
+        "GameMaps/restaurant.tmx",
+        "Tilesets/tileset_kitchen.tsx"
     ],
     "project": "world.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "Tilesets/tileset_smoke.tsx",
+        "Tilesets/tileset_kitchen.tsx",
+        "GameMaps/restaurant.tmx",
         "GameMaps/homeoutside.tmx",
         "GameMaps/test.tmx",
         "GameMaps/obstacles.tmx",
-        "GameMaps/homeinside.tmx",
         "GameMaps/development.tmx",
-        "Tilesets/full.tsx",
-        "Tilesets/tileset_furniture.tsx",
-        "Tilesets/tileset_floors.tsx",
-        "Tilesets/tileset_buildings_roofs.tsx",
-        "Tilesets/tileset_buildings_shadows.tsx",
-        "Tilesets/tileset_buildings_walls.tsx"
+        "Tilesets/tileset_clouds.tsx",
+        "Tilesets/tileset_lightrain.tsx",
+        "Tilesets/tileset_rainimpact.tsx",
+        "GameMaps/homeinside.tmx",
+        "Tilesets/tileset_smoke.tsx",
+        "Tilesets/full.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 16,
-        "width": 16
+        "height": 32,
+        "width": 32
     },
     "tileset.useTransparentColor": true
 }

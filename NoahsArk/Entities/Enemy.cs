@@ -11,18 +11,26 @@ namespace NoahsArk.Entities
     public class Enemy : Entity
     {
         #region Fields
+        private EEnemyType _enemyType;
+        private static Texture2D _healthBarTexture;
+        private static Rectangle _healthBarRectangle;
+        private static List<Rectangle> _healthBarFrames;
         private IAIBehavior _behavior;
         #endregion
 
         #region Properties
         public IAIBehavior Behavior { get; private set; }
+        public static Texture2D HealthBarTexture {  get { return _healthBarTexture; } set { _healthBarTexture = value; } }
+        public static Rectangle HealthBarRectangle { get { return _healthBarRectangle; } set { _healthBarRectangle = value; } } 
+        public static List<Rectangle> HealthBarFrames {  get { return _healthBarFrames; } set { _healthBarFrames = value; } }
         #endregion
 
         #region Constructor
-        public Enemy(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
+        public Enemy(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
             Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Camera camera,
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
+            _enemyType = enemyType;
             _behavior = behavior;
         }
         #endregion
@@ -55,6 +63,44 @@ namespace NoahsArk.Entities
         {       
             _behavior.Update(this, gameTime);
             base.Update(gameTime);
+            if (HealthPoints <= 0)
+            {
+                CurrentMap.RemoveEnemy(_enemyType, this);
+            }
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            // draw the sprite
+            base.Draw(spriteBatch);
+
+            if (_healthBarTexture != null &&
+                _healthBarFrames.Count > 0 &&
+                HealthPoints < MaxHealthPoints)
+            {
+                float healthPercent = (float)HealthPoints / MaxHealthPoints;
+
+                int frameIndex = 0;
+                if (healthPercent > 0.80f)
+                {
+                    frameIndex = 0;
+                } else if (healthPercent >= 0.6f)
+                {
+                    frameIndex = 1;
+                } else if (healthPercent >= 0.5f)
+                {
+                    frameIndex = 2;
+                } else if (healthPercent >= 0.4f)
+                {
+                    frameIndex = 3;
+                } else if (healthPercent >= 0.2f)
+                {
+                    frameIndex = 4;
+                }
+
+                Rectangle sourceRect = _healthBarFrames[frameIndex];
+                Vector2 barPosition = GetHitbox(Position).Center + new Vector2(-25, -38);
+                spriteBatch.Draw(_healthBarTexture, barPosition, sourceRect, Color.White * 0.8f);
+            }
         }
         #endregion
     }

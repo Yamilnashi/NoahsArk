@@ -26,8 +26,8 @@ namespace NoahsArk.States
         private Engine _engine = new Engine(16, 16);
         private World _world;
         private Camera _camera;
-        private Texture2D _debugTexture;
-        private bool _isDebugEnabled = true;
+        private static Texture2D _debugTexture;
+        private static bool _isDebugEnabled = true;
         private Player _player;
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
@@ -40,8 +40,10 @@ namespace NoahsArk.States
         public Camera Camera { get { return _camera; } }
         public World World { get { return _world; } }
         public bool IsPaused { get { return _isPaused; } }  
+        public static Texture2D DebugTexture { get { return _debugTexture; } }
         public static Dictionary<EEnemyType, EnemyEntity> EnemyEntityDict {  get  { return _enemyEntityDict; } }
         public static ContentManager ContentRef { get { return _contentRef; } }
+        public static bool IsDebugEnabled { get { return _isDebugEnabled; } }
         #endregion
 
         #region Constructor
@@ -139,6 +141,18 @@ namespace NoahsArk.States
             string jsonContent = File.ReadAllText(enemyDataFilePath);
             EnemyData data = JsonConvert.DeserializeObject<EnemyData>(jsonContent);
             Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
+            Texture2D healthBar = _contentRef.Load<Texture2D>("Assets/Sprites/Enemies/HealthBar/healthbar-red");
+            Enemy.HealthBarTexture = healthBar;
+            Enemy.HealthBarRectangle = new Rectangle(0, 0, 48, 16);
+            Enemy.HealthBarFrames = new List<Rectangle>()
+            {
+                new Rectangle(48, 0, 48, 16), // full health
+                new Rectangle(96, 0, 48, 16), // 80% health
+                new Rectangle(144, 0, 48, 16), // 60% health
+                new Rectangle(192, 0, 48, 16), // 50% health
+                new Rectangle(240, 0, 48, 16), // 40% health
+                new Rectangle(288, 0, 48, 16), // 20% health
+            };
             for (int i = 0; i < data.EnemyObjects.Count; i++)
             {
                 EnemyObject obj = data.EnemyObjects[i];

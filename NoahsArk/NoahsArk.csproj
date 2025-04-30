@@ -19,6 +19,7 @@
     <None Remove="Content\Tiled\GameMaps\homeoutside.tmx" />
     <None Remove="Content\Tiled\GameMaps\infinite.tmx" />
     <None Remove="Content\Tiled\GameMaps\obstacles.tmx" />
+    <None Remove="Content\Tiled\GameMaps\restaurant.tmx" />
     <None Remove="Content\Tiled\GameMaps\test.tmx" />
     <None Remove="Content\Tiled\Tilesets\full.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_buildings_floors.png" />
@@ -37,6 +38,7 @@
     <None Remove="Content\Tiled\Tilesets\tileset_farm.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_floors.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_furniture.tsx" />
+    <None Remove="Content\Tiled\Tilesets\tileset_kitchen.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_lightrain.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_meat.tsx" />
     <None Remove="Content\Tiled\Tilesets\tileset_pan.tsx" />
@@ -76,6 +78,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\GameMaps\obstacles.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\GameMaps\restaurant.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\GameMaps\test.tmx">
@@ -130,6 +135,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_furniture.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\Tilesets\tileset_kitchen.tsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\Tilesets\tileset_lightrain.tsx">
@@ -203,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="Content\Assets\Backgrounds\title_background.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Tiled\Tilesets\tileset_kitchen.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>

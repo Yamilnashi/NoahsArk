@@ -7,5 +7,6 @@
         Obstacles,
         HomeOutside,
         HomeInside,
+        Restaurant
     }
 }

@@ -200,6 +200,18 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Character/shadow.png
 
+#begin Assets/Sprites/Enemies/HealthBar/healthbar-red.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/HealthBar/healthbar-red.png
+
 #begin Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -367,6 +379,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tiled/Tilesets/tileset_furniture.png
+
+#begin Tiled/Tilesets/tileset_kitchen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiled/Tilesets/tileset_kitchen.png
 
 #begin Tiled/Tilesets/tileset_lightrain.png
 /importer:TextureImporter

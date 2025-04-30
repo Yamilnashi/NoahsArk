@@ -8,6 +8,7 @@ using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Rendering;
+using NoahsArk.States;
 using NoahsArk.Utilities;
 
 namespace NoahsArk.Entities
@@ -45,6 +46,7 @@ namespace NoahsArk.Entities
             UpdateTransitionCooldownTimer(gameTime);
             HandleCameraControls();
             HandleMovement();
+            HandleAttack();
             if (!_isTransitioningMaps)
             {
                 HandleDoorTransitions();
@@ -61,7 +63,21 @@ namespace NoahsArk.Entities
             UpdateInteractionState();
             base.Update(gameTime);
         }
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            if (GamePlayScreen.IsDebugEnabled)
+            {
+                Circle attackhitbox = GetAttackHitbox();
+                Rectangle boundingRect = new Rectangle(
+                    (int)(attackhitbox.Center.X - attackhitbox.Radius),
+                    (int)(attackhitbox.Center.Y - attackhitbox.Radius),
+                    (int)(2 * attackhitbox.Radius),
+                    (int)(2 * attackhitbox.Radius)
+                );
+                spriteBatch.Draw(GamePlayScreen.DebugTexture, boundingRect, Color.Yellow * 0.7f);
+            }            
+        }
         public override Circle GetHitbox(Vector2 desiredMovement)
         {
             Vector2 feetPosition = desiredMovement + new Vector2(8, 24); // 16px = bottom half, add another 8px to be at center of bottom 16px = 24px
@@ -70,6 +86,31 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Private
+        private Circle GetAttackHitbox()
+        {
+            Vector2 attackOffset;
+            switch (CurrentDirection)
+            {
+                case EDirection.Right:
+                    attackOffset = new Vector2(26, 24);
+                    break;
+                case EDirection.Left:
+                    attackOffset = new Vector2(-10, 24);
+                    break;
+                case EDirection.Up:
+                    attackOffset = new Vector2(8, 6);
+                    break;
+                case EDirection.Down:
+                    attackOffset = new Vector2(8, 42);
+                    break;
+                default:
+                    attackOffset = Vector2.Zero;
+                    break;
+            }
+
+            Vector2 attackPosition = Position + attackOffset;
+            return new Circle(attackPosition, 8f);
+        }
         private void UpdateTransitionCooldownTimer(GameTime gameTime)
         {
             if (_transitionCooldown > 0)
@@ -229,6 +270,31 @@ namespace NoahsArk.Entities
             Position = playerSpawnPosition;
             Camera.LockToPosition(Position, CurrentMap);
             _transitionCooldown = _transition_cooldown_duration; // start the transition cooldown
+        }
+        private void HandleAttack()
+        {
+            if (InputHandler.KeyPressed(Keys.E) ||
+                InputHandler.ButtonPressed(Buttons.X, _playerIndex))
+            {
+                PerformAttack();
+            }
+        }
+        private void PerformAttack()
+        {
+            Circle attackHitBox = GetAttackHitbox();
+
+            for (int i = 0; i < CurrentMap.Entities.Count; i++)
+            {
+                Entity entity = CurrentMap.Entities[i];
+                if (entity == this)
+                {
+                    continue;
+                }
+                if (CollisionHelper.CircleIntersectsCircle(attackHitBox, entity.GetHitbox(entity.Position)))
+                {
+                    DealDamage(entity);
+                }
+            }
         }
         #endregion
     }
