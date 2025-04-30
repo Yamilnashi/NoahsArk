@@ -29,6 +29,7 @@ namespace NoahsArk.Entities
         private Map _currentMap;
         private Camera _camera;
         private Texture2D _shadow;
+        private bool _isDying = false;
         #endregion
 
         #region Properties
@@ -39,12 +40,14 @@ namespace NoahsArk.Entities
         public int ExperiencePoints { get { return _experiencePoints; } protected set { _experiencePoints = value; } }
         public float Speed { get { return _speed; } protected set { _speed = value; } }
         public Inventory Inventory { get { return _inventory; } protected set { _inventory = value; } } 
+        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> Animations { get { return _animations; } }
         public Dictionary<EEquipmentSlot, Item> EquippedItems { get { return _equippedItems; } protected set { _equippedItems = value; } }
         public Vector2 Position { get { return _position; } protected set { _position = value; } }
         public EDirection CurrentDirection { get { return _currentDirection; } }
         public EAnimationKey CurrentAnimation { get { return _currentAnimationKey; } }
         public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; } }
         public Camera Camera { get { return _camera; } }
+        public bool IsDying { get { return _isDying; } set { _isDying = value; } }
         #endregion
 
         #region Constructor
@@ -118,9 +121,14 @@ namespace NoahsArk.Entities
                 }                             
             }
         }
-        public void TakeDamage(int amount)
+        public virtual void TakeDamage(int amount)
         {
             _healthPoints = MathHelper.Max(0, _healthPoints - amount);
+            if (_healthPoints == 0)
+            {
+                _isDying = true;
+                _currentAnimationKey = EAnimationKey.Death;
+            }
         }
         public void DealDamage(Entity target)
         {
@@ -129,6 +137,11 @@ namespace NoahsArk.Entities
         }
         public void Move(Vector2 direction)
         {
+            if (_isDying)
+            {
+                return; // don't move when we are dying
+            }
+
             Vector2 newPosition = _position + direction;
             Circle newHitBox = GetHitbox(newPosition);
             Vector2 totalDisplacement = Vector2.Zero;

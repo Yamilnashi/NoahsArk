@@ -152,6 +152,7 @@ namespace NoahsArk.States
                 new Rectangle(192, 0, 48, 16), // 50% health
                 new Rectangle(240, 0, 48, 16), // 40% health
                 new Rectangle(288, 0, 48, 16), // 20% health
+                new Rectangle(336, 0, 48, 16), // 0% health
             };
             for (int i = 0; i < data.EnemyObjects.Count; i++)
             {

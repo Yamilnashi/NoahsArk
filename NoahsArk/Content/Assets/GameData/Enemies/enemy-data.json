@@ -54,6 +54,22 @@
 						"frameDuration": 100,
 						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
 					},
+				},
+				"Death": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
 				}
 			}
 		}

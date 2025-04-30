@@ -43,7 +43,7 @@ namespace NoahsArk.Entities.Enemies
             if (gameTime.TotalGameTime.TotalSeconds > _nextSpawnTime)
             {
                 _isReadyToSpawn = true;
-                _nextSpawnTime = (float)(gameTime.TotalGameTime.TotalSeconds + _random.Next(5, 10));
+                _nextSpawnTime = (float)(gameTime.TotalGameTime.TotalSeconds + _random.Next(40, 45));
             }
         }
         public Vector2 GetRandomSpawnPosition()

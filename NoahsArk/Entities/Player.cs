@@ -274,7 +274,8 @@ namespace NoahsArk.Entities
         private void HandleAttack()
         {
             if (InputHandler.KeyPressed(Keys.E) ||
-                InputHandler.ButtonPressed(Buttons.X, _playerIndex))
+                InputHandler.ButtonPressed(Buttons.X, _playerIndex) ||
+                InputHandler.CheckMousePress(EMouseButton.Left))
             {
                 PerformAttack();
             }
@@ -290,7 +291,8 @@ namespace NoahsArk.Entities
                 {
                     continue;
                 }
-                if (CollisionHelper.CircleIntersectsCircle(attackHitBox, entity.GetHitbox(entity.Position)))
+                if (!entity.IsDying &&
+                    CollisionHelper.CircleIntersectsCircle(attackHitBox, entity.GetHitbox(entity.Position)))
                 {
                     DealDamage(entity);
                 }

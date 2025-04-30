@@ -4,6 +4,7 @@
     {
         Idle,
         Walking,
-        Running
+        Running,
+        Death
     }
 }

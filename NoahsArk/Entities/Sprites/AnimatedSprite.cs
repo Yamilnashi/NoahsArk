@@ -20,6 +20,8 @@ namespace NoahsArk.Entities.Sprites
         #region Properties
         public int FrameWidth { get { return _frameWidth; } }
         public int FrameHeight { get { return _frameHeight; } }
+        public int CurrentFrame { get { return _currentFrame; } }
+        public int TotalFrames { get { return _frames.Count; } }
         #endregion
 
         #region Constructor

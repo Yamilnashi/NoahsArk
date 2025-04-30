@@ -16,6 +16,8 @@ namespace NoahsArk.Entities
         private static Rectangle _healthBarRectangle;
         private static List<Rectangle> _healthBarFrames;
         private IAIBehavior _behavior;
+        private float _healthBarOpacity = 0.8f;
+        private float _isDyingTimer = 0f;
         #endregion
 
         #region Properties
@@ -63,44 +65,73 @@ namespace NoahsArk.Entities
         {       
             _behavior.Update(this, gameTime);
             base.Update(gameTime);
-            if (HealthPoints <= 0)
+            if (HealthPoints <= 0 && CurrentAnimation == EAnimationKey.Death)
             {
-                CurrentMap.RemoveEnemy(_enemyType, this);
+                int currentFrame = Animations[CurrentAnimation][CurrentDirection].CurrentFrame;
+                int totalFrames = Animations[CurrentAnimation][CurrentDirection].TotalFrames - 1;
+                if (currentFrame == totalFrames)
+                {
+                    IsDying = false;
+                    CurrentMap.RemoveEnemy(_enemyType, this);
+                }             
             }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             // draw the sprite
             base.Draw(spriteBatch);
+            Vector2 barPosition = GetHealthBarPosition();
 
             if (_healthBarTexture != null &&
-                _healthBarFrames.Count > 0 &&
-                HealthPoints < MaxHealthPoints)
+                    _healthBarFrames.Count > 0 &&
+                    HealthPoints < MaxHealthPoints)
             {
-                float healthPercent = (float)HealthPoints / MaxHealthPoints;
+                spriteBatch.Draw(_healthBarTexture, barPosition, _healthBarRectangle, Color.White * _healthBarOpacity);
+                if (HealthPoints <= 0)
+                {
+                    spriteBatch.Draw(_healthBarTexture, barPosition, _healthBarFrames[6], Color.White * _healthBarOpacity);
+                    return;
+                }
 
+                float healthPercent = (float)HealthPoints / MaxHealthPoints;
                 int frameIndex = 0;
                 if (healthPercent > 0.80f)
                 {
                     frameIndex = 0;
-                } else if (healthPercent >= 0.6f)
+                }
+                else if (healthPercent >= 0.6f)
                 {
                     frameIndex = 1;
-                } else if (healthPercent >= 0.5f)
+                }
+                else if (healthPercent >= 0.5f)
                 {
                     frameIndex = 2;
-                } else if (healthPercent >= 0.4f)
+                }
+                else if (healthPercent >= 0.4f)
                 {
                     frameIndex = 3;
-                } else if (healthPercent >= 0.2f)
+                }
+                else if (healthPercent >= 0.2f)
                 {
                     frameIndex = 4;
                 }
-
+                else
+                {
+                    frameIndex = 5;
+                }
                 Rectangle sourceRect = _healthBarFrames[frameIndex];
-                Vector2 barPosition = GetHitbox(Position).Center + new Vector2(-25, -38);
-                spriteBatch.Draw(_healthBarTexture, barPosition, sourceRect, Color.White * 0.8f);
+                spriteBatch.Draw(_healthBarTexture, barPosition, sourceRect, Color.White * _healthBarOpacity);
             }
+        }
+        public override void TakeDamage(int amount)
+        {
+            base.TakeDamage(amount);
+        }
+        #endregion
+        #region Private
+        private Vector2 GetHealthBarPosition()
+        {
+            return GetHitbox(Position).Center + new Vector2(-25, -38); // on a 64x64 sprite
         }
         #endregion
     }

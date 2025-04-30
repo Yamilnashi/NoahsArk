@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using NoahsArk.Controls;
+using NoahsArk.Entities.Sprites;
 
 namespace NoahsArk.Entities.Behaviors
 {
@@ -48,8 +48,11 @@ namespace NoahsArk.Entities.Behaviors
             {
                 animationDirection = EDirection.Left;
             }
+            EAnimationKey animation = enemy.IsDying
+                ? EAnimationKey.Death
+                : EAnimationKey.Walking;
 
-            enemy.SetAnimation(Sprites.EAnimationKey.Walking, animationDirection);
+            enemy.SetAnimation(animation, animationDirection);
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector2 displacement = _currentDirection * enemy.Speed * deltaTime;
             enemy.Move(displacement);
