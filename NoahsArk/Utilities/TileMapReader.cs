@@ -319,11 +319,14 @@ namespace NoahsArk.Utilities
         {
             object foundEnemyTypeCode = properties["enemyTypeCode"];
             object foundMaxSpawnCount = properties["maxSpawnCount"];
+            object foundRarity = properties["rarity"];
             string enemyTypeValue = foundEnemyTypeCode.ToString();
+            string rarityValue = foundRarity.ToString();
             int maxSpawnCount = int.Parse(foundMaxSpawnCount.ToString());
             EEnemyType enemyType = (EEnemyType)Enum.Parse(typeof(EEnemyType), enemyTypeValue, true);
+            ERarity rarity = (ERarity)Enum.Parse(typeof(ERarity), rarityValue, true);
             Vector2 enemySpawnerPosition = new Vector2(rectangle.X, rectangle.Y);
-            EnemySpawner enemySpawner = new EnemySpawner(enemySpawnerPosition, rectangle.Width, rectangle.Height, enemyType, maxSpawnCount);
+            EnemySpawner enemySpawner = new EnemySpawner(enemySpawnerPosition, rectangle.Width, rectangle.Height, enemyType, rarity, maxSpawnCount);
             _enemySpawners.Add(enemySpawner);
         }
         private static void Write(string text)

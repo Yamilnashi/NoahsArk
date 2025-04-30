@@ -183,6 +183,7 @@
    <properties>
     <property name="enemyTypeCode" value="orc"/>
     <property name="maxSpawnCount" type="int" value="2"/>
+    <property name="rarity" value="normal"/>
    </properties>
   </object>
  </objectgroup>

@@ -30,6 +30,9 @@ namespace NoahsArk.Entities
         private Camera _camera;
         private Texture2D _shadow;
         private bool _isDying = false;
+        private bool _isFlashing = false;
+        private float _flashTimer;
+        private const float _flashDuration = 0.25f;
         #endregion
 
         #region Properties
@@ -74,6 +77,14 @@ namespace NoahsArk.Entities
         #region Methods
         public virtual void Update(GameTime gameTime)
         {
+            if (_isFlashing)
+            {
+                _flashTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_flashTimer <= 0)
+                {
+                    _isFlashing = false;
+                }
+            }
             if (_animations.ContainsKey(_currentAnimationKey))
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
@@ -88,7 +99,8 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
-                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition());
+                    Color drawColor = _isFlashing || _isDying ? GetFlashColor() : Color.White;
+                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition(), drawColor);
                 }
             }
         }
@@ -128,6 +140,11 @@ namespace NoahsArk.Entities
             {
                 _isDying = true;
                 _currentAnimationKey = EAnimationKey.Death;
+            }
+            else
+            {
+                _isFlashing = true;
+                _flashTimer = _flashDuration; // reset timer
             }
         }
         public void DealDamage(Entity target)
@@ -189,6 +206,10 @@ namespace NoahsArk.Entities
         {
             _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection].FrameWidth);
             _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection].FrameHeight);
+        }
+        public virtual Color GetFlashColor()
+        {
+            return Color.Lerp(Color.Red, Color.Black, _flashTimer / _flashDuration);
         }
         #endregion
 

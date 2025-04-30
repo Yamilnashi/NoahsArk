@@ -6,6 +6,303 @@
 			"healthPoints": 100,
 			"manaPoints": 10,
 			"speed": 25,
+			"rarityType": "Normal",
+			"animations": {
+				"Walking": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Death": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+				}
+			}
+		},
+		{
+			"enemyType": "Orc",
+			"level": 1,
+			"healthPoints": 200,
+			"manaPoints": 10,
+			"speed": 35,
+			"rarityType": "Magic",
+			"animations": {
+				"Walking": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Death": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+				}
+			}
+		},
+		{
+			"enemyType": "Orc",
+			"level": 1,
+			"healthPoints": 300,
+			"manaPoints": 10,
+			"speed": 38,
+			"rarityType": "Rare",
+			"animations": {
+				"Walking": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Death": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+				}
+			}
+		},
+		{
+			"enemyType": "Orc",
+			"level": 1,
+			"healthPoints": 450,
+			"manaPoints": 10,
+			"speed": 40,
+			"rarityType": "Epic",
+			"animations": {
+				"Walking": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Idle": {
+					"Right": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 4,
+						"frameWidth": 32,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png"
+					},
+				},
+				"Running": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/run-right-spritesheet.png"
+					},
+				},
+				"Death": {
+					"Right": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+					"Left": {
+						"frameCount": 6,
+						"frameWidth": 64,
+						"frameHeight": 64,
+						"frameDuration": 100,
+						"textureFilePath": "Assets/Sprites/Enemies/Orc/death-right-spritesheet.png"
+					},
+				}
+			}
+		},
+		{
+			"enemyType": "Orc",
+			"level": 1,
+			"healthPoints": 850,
+			"manaPoints": 10,
+			"speed": 42,
+			"rarityType": "Legendary",
 			"animations": {
 				"Walking": {
 					"Right": {

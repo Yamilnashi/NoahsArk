@@ -35,10 +35,10 @@
                 7
             ],
             "scale": 3,
-            "selectedLayer": 5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 97.16666666666666,
-                "y": 247.33333333333331
+                "x": 228.66666666666669,
+                "y": 150
             }
         },
         "GameMaps/full.tsx": {
@@ -58,13 +58,13 @@
         },
         "GameMaps/homeinside.tmx": {
             "expandedObjectLayers": [
-                5,
-                10
+                10,
+                5
             ],
             "scale": 4,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 70.375,
+                "x": 70.25,
                 "y": 78.5
             }
         },
@@ -74,10 +74,10 @@
                 17
             ],
             "scale": 1.5,
-            "selectedLayer": 0,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 265,
-                "y": 258.6666666666667
+                "x": 135.33333333333331,
+                "y": 99.33333333333334
             }
         },
         "GameMaps/infinite.tmx": {
@@ -114,8 +114,8 @@
             "scale": 2,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 366.25,
-                "y": 217
+                "x": 232.5,
+                "y": 392.5
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {
@@ -270,7 +270,7 @@
         "Tilesets/tileset_kitchen.tsx"
     ],
     "project": "world.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "Tilesets/tileset_kitchen.tsx",
         "GameMaps/restaurant.tmx",

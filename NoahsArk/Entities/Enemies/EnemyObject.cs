@@ -17,6 +17,8 @@ namespace NoahsArk.Entities.Enemies
         public int ManaPoints { get; set; }
         [JsonProperty("speed")]
         public float Speed { get; set; }
+        [JsonProperty("rarityType")]
+        public ERarity RarityType { get; set; }
         [JsonProperty("animations")]
         public Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> Animations { get; set; }
     }

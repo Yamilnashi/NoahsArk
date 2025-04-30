@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -32,7 +33,7 @@ namespace NoahsArk.States
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
         public static ContentManager _contentRef;
-        private static Dictionary<EEnemyType, EnemyEntity> _enemyEntityDict = new Dictionary<EEnemyType, EnemyEntity>();
+        private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
         #endregion
 
         #region Properties
@@ -41,7 +42,7 @@ namespace NoahsArk.States
         public World World { get { return _world; } }
         public bool IsPaused { get { return _isPaused; } }  
         public static Texture2D DebugTexture { get { return _debugTexture; } }
-        public static Dictionary<EEnemyType, EnemyEntity> EnemyEntityDict {  get  { return _enemyEntityDict; } }
+        public static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> EnemyEntityDict {  get  { return _enemyEntityDict; } }
         public static ContentManager ContentRef { get { return _contentRef; } }
         public static bool IsDebugEnabled { get { return _isDebugEnabled; } }
         #endregion
@@ -141,10 +142,64 @@ namespace NoahsArk.States
             string jsonContent = File.ReadAllText(enemyDataFilePath);
             EnemyData data = JsonConvert.DeserializeObject<EnemyData>(jsonContent);
             Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
-            Texture2D healthBar = _contentRef.Load<Texture2D>("Assets/Sprites/Enemies/HealthBar/healthbar-red");
-            Enemy.HealthBarTexture = healthBar;
-            Enemy.HealthBarRectangle = new Rectangle(0, 0, 48, 16);
-            Enemy.HealthBarFrames = new List<Rectangle>()
+            Texture2D rarityMarker = _contentRef.Load<Texture2D>("Assets/Sprites/Enemies/Rarity/marker");
+            Enemy.HealthBarTexture = new Dictionary<ERarity, Texture2D>();
+            Enemy.HealthBarRectangle = new Dictionary<ERarity, Rectangle>();            
+            Enemy.HealthBarFrames = new Dictionary<ERarity, List<Rectangle>>();
+
+            ERarity[] rarities = Enum.GetValues(typeof(ERarity))
+                .Cast<ERarity>()
+                .ToArray();
+
+            EEnemyType[] enemyTypes = Enum.GetValues(typeof(EEnemyType))
+                .Cast<EEnemyType>()
+                .ToArray();
+
+            for (int i = 0; i < rarities.Length; i++)
+            {
+                ERarity r = rarities[i];
+                Enemy.HealthBarTexture[r] = GetHealthBarTexture(r);
+                Enemy.HealthBarRectangle[r] = GetHealthBarRectangle(r);
+                Enemy.HealthBarFrames[r] = GetHealthBarFrames(r);
+            }
+
+            for (int i = 0; i < enemyTypes.Length; i++)
+            {
+                EEnemyType enemyType = enemyTypes[i];
+                _enemyEntityDict[enemyType] = new Dictionary<ERarity, EnemyEntity>();
+            }
+            
+            for (int i = 0; i < data.EnemyObjects.Count; i++)
+            {
+                EnemyObject obj = data.EnemyObjects[i];
+                EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, obj.RarityType,
+                    obj.Animations, _camera, rarityMarker, shadow);
+                if (!_enemyEntityDict[obj.EnemyType].TryGetValue(obj.RarityType, out EnemyEntity found))
+                {
+                    _enemyEntityDict[obj.EnemyType][obj.RarityType] = entity;
+                }                
+            }
+        }
+        private Texture2D GetHealthBarTexture(ERarity r)
+        {            
+            string healthBarName = r switch
+            {
+                ERarity.Normal => "healthbar-grey",
+                ERarity.Magic => "healthbar-bronze",
+                ERarity.Rare => "healthbar-silver",
+                ERarity.Epic => "healthbar-gold",
+                ERarity.Legendary => "healthbar-red",
+                _ => "healthbar-grey"
+            };
+            return _contentRef.Load<Texture2D>($"Assets/Sprites/Enemies/HealthBar/{healthBarName}");
+        }
+        private Rectangle GetHealthBarRectangle(ERarity r)
+        {
+            return new Rectangle(0, 0, 48, 16);            
+        }
+        private List<Rectangle> GetHealthBarFrames(ERarity r)
+        {
+            return new List<Rectangle>()
             {
                 new Rectangle(48, 0, 48, 16), // full health
                 new Rectangle(96, 0, 48, 16), // 80% health
@@ -154,13 +209,6 @@ namespace NoahsArk.States
                 new Rectangle(288, 0, 48, 16), // 20% health
                 new Rectangle(336, 0, 48, 16), // 0% health
             };
-            for (int i = 0; i < data.EnemyObjects.Count; i++)
-            {
-                EnemyObject obj = data.EnemyObjects[i];
-                EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, 
-                    obj.Animations, _camera, shadow);
-                _enemyEntityDict[obj.EnemyType] = entity;
-            }
         }
         private void CreatePlayers()
         {

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
+using NoahsArk.Extensions;
 using NoahsArk.Rendering;
 
 namespace NoahsArk.Entities
@@ -12,28 +13,33 @@ namespace NoahsArk.Entities
     {
         #region Fields
         private EEnemyType _enemyType;
-        private static Texture2D _healthBarTexture;
-        private static Rectangle _healthBarRectangle;
-        private static List<Rectangle> _healthBarFrames;
+        private Texture2D _rarityMarker;
+        private static Dictionary<ERarity, Texture2D> _healthBarTexture;
+        private static Dictionary<ERarity, Rectangle> _healthBarRectangle;
+        private static Dictionary<ERarity, List<Rectangle>> _healthBarFrames;
         private IAIBehavior _behavior;
         private float _healthBarOpacity = 0.8f;
-        private float _isDyingTimer = 0f;
+        private ERarity _rarityType;
         #endregion
 
         #region Properties
         public IAIBehavior Behavior { get; private set; }
-        public static Texture2D HealthBarTexture {  get { return _healthBarTexture; } set { _healthBarTexture = value; } }
-        public static Rectangle HealthBarRectangle { get { return _healthBarRectangle; } set { _healthBarRectangle = value; } } 
-        public static List<Rectangle> HealthBarFrames {  get { return _healthBarFrames; } set { _healthBarFrames = value; } }
+        public static Dictionary<ERarity, Texture2D> HealthBarTexture {  get { return _healthBarTexture; } set { _healthBarTexture = value; } }
+        public static Dictionary<ERarity, Rectangle> HealthBarRectangle { get { return _healthBarRectangle; } set { _healthBarRectangle = value; } }
+        public static Dictionary<ERarity, List<Rectangle>> HealthBarFrames { get { return _healthBarFrames; } set { _healthBarFrames = value; } }
+        public EEnemyType EnemyType { get { return _enemyType; } }
+        public ERarity Rarity { get { return _rarityType; } }
         #endregion
 
         #region Constructor
-        public Enemy(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Camera camera,
+        public Enemy(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, ERarity rarity,
+            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Texture2D rarityMarker, Camera camera,
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _enemyType = enemyType;
             _behavior = behavior;
+            _rarityType = rarity;
+            _rarityMarker = rarityMarker;
         }
         #endregion
 
@@ -72,7 +78,7 @@ namespace NoahsArk.Entities
                 if (currentFrame == totalFrames)
                 {
                     IsDying = false;
-                    CurrentMap.RemoveEnemy(_enemyType, this);
+                    CurrentMap.RemoveEnemy(this);
                 }             
             }
         }
@@ -81,15 +87,15 @@ namespace NoahsArk.Entities
             // draw the sprite
             base.Draw(spriteBatch);
             Vector2 barPosition = GetHealthBarPosition();
-
+            Vector2 rarityMarkerPosition = GetRarityMarkerPosition();
             if (_healthBarTexture != null &&
                     _healthBarFrames.Count > 0 &&
                     HealthPoints < MaxHealthPoints)
             {
-                spriteBatch.Draw(_healthBarTexture, barPosition, _healthBarRectangle, Color.White * _healthBarOpacity);
+                spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarRectangle[_rarityType], Color.White * _healthBarOpacity);
                 if (HealthPoints <= 0)
                 {
-                    spriteBatch.Draw(_healthBarTexture, barPosition, _healthBarFrames[6], Color.White * _healthBarOpacity);
+                    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarFrames[_rarityType][6], Color.White * _healthBarOpacity);
                     return;
                 }
 
@@ -119,9 +125,23 @@ namespace NoahsArk.Entities
                 {
                     frameIndex = 5;
                 }
-                Rectangle sourceRect = _healthBarFrames[frameIndex];
-                spriteBatch.Draw(_healthBarTexture, barPosition, sourceRect, Color.White * _healthBarOpacity);
+                Rectangle sourceRect = _healthBarFrames[_rarityType][frameIndex];
+                spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, sourceRect, Color.White * _healthBarOpacity);
             }
+            int markerCount = _rarityType.GetRarityMarkerCount();
+            if (markerCount > 0)
+            {
+                int markerWidth = 4;    // Width of each marker
+                int totalWidth = (markerCount * markerWidth) + ((markerCount - 1)); // Total space needed
+                float startX = rarityMarkerPosition.X - (totalWidth / 2f); // Center the markers
+
+                for (int i = 0; i < markerCount; i++)
+                {
+                    Vector2 markerPosition = new Vector2(startX + (i * (markerWidth)), rarityMarkerPosition.Y);
+                    spriteBatch.Draw(_rarityMarker, markerPosition, new Rectangle(0, 0, 4, 8), Color.White);
+                }
+            }
+
         }
         public override void TakeDamage(int amount)
         {
@@ -132,6 +152,11 @@ namespace NoahsArk.Entities
         private Vector2 GetHealthBarPosition()
         {
             return GetHitbox(Position).Center + new Vector2(-25, -38); // on a 64x64 sprite
+        }
+
+        private Vector2 GetRarityMarkerPosition()
+        {
+            return GetHitbox(Position).Center + new Vector2(12, -28);
         }
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,7 +16,7 @@ namespace NoahsArk.Levels
         private EMapCode _mapCode;
         private TileMap _tileMap;
         private List<Player> _players = new List<Player>();
-        private Dictionary<EEnemyType, List<Enemy>> _enemies = new Dictionary<EEnemyType, List<Enemy>>();
+        private Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>> _enemies = new Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>>();
         private List<Entity> _entities = new List<Entity>();
         private Texture2D _debugTexture;
         private Game1 _gameRef;
@@ -24,7 +25,7 @@ namespace NoahsArk.Levels
         #region Properties
         public List<Player> Players { get { return _players; } }
         public TileMap TileMap { get { return _tileMap; } }
-        public Dictionary<EEnemyType, List<Enemy>> Enemies {  get { return _enemies; } }    
+        public Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>> Enemies {  get { return _enemies; } }    
         public List<Entity> Entities { get { return _entities; } }
         public Game1 GameRef { get { return _gameRef; } }   
         #endregion
@@ -34,10 +35,18 @@ namespace NoahsArk.Levels
         {
             _tileMap = tileMap;
             _debugTexture = debugTexture;
+            ERarity[] rarities = Enum.GetValues(typeof(ERarity))
+                .Cast<ERarity>()
+                .ToArray();
             for (int i = 0; i < _tileMap.EnemySpawners.Count; i++)
             {
                 EnemySpawner enemySpawner = _tileMap.EnemySpawners[i];
-                _enemies[enemySpawner.EnemyType] = new List<Enemy>();
+                _enemies[enemySpawner.EnemyType] = new Dictionary<ERarity, List<Enemy>>();
+                for (int j = 0; j < rarities.Length; j++)
+                {
+                    ERarity r = rarities[j];
+                    _enemies[enemySpawner.EnemyType][r] = new List<Enemy>();
+                }
             }
         }
         #endregion
@@ -50,11 +59,13 @@ namespace NoahsArk.Levels
                 EnemySpawner enemySpawner = _tileMap.EnemySpawners[i];
                 enemySpawner.Update(gameTime);
                 
-                if (enemySpawner.IsReadyToSpawn && 
-                    enemySpawner.MaxSpawnCount > _enemies[enemySpawner.EnemyType].Count)
+                if (enemySpawner.IsReadyToSpawn &&
+                    _enemies[enemySpawner.EnemyType].TryGetValue(enemySpawner.Rarity, out List<Enemy> enemies) &&
+                    enemies != null &&
+                    enemySpawner.MaxSpawnCount > enemies.Count)
                 {
                     // spawn enemies until we reach the max spawn count
-                    while (_enemies[enemySpawner.EnemyType].Count < enemySpawner.MaxSpawnCount)
+                    while (enemies.Count < enemySpawner.MaxSpawnCount)
                     {
                         enemySpawner.SpawnEnemy(this);
                     }
@@ -91,15 +102,15 @@ namespace NoahsArk.Levels
             _entities.Remove(player);
             player.CurrentMap = null;
         }
-        public void AddEnemy(EEnemyType enemyType, Enemy enemy)
+        public void AddEnemy(Enemy enemy)
         {
-            _enemies[enemyType].Add(enemy);
+            _enemies[enemy.EnemyType][enemy.Rarity].Add(enemy);
             _entities.Add(enemy);
             enemy.CurrentMap = this;
         }
-        public void RemoveEnemy(EEnemyType enemyType, Enemy enemy)
+        public void RemoveEnemy(Enemy enemy)
         {
-            _enemies[enemyType].Remove(enemy);
+            _enemies[enemy.EnemyType][enemy.Rarity].Remove(enemy);
             _entities.Remove(enemy);
             enemy.CurrentMap = null;    
         }
