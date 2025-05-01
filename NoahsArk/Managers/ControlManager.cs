@@ -96,10 +96,17 @@ namespace NoahsArk.Managers
                 if (control.IsVisible)
                 {
                     control.Draw(spriteBatch);
-                    if (control.GetBounds().Contains(mouse))
+                    if (control.GetBounds().Contains(mouse) &&
+                        control.TabStop &&
+                        control.IsEnabled)
                     {
                         ResetFocusOnControls();
                         control.HasFocus = true;
+                        _selectedControl = i;
+                        if (FocusChanged != null)
+                        {
+                            FocusChanged(control, null); // move arrows
+                        }
                     }
                 }
             }

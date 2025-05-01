@@ -12,12 +12,10 @@ using NoahsArk.Entities;
 using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Players;
-using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Managers;
 using NoahsArk.Rendering;
-using NoahsArk.Utilities;
 
 namespace NoahsArk.States
 {
@@ -28,7 +26,7 @@ namespace NoahsArk.States
         private World _world;
         private Camera _camera;
         private static Texture2D _debugTexture;
-        private static bool _isDebugEnabled = true;
+        private static bool _isDebugEnabled = false;
         private Player _player;
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
