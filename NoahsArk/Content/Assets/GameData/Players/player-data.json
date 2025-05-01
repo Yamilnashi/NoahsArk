@@ -7,95 +7,158 @@
 			"manaPoints": 10,
 			"speed": 0.6,
 			"animations": {
-				"Walking": {
-					"Down": {
+				"Movements": {
+					"Walking": {
 						"frameCount": 6,
 						"frameWidth": 16,
 						"frameHeight": 32,
 						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/walk-down-spritesheet.png"
+						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
+						"equipmentSlotTextureFilePaths": {
+							"Down": {
+								"Head": "walk-down-spritesheet.png",
+								"Chest": "walk-down-spritesheet.png",
+								"Gloves": "walk-down-spritesheet.png",
+								"Legs": "walk-down-spritesheet.png",
+								"Feet": "walk-down-spritesheet.png"					
+							},
+							"Right": {
+								"Head": "walk-right-spritesheet.png",
+								"Chest": "walk-right-spritesheet.png",
+								"Gloves": "walk-right-spritesheet.png",
+								"Legs": "walk-right-spritesheet.png",
+								"Feet": "walk-right-spritesheet.png"
+							},
+							"Up": {							
+								"Head": "walk-up-spritesheet.png",
+								"Chest": "walk-up-spritesheet.png",
+								"Gloves": "walk-up-spritesheet.png",
+								"Legs": "walk-up-spritesheet.png",
+								"Feet": "walk-up-spritesheet.png"						
+							},
+							"Left": {
+								"Head": "walk-right-spritesheet.png",
+								"Chest": "walk-right-spritesheet.png",
+								"Gloves": "walk-right-spritesheet.png",
+								"Legs": "walk-right-spritesheet.png",
+								"Feet": "walk-right-spritesheet.png"							
+							},
+						}						
 					},
-					"Right": {
+					"Idle": {
+						"frameCount": 4,
+						"frameWidth": 16,
+						"frameHeight": 32,
+						"frameDuration": 100,
+						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
+						"equipmentSlotTextureFilePaths": {
+							"Down": {
+								"Head": "idle-down-spritesheet.png",
+								"Chest": "idle-down-spritesheet.png",
+								"Gloves": "idle-down-spritesheet.png",
+								"Legs": "idle-down-spritesheet.png",
+								"Feet": "idle-down-spritesheet.png"						
+							},
+							"Right": {
+
+								"Head": "idle-right-spritesheet.png",
+								"Chest": "idle-right-spritesheet.png",
+								"Gloves": "idle-right-spritesheet.png",
+								"Legs": "idle-right-spritesheet.png",
+								"Feet": "idle-right-spritesheet.png"							
+							},
+							"Up": {
+								"Head": "idle-up-spritesheet.png",
+								"Chest": "idle-up-spritesheet.png",
+								"Gloves": "idle-up-spritesheet.png",
+								"Legs": "idle-up-spritesheet.png",
+								"Feet": "idle-up-spritesheet.png"					
+							},
+							"Left": {
+								"Head": "idle-right-spritesheet.png",
+								"Chest": "idle-right-spritesheet.png",
+								"Gloves": "idle-right-spritesheet.png",
+								"Legs": "idle-right-spritesheet.png",
+								"Feet": "idle-right-spritesheet.png"						
+							},
+						}						
+					},
+					"Running": {
 						"frameCount": 6,
 						"frameWidth": 16,
 						"frameHeight": 32,
 						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/walk-right-spritesheet.png"
-					},
-					"Up": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/walk-up-spritesheet.png"
-					},
-					"Left": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/walk-right-spritesheet.png"
-					},
+						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
+						"equipmentSlotTextureFilePaths": {
+							"Down": {
+								"Head": "run-down-spritesheet.png",
+								"Chest": "run-down-spritesheet.png",
+								"Gloves": "run-down-spritesheet.png",
+								"Legs": "run-down-spritesheet.png",
+								"Feet": "run-down-spritesheet.png"						
+							},
+							"Right": {
+								"Head": "run-right-spritesheet.png",
+								"Chest": "run-right-spritesheet.png",
+								"Gloves": "run-right-spritesheet.png",
+								"Legs": "run-right-spritesheet.png",
+								"Feet": "run-right-spritesheet.png"							
+							},
+							"Up": {							
+								"Head": "run-up-spritesheet.png",
+								"Chest": "run-up-spritesheet.png",
+								"Gloves": "run-up-spritesheet.png",
+								"Legs": "run-up-spritesheet.png",
+								"Feet": "run-up-spritesheet.png"							
+							},
+							"Left": {
+								"Head": "run-right-spritesheet.png",
+								"Chest": "run-right-spritesheet.png",
+								"Gloves": "run-right-spritesheet.png",
+								"Legs": "run-right-spritesheet.png",
+								"Feet": "run-right-spritesheet.png"						
+							},
+						}						
+					}
 				},
-				"Idle": {
-					"Down": {
-						"frameCount": 4,
-						"frameWidth": 16,
-						"frameHeight": 32,
+				"Attacks": {
+					"Pierce": {
+						"frameCount": 8,
+						"frameWidth": 100,
+						"frameHeight": 64,
 						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/idle-down-spritesheet.png"
-					},
-					"Right": {
-						"frameCount": 4,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/idle-right-spritesheet.png"
-					},
-					"Up": {
-						"frameCount": 4,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/idle-up-spritesheet.png"
-					},
-					"Left": {
-						"frameCount": 4,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/idle-right-spritesheet.png"
-					},
-				},
-				"Running": {
-					"Down": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/run-down-spritesheet.png"
-					},
-					"Right": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/run-right-spritesheet.png"
-					},
-					"Up": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/run-up-spritesheet.png"
-					},
-					"Left": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePath": "Assets/Sprites/Character/A/run-right-spritesheet.png"
-					},
+						"textureFilePathBase": "Assets/Sprites/Character/A/Attacks/Pierce",
+						"equipmentSlotTextureFilePaths": {
+							"Down": {						
+								"Head": "head-pierce-down-spritesheet.png",
+								"Chest": "chest-pierce-down-spritesheet.png",
+								"Gloves": "gloves-pierce-down-spritesheet.png",
+								"Legs": "legs-pierce-down-spritesheet.png",
+								"Feet": "feet-pierce-down-spritesheet.png"							
+							},
+							"Right": {
+								"Head": "head-pierce-right-spritesheet.png",
+								"Chest": "chest-pierce-right-spritesheet.png",
+								"Gloves": "gloves-pierce-right-spritesheet.png",
+								"Legs": "legs-pierce-right-spritesheet.png",
+								"Feet": "feet-pierce-right-spritesheet.png"							
+							},
+							"Up": {
+								"Head": "head-pierce-up-spritesheet.png",
+								"Chest": "chest-pierce-up-spritesheet.png",
+								"Gloves": "gloves-pierce-up-spritesheet.png",
+								"Legs": "legs-pierce-up-spritesheet.png",
+								"Feet": "feet-pierce-up-spritesheet.png"						
+							},
+							"Left": {
+								"Head": "head-pierce-right-spritesheet.png",
+								"Chest": "chest-pierce-right-spritesheet.png",
+								"Gloves": "gloves-pierce-right-spritesheet.png",
+								"Legs": "legs-pierce-right-spritesheet.png",
+								"Feet": "feet-pierce-right-spritesheet.png"							
+							}
+						}						
+					}
 				}
 			}
 		}

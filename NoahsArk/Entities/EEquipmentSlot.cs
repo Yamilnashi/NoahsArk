@@ -3,10 +3,10 @@
     public enum EEquipmentSlot
     {
         Head,
-        Body,
+        Chest,
+        Gloves,
         Legs,
         Feet,
-        Hands,
         MainHand,
         OffHand,
         RingLeft,

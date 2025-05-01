@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
@@ -23,7 +24,7 @@ namespace NoahsArk.Entities
         private Inventory _inventory;
         private Dictionary<EEquipmentSlot, Item> _equippedItems;
         private Vector2 _position;
-        private Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> _animations;
+        private Dictionary<EAnimationKey, Dictionary<EDirection, Dictionary<EEquipmentSlot, AnimatedSprite>>> _animations;
         private EAnimationKey _currentAnimationKey;
         private EDirection _currentDirection;
         private Map _currentMap;
@@ -33,6 +34,7 @@ namespace NoahsArk.Entities
         private bool _isFlashing = false;
         private float _flashTimer;
         private const float _flashDuration = 0.25f;
+        private bool _isAttacking = false;
         #endregion
 
         #region Properties
@@ -43,7 +45,7 @@ namespace NoahsArk.Entities
         public int ExperiencePoints { get { return _experiencePoints; } protected set { _experiencePoints = value; } }
         public float Speed { get { return _speed; } protected set { _speed = value; } }
         public Inventory Inventory { get { return _inventory; } protected set { _inventory = value; } } 
-        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimatedSprite>> Animations { get { return _animations; } }
+        public Dictionary<EAnimationKey, Dictionary<EDirection, Dictionary<EEquipmentSlot, AnimatedSprite>>> Animations { get { return _animations; } }
         public Dictionary<EEquipmentSlot, Item> EquippedItems { get { return _equippedItems; } protected set { _equippedItems = value; } }
         public Vector2 Position { get { return _position; } protected set { _position = value; } }
         public EDirection CurrentDirection { get { return _currentDirection; } }
@@ -51,11 +53,12 @@ namespace NoahsArk.Entities
         public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; } }
         public Camera Camera { get { return _camera; } }
         public bool IsDying { get { return _isDying; } set { _isDying = value; } }
+        public bool IsAttacking { get { return _isAttacking; } set { _isAttacking = value; } }
         #endregion
 
         #region Constructor
         public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Camera camera)
+            Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
             _healthPoints = maxHealthPoints;
@@ -89,7 +92,11 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
-                    _animations[_currentAnimationKey][_currentDirection].Update(gameTime, _currentAnimationKey);
+                    for (int i = 0; i < _animations[_currentAnimationKey][_currentDirection].Keys.Count; i++)
+                    {
+                        EEquipmentSlot slot = _animations[_currentAnimationKey][_currentDirection].Keys.ElementAt(i);
+                        _animations[_currentAnimationKey][_currentDirection][slot].Update(gameTime, _currentAnimationKey);
+                    }
                 }
             }
         }
@@ -100,7 +107,11 @@ namespace NoahsArk.Entities
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
                     Color drawColor = _isFlashing || _isDying ? GetFlashColor() : Color.White;
-                    _animations[_currentAnimationKey][_currentDirection].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition(), drawColor);
+                    for (int i = 0; i < _animations[_currentAnimationKey][_currentDirection].Keys.Count; i++)
+                    {
+                        EEquipmentSlot slot = _animations[_currentAnimationKey][_currentDirection].Keys.ElementAt(i);
+                        _animations[_currentAnimationKey][_currentDirection][slot].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition(), drawColor);
+                    }                    
                 }
             }
         }
@@ -127,7 +138,11 @@ namespace NoahsArk.Entities
                 {
                     if (direction != _currentDirection)
                     {
-                        _animations[key][direction].Reset();
+                        for (int i = 0; i < _animations[key][direction].Keys.Count; i++)
+                        {
+                            EEquipmentSlot slot = _animations[key][direction].Keys.ElementAt(i);
+                            _animations[key][direction][slot].Reset();
+                        }                        
                     }                    
                     _currentDirection = direction;                                     
                 }                             
@@ -204,8 +219,8 @@ namespace NoahsArk.Entities
         }
         public void LockToMap()
         {
-            _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection].FrameWidth);
-            _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection].FrameHeight);
+            _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection][EEquipmentSlot.Feet].FrameWidth);
+            _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection][EEquipmentSlot.Feet].FrameHeight);
         }
         public virtual Color GetFlashColor()
         {
@@ -221,7 +236,11 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
-                    _animations[_currentAnimationKey][_currentDirection].UpdatePosition(_position);
+                    for (int i = 0; i < _animations[_currentAnimationKey][_currentDirection].Keys.Count; i++)
+                    {
+                        EEquipmentSlot slot = _animations[_currentAnimationKey][_currentDirection].Keys.ElementAt(i);
+                        _animations[_currentAnimationKey][_currentDirection][slot].UpdatePosition(_position);
+                    }                    
                 }
             }
         }

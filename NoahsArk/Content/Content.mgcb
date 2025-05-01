@@ -80,7 +80,7 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Menus/selector_right.png
 
-#begin Assets/Sprites/Character/A/idle-down-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-down-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -90,9 +90,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/idle-down-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-down-spritesheet.png
 
-#begin Assets/Sprites/Character/A/idle-right-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -102,9 +102,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/idle-right-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-right-spritesheet.png
 
-#begin Assets/Sprites/Character/A/idle-up-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-up-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -114,9 +114,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/idle-up-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/chest-pierce-up-spritesheet.png
 
-#begin Assets/Sprites/Character/A/run-down-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-down-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -126,9 +126,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/run-down-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-down-spritesheet.png
 
-#begin Assets/Sprites/Character/A/run-right-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -138,9 +138,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/run-right-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-right-spritesheet.png
 
-#begin Assets/Sprites/Character/A/run-up-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-up-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -150,9 +150,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/run-up-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/feet-pierce-up-spritesheet.png
 
-#begin Assets/Sprites/Character/A/walk-down-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-down-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -162,9 +162,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/walk-down-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-down-spritesheet.png
 
-#begin Assets/Sprites/Character/A/walk-right-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -174,9 +174,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/walk-right-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-right-spritesheet.png
 
-#begin Assets/Sprites/Character/A/walk-up-spritesheet.png
+#begin Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-up-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -186,7 +186,187 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Character/A/walk-up-spritesheet.png
+/build:Assets/Sprites/Character/A/Attacks/Pierce/gloves-pierce-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/head-pierce-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/idle-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/idle-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/idle-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/idle-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/idle-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/idle-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/run-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/run-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/run-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/run-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/run-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/run-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/walk-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/walk-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/walk-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/walk-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Movement/walk-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Movement/walk-up-spritesheet.png
 
 #begin Assets/Sprites/Character/shadow.png
 /importer:TextureImporter
@@ -272,7 +452,7 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Enemies/HealthBar/healthbar-silver.png
 
-#begin Assets/Sprites/Enemies/Orc/death-right-spritesheet.png
+#begin Assets/Sprites/Enemies/Orc/Movements/death-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -282,9 +462,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Enemies/Orc/death-right-spritesheet.png
+/build:Assets/Sprites/Enemies/Orc/Movements/death-right-spritesheet.png
 
-#begin Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png
+#begin Assets/Sprites/Enemies/Orc/Movements/idle-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -294,9 +474,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Enemies/Orc/idle-right-spritesheet.png
+/build:Assets/Sprites/Enemies/Orc/Movements/idle-right-spritesheet.png
 
-#begin Assets/Sprites/Enemies/Orc/run-right-spritesheet.png
+#begin Assets/Sprites/Enemies/Orc/Movements/run-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -306,7 +486,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/Sprites/Enemies/Orc/run-right-spritesheet.png
+/build:Assets/Sprites/Enemies/Orc/Movements/run-right-spritesheet.png
 
 #begin Assets/Sprites/Enemies/Rarity/marker.png
 /importer:TextureImporter

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using NoahsArk.Controls;
 using NoahsArk.Entities.Sprites;
 
 namespace NoahsArk.Entities.Players
@@ -18,6 +17,6 @@ namespace NoahsArk.Entities.Players
         [JsonProperty("speed")]
         public float Speed { get; set; }
         [JsonProperty("animations")]
-        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> Animations { get; set; }
+        public Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> Animations { get; set; }
     }
 }

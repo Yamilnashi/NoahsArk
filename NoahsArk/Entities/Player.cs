@@ -22,6 +22,8 @@ namespace NoahsArk.Entities
         private bool _isTransitioningMaps;
         private float _transitionCooldown;
         private const float _transition_cooldown_duration = 0.5f;
+        private float _attackingCooldown;
+        private const float _attacking_cooldown_duration = 2.4f;
         private bool _isInteracting;
         #endregion
 
@@ -29,13 +31,14 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Constructor
-        public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, 
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Camera camera, PlayerIndex playerIndex,
+        public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
+            Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Camera camera, PlayerIndex playerIndex,
             Texture2D shadow, World world) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _playerIndex = playerIndex;
             _world = world;
             _transitionCooldown = 0f;
+            _attackingCooldown = 0f;
             _isInteracting = false;
         }
         #endregion
@@ -46,7 +49,11 @@ namespace NoahsArk.Entities
             UpdateTransitionCooldownTimer(gameTime);
             HandleCameraControls();
             HandleMovement();
-            HandleAttack();
+            UpdateAttackCooldownTimer(gameTime);
+            if (!IsAttacking)
+            {
+                HandleAttack();
+            }            
             if (!_isTransitioningMaps)
             {
                 HandleDoorTransitions();
@@ -123,6 +130,19 @@ namespace NoahsArk.Entities
                 }
             }
         }
+        private void UpdateAttackCooldownTimer(GameTime gameTime)
+        {
+            if (_attackingCooldown > 0)
+            {
+                _attackingCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_attackingCooldown <= 0)
+                {
+                    _attackingCooldown = 0;
+                    IsAttacking = false;
+                    SetAnimation(EAnimationKey.Idle, CurrentDirection);
+                }
+            }
+        }
         private void UpdateInteractionState()
         {
             if (InputHandler.KeyReleased(Keys.E) || 
@@ -177,8 +197,9 @@ namespace NoahsArk.Entities
             GamePadState gamePadState = GamePad.GetState(_playerIndex);
             KeyboardState keyboardState = Keyboard.GetState();           
             EDirection facingDirection = CurrentDirection;
-            EAnimationKey animationState = EAnimationKey.Idle;
+            EAnimationKey animationState = CurrentAnimation;
             Vector2 direction = Vector2.Zero;
+            _desiredMovement = Vector2.Zero;
             float isRunningSpeed = 1f;
             if (gamePadState.DPad.Up == ButtonState.Pressed ||
                 keyboardState.IsKeyDown(Keys.W) ||
@@ -226,13 +247,14 @@ namespace NoahsArk.Entities
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
-                SetAnimation(animationState, facingDirection);
-                _desiredMovement = direction * Speed * isRunningSpeed;                
-            } else
+                SetAnimation(IsAttacking ? CurrentAnimation : animationState, facingDirection);
+                _desiredMovement = direction * Speed * isRunningSpeed;
+                return;
+            }
+            if (!IsAttacking)
             {
                 SetAnimation(EAnimationKey.Idle, facingDirection);
-                _desiredMovement = Vector2.Zero;
-            }
+            }            
         }
         private void HandleDoorTransitions()
         {
@@ -277,11 +299,14 @@ namespace NoahsArk.Entities
                 InputHandler.ButtonPressed(Buttons.X, _playerIndex) ||
                 InputHandler.CheckMousePress(EMouseButton.Left))
             {
+                IsAttacking = true;
                 PerformAttack();
+                _attackingCooldown = _attacking_cooldown_duration; // start the attack cooldown
             }
         }
         private void PerformAttack()
         {
+            SetAnimation(EAnimationKey.Pierce, CurrentDirection);
             Circle attackHitBox = GetAttackHitbox();
 
             for (int i = 0; i < CurrentMap.Entities.Count; i++)

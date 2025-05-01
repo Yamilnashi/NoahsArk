@@ -5,6 +5,7 @@
         Idle,
         Walking,
         Running,
-        Death
+        Death,
+        Pierce
     }
 }

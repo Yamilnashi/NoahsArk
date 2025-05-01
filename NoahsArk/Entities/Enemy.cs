@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Extensions;
@@ -33,7 +33,7 @@ namespace NoahsArk.Entities
 
         #region Constructor
         public Enemy(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, ERarity rarity,
-            Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> animations, Texture2D shadow, Texture2D rarityMarker, Camera camera,
+            Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, Texture2D rarityMarker, Camera camera,
             IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
         {
             _enemyType = enemyType;
@@ -73,13 +73,17 @@ namespace NoahsArk.Entities
             base.Update(gameTime);
             if (HealthPoints <= 0 && CurrentAnimation == EAnimationKey.Death)
             {
-                int currentFrame = Animations[CurrentAnimation][CurrentDirection].CurrentFrame;
-                int totalFrames = Animations[CurrentAnimation][CurrentDirection].TotalFrames - 1;
-                if (currentFrame == totalFrames)
+                for (int i = 0; i < Animations[CurrentAnimation][CurrentDirection].Keys.Count; i++)
                 {
-                    IsDying = false;
-                    CurrentMap.RemoveEnemy(this);
-                }             
+                    EEquipmentSlot slot = Animations[CurrentAnimation][CurrentDirection].Keys.ElementAt(i);
+                    int currentFrame = Animations[CurrentAnimation][CurrentDirection][slot].CurrentFrame;
+                    int totalFrames = Animations[CurrentAnimation][CurrentDirection][slot].TotalFrames - 1;
+                    if (currentFrame == totalFrames)
+                    {
+                        IsDying = false;
+                        CurrentMap.RemoveEnemy(this);
+                    }
+                }                         
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

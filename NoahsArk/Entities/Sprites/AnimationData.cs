@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using NoahsArk.Controls;
 
 namespace NoahsArk.Entities.Sprites
 {
@@ -9,7 +11,8 @@ namespace NoahsArk.Entities.Sprites
         private int _frameWidth;
         private int _frameHeight;
         private float _frameDuration;
-        private string _textureFilePath;
+        private string _textureFilePathBase;
+        private Dictionary<EDirection, Dictionary<EEquipmentSlot, string>> _equipmentSlotTextureFilePaths;
         #endregion
 
         #region Properties
@@ -21,8 +24,10 @@ namespace NoahsArk.Entities.Sprites
         public int FrameHeight { get { return _frameHeight; } set { _frameHeight = value; } }
         [JsonProperty("frameDuration")]
         public float FrameDuration { get { return _frameDuration; } set { _frameDuration = value; } }
-        [JsonProperty("textureFilePath")]
-        public string TextureFilePath { get { return _textureFilePath; } set { _textureFilePath = value; } }
+        [JsonProperty("textureFilePathBase")]
+        public string TextureFilePathBase { get { return _textureFilePathBase; } set { _textureFilePathBase = value; } }
+        [JsonProperty("equipmentSlotTextureFilePaths")]
+        public Dictionary<EDirection, Dictionary<EEquipmentSlot, string>> EquipmentSlotTextureFilePaths {  get { return _equipmentSlotTextureFilePaths; } set { _equipmentSlotTextureFilePaths = value; } }
         #endregion
 
         #region Constructor

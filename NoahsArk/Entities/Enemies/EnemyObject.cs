@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using NoahsArk.Controls;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using NoahsArk.Entities.Sprites;
-using System.Collections.Generic;
 
 namespace NoahsArk.Entities.Enemies
 {
@@ -20,6 +19,6 @@ namespace NoahsArk.Entities.Enemies
         [JsonProperty("rarityType")]
         public ERarity RarityType { get; set; }
         [JsonProperty("animations")]
-        public Dictionary<EAnimationKey, Dictionary<EDirection, AnimationData>> Animations { get; set; }
+        public Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> Animations { get; set; }
     }
 }
