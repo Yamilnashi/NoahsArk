@@ -52,8 +52,8 @@ namespace NoahsArk.Entities
         public EAnimationKey CurrentAnimation { get { return _currentAnimationKey; } }
         public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; } }
         public Camera Camera { get { return _camera; } }
-        public bool IsDying { get { return _isDying; } set { _isDying = value; } }
-        public bool IsAttacking { get { return _isAttacking; } set { _isAttacking = value; } }
+        public bool IsDying { get { return _isDying; } protected set { _isDying = value; } }
+        public bool IsAttacking { get { return _isAttacking; } protected set { _isAttacking = value; } }
         #endregion
 
         #region Constructor
