@@ -57,7 +57,7 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Constructor
-        public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
+        public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialTopLeftPosition, float speed,
             Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
@@ -68,7 +68,7 @@ namespace NoahsArk.Entities
             _speed = speed;
             _inventory = new Inventory();
             _equippedItems = new Dictionary<EEquipmentSlot, Item>();
-            _position = initialPosition;
+            _position = initialTopLeftPosition;
             _animations = AnimatedSpriteHelper.GetAnimationData(GamePlayScreen.ContentRef, animations);
             _currentAnimationKey = EAnimationKey.Idle;
             _currentDirection = EDirection.Right;
@@ -106,11 +106,12 @@ namespace NoahsArk.Entities
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
                 {
+                    _animations[_currentAnimationKey][_currentDirection][EEquipmentSlot.Feet].DrawShadow(spriteBatch, _position, _shadow, GetShadowPosition());
                     Color drawColor = _isFlashing || _isDying ? GetFlashColor() : Color.White;
                     for (int i = 0; i < _animations[_currentAnimationKey][_currentDirection].Keys.Count; i++)
                     {
                         EEquipmentSlot slot = _animations[_currentAnimationKey][_currentDirection].Keys.ElementAt(i);
-                        _animations[_currentAnimationKey][_currentDirection][slot].Draw(spriteBatch, _position, _currentDirection, _shadow, GetShadowPosition(), drawColor);
+                        _animations[_currentAnimationKey][_currentDirection][slot].Draw(spriteBatch, _position, _currentDirection, drawColor);
                     }                    
                 }
             }
@@ -219,8 +220,9 @@ namespace NoahsArk.Entities
         }
         public void LockToMap()
         {
-            _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - _animations[_currentAnimationKey][_currentDirection][EEquipmentSlot.Feet].FrameWidth);
-            _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - _animations[_currentAnimationKey][_currentDirection][EEquipmentSlot.Feet].FrameHeight);
+            Circle currentPositionHitbox = GetHitbox(_position);
+            _position.X = MathHelper.Clamp(_position.X, 0, _currentMap.TileMap.MapWidth - currentPositionHitbox.Radius);
+            _position.Y = MathHelper.Clamp(_position.Y, 0, _currentMap.TileMap.MapHeight - currentPositionHitbox.Radius * 3);
         }
         public virtual Color GetFlashColor()
         {

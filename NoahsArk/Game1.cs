@@ -59,7 +59,7 @@ namespace NoahsArk
             _loadGameScreen = new LoadGameScreen(this, _gameStateManager);
             _gamePlayScreen = new GamePlayScreen(this, _gameStateManager);
 
-            _gameStateManager.ChangeState(TitleScreen);
+            _gameStateManager.ChangeState(_gamePlayScreen);
             IsFixedTimeStep = true;
             _graphics.SynchronizeWithVerticalRetrace = false;
         }

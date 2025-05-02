@@ -15,6 +15,9 @@ namespace NoahsArk.Entities.Sprites
         private int _currentFrame;
         private float _timer;
         private float _frameDuration;
+        private float _hitboxOffsetX;
+        private float _hitboxOffsetY;
+        private int _hitFrame;
         #endregion
 
         #region Properties
@@ -22,15 +25,21 @@ namespace NoahsArk.Entities.Sprites
         public int FrameHeight { get { return _frameHeight; } }
         public int CurrentFrame { get { return _currentFrame; } }
         public int TotalFrames { get { return _frames.Count; } }
+        public int HitFrame { get { return _hitFrame; } }
+        public bool IsHitFrame => CurrentFrame == HitFrame;
         #endregion
 
         #region Constructor
-        public AnimatedSprite(Texture2D texture, int frameCount, int frameWidth, int frameHeight, float frameDuration)
+        public AnimatedSprite(Texture2D texture, int frameCount, int frameWidth, int frameHeight, 
+            float frameDuration, float hitboxOffsetX, float hitboxOffsetY, int hitFrame)
         {
             _texture = texture;
             _frameDuration = frameDuration;
             _frameWidth = frameWidth;
             _frameHeight = frameHeight;
+            _hitboxOffsetX = hitboxOffsetX;
+            _hitboxOffsetY = hitboxOffsetY; 
+            _hitFrame = hitFrame;
             _frames = new List<Rectangle>();
             for (int i = 0; i < frameCount; i++)
             {
@@ -62,17 +71,25 @@ namespace NoahsArk.Entities.Sprites
                 _currentFrame = (_currentFrame + 1) % _frames.Count;
             }
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, 
-            Texture2D shadow, Vector2 shadowPosition, Color color)
-        {            
+
+        public void DrawShadow(SpriteBatch spriteBatch, Vector2 Position, Texture2D shadow, Vector2 shadowPosition)
+        {
+            spriteBatch.Draw(shadow, shadowPosition, 
+                new Rectangle(0, 0, 16, 32), 
+                Color.White * 0.3f, // some opacity
+                0f, 
+                new Vector2(0, 0), 
+                1f, 
+                SpriteEffects.None, 
+                0f);
+        }
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, Color color)
+        {   
+            Vector2 topLeftPosition = position - new Vector2(_hitboxOffsetX, _hitboxOffsetY);
             SpriteEffects spriteEffects = direction == EDirection.Left
                 ? SpriteEffects.FlipHorizontally
                 : SpriteEffects.None;
-            if (shadow != null)
-            {
-                spriteBatch.Draw(shadow, shadowPosition, new Rectangle(0, 0, 16, 32), Color.White * 0.3f, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-            }
-            spriteBatch.Draw(_texture, position, _frames[_currentFrame], color, 0f, new Vector2(0, 0), 1f, spriteEffects, 0f);
+            spriteBatch.Draw(_texture, topLeftPosition, _frames[_currentFrame], color, 0f, new Vector2(0, 0), 1f, spriteEffects, 0f);
         }
         public void UpdatePosition(Vector2 newPosition)
         {

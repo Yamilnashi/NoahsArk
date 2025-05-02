@@ -9,98 +9,129 @@
 			"rarityType": "Normal",
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {							
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
-							},
-						}
-						
-					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 32,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"	
-							},
-							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"
-							},
-						}						
-					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-						}						
-					},
-					"Death": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}									
 							}
-						}						
+						}											
+					},
+					"Idle": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}									
+							},
+							"Left": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}
+							}															
+						}										
+					},
+					"Running": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}								
+							}								
+						}											
+					},
+					"Death": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							}							
+						}												
 					}
 				}
 			}
@@ -114,98 +145,129 @@
 			"rarityType": "Magic",
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {							
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
-							},
-						}
-						
-					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 32,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"	
-							},
-							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"
-							},
-						}						
-					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-						}						
-					},
-					"Death": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}									
 							}
-						}						
+						}											
+					},
+					"Idle": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}									
+							},
+							"Left": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}
+							}															
+						}										
+					},
+					"Running": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}								
+							}								
+						}											
+					},
+					"Death": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							}							
+						}												
 					}
 				}
 			}
@@ -219,98 +281,129 @@
 			"rarityType": "Rare",
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {							
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
-							},
-						}
-						
-					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 32,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"	
-							},
-							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"
-							},
-						}						
-					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-						}						
-					},
-					"Death": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}									
 							}
-						}						
+						}											
+					},
+					"Idle": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}									
+							},
+							"Left": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}
+							}															
+						}										
+					},
+					"Running": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}								
+							}								
+						}											
+					},
+					"Death": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							}							
+						}												
 					}
 				}
 			}
@@ -324,98 +417,129 @@
 			"rarityType": "Epic",
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {							
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
-							},
-						}
-						
-					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 32,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"	
-							},
-							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"
-							},
-						}						
-					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-						}						
-					},
-					"Death": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}									
 							}
-						}						
+						}											
+					},
+					"Idle": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}									
+							},
+							"Left": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}
+							}															
+						}										
+					},
+					"Running": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}								
+							}								
+						}											
+					},
+					"Death": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							}							
+						}												
 					}
 				}
 			}
@@ -429,98 +553,129 @@
 			"rarityType": "Legendary",
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {							
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"	
-							},
-						}
-						
-					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 32,
-						"frameHeight": 32,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"	
-							},
-							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"
-							},
-						}						
-					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"
-							},
-						}						
-					},
-					"Death": {
-						"frameCount": 6,
-						"frameWidth": 64,
-						"frameHeight": 64,
-						"frameDuration": 100,
-						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
-						"equipmentSlotTextureFilePaths": {
-							"Right": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
-							},
-							"Left": {
-								"Head": "death-right-spritesheet.png",
-								"Chest": "death-right-spritesheet.png",
-								"Gloves": "death-right-spritesheet.png",
-								"Legs": "death-right-spritesheet.png",
-								"Feet": "death-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}									
 							}
-						}						
+						}											
+					},
+					"Idle": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}									
+							},
+							"Left": {
+								"frameCount": 4,
+								"frameWidth": 32,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}
+							}															
+						}										
+					},
+					"Running": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}								
+							}								
+						}											
+					},
+					"Death": {						
+						"textureFilePathBase": "Assets/Sprites/Enemies/Orc/Movements",
+						"directionAnimationData": {
+							"Right": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							},
+							"Left": {
+								"frameCount": 6,
+								"frameWidth": 64,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "death-right-spritesheet.png",
+									"Chest": "death-right-spritesheet.png",
+									"Gloves": "death-right-spritesheet.png",
+									"Legs": "death-right-spritesheet.png",
+									"Feet": "death-right-spritesheet.png"
+								}								
+							}							
+						}												
 					}
 				}
 			}

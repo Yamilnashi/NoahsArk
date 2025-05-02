@@ -8,154 +8,269 @@
 			"speed": 0.6,
 			"animations": {
 				"Movements": {
-					"Walking": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
+					"Walking": {						
 						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {
 							"Down": {
-								"Head": "walk-down-spritesheet.png",
-								"Chest": "walk-down-spritesheet.png",
-								"Gloves": "walk-down-spritesheet.png",
-								"Legs": "walk-down-spritesheet.png",
-								"Feet": "walk-down-spritesheet.png"					
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "walk-down-spritesheet.png",
+									"Chest": "walk-down-spritesheet.png",
+									"Gloves": "walk-down-spritesheet.png",
+									"Legs": "walk-down-spritesheet.png",
+									"Feet": "walk-down-spritesheet.png"
+								}													
 							},
 							"Right": {
-								"Head": "walk-right-spritesheet.png",
-								"Chest": "walk-right-spritesheet.png",
-								"Gloves": "walk-right-spritesheet.png",
-								"Legs": "walk-right-spritesheet.png",
-								"Feet": "walk-right-spritesheet.png"
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "walk-right-spritesheet.png",
+									"Chest": "walk-right-spritesheet.png",
+									"Gloves": "walk-right-spritesheet.png",
+									"Legs": "walk-right-spritesheet.png",
+									"Feet": "walk-right-spritesheet.png"
+								}								
 							},
-							"Up": {							
-								"Head": "walk-up-spritesheet.png",
-								"Chest": "walk-up-spritesheet.png",
-								"Gloves": "walk-up-spritesheet.png",
-								"Legs": "walk-up-spritesheet.png",
-								"Feet": "walk-up-spritesheet.png"						
+							"Up": {	
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,	
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,					
+								"equipmentSlotTextureFilePaths": {
+									"Head": "walk-up-spritesheet.png",
+									"Chest": "walk-up-spritesheet.png",
+									"Gloves": "walk-up-spritesheet.png",
+									"Legs": "walk-up-spritesheet.png",
+									"Feet": "walk-up-spritesheet.png"	
+								}					
 							},
 							"Left": {
-								"Head": "walk-right-spritesheet.png",
-								"Chest": "walk-right-spritesheet.png",
-								"Gloves": "walk-right-spritesheet.png",
-								"Legs": "walk-right-spritesheet.png",
-								"Feet": "walk-right-spritesheet.png"							
-							},
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "walk-right-spritesheet.png",
+									"Chest": "walk-right-spritesheet.png",
+									"Gloves": "walk-right-spritesheet.png",
+									"Legs": "walk-right-spritesheet.png",
+									"Feet": "walk-right-spritesheet.png"
+								}							
+							}
 						}						
 					},
-					"Idle": {
-						"frameCount": 4,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
+					"Idle": {						
 						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {
 							"Down": {
-								"Head": "idle-down-spritesheet.png",
-								"Chest": "idle-down-spritesheet.png",
-								"Gloves": "idle-down-spritesheet.png",
-								"Legs": "idle-down-spritesheet.png",
-								"Feet": "idle-down-spritesheet.png"						
+								"frameCount": 4,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-down-spritesheet.png",
+									"Chest": "idle-down-spritesheet.png",
+									"Gloves": "idle-down-spritesheet.png",
+									"Legs": "idle-down-spritesheet.png",
+									"Feet": "idle-down-spritesheet.png"
+								}														
 							},
 							"Right": {
-
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"							
+								"frameCount": 4,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}															
 							},
 							"Up": {
-								"Head": "idle-up-spritesheet.png",
-								"Chest": "idle-up-spritesheet.png",
-								"Gloves": "idle-up-spritesheet.png",
-								"Legs": "idle-up-spritesheet.png",
-								"Feet": "idle-up-spritesheet.png"					
+								"frameCount": 4,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-up-spritesheet.png",
+									"Chest": "idle-up-spritesheet.png",
+									"Gloves": "idle-up-spritesheet.png",
+									"Legs": "idle-up-spritesheet.png",
+									"Feet": "idle-up-spritesheet.png"
+								}													
 							},
 							"Left": {
-								"Head": "idle-right-spritesheet.png",
-								"Chest": "idle-right-spritesheet.png",
-								"Gloves": "idle-right-spritesheet.png",
-								"Legs": "idle-right-spritesheet.png",
-								"Feet": "idle-right-spritesheet.png"						
-							},
+								"frameCount": 4,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "idle-right-spritesheet.png",
+									"Chest": "idle-right-spritesheet.png",
+									"Gloves": "idle-right-spritesheet.png",
+									"Legs": "idle-right-spritesheet.png",
+									"Feet": "idle-right-spritesheet.png"
+								}														
+							}
 						}						
 					},
-					"Running": {
-						"frameCount": 6,
-						"frameWidth": 16,
-						"frameHeight": 32,
-						"frameDuration": 100,
+					"Running": {						
 						"textureFilePathBase": "Assets/Sprites/Character/A/Movement",
-						"equipmentSlotTextureFilePaths": {
+						"directionAnimationData": {
 							"Down": {
-								"Head": "run-down-spritesheet.png",
-								"Chest": "run-down-spritesheet.png",
-								"Gloves": "run-down-spritesheet.png",
-								"Legs": "run-down-spritesheet.png",
-								"Feet": "run-down-spritesheet.png"						
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-down-spritesheet.png",
+									"Chest": "run-down-spritesheet.png",
+									"Gloves": "run-down-spritesheet.png",
+									"Legs": "run-down-spritesheet.png",
+									"Feet": "run-down-spritesheet.png"	
+								}													
 							},
 							"Right": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"							
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"
+								}															
 							},
-							"Up": {							
-								"Head": "run-up-spritesheet.png",
-								"Chest": "run-up-spritesheet.png",
-								"Gloves": "run-up-spritesheet.png",
-								"Legs": "run-up-spritesheet.png",
-								"Feet": "run-up-spritesheet.png"							
+							"Up": {		
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-up-spritesheet.png",
+									"Chest": "run-up-spritesheet.png",
+									"Gloves": "run-up-spritesheet.png",
+									"Legs": "run-up-spritesheet.png",
+									"Feet": "run-up-spritesheet.png"
+								}															
 							},
 							"Left": {
-								"Head": "run-right-spritesheet.png",
-								"Chest": "run-right-spritesheet.png",
-								"Gloves": "run-right-spritesheet.png",
-								"Legs": "run-right-spritesheet.png",
-								"Feet": "run-right-spritesheet.png"						
-							},
+								"frameCount": 6,
+								"frameWidth": 16,
+								"frameHeight": 32,
+								"frameDuration": 100,
+								"hitboxOffsetX": 0,
+								"hitboxOffsetY": 0,
+								"equipmentSlotTextureFilePaths": {
+									"Head": "run-right-spritesheet.png",
+									"Chest": "run-right-spritesheet.png",
+									"Gloves": "run-right-spritesheet.png",
+									"Legs": "run-right-spritesheet.png",
+									"Feet": "run-right-spritesheet.png"	
+								}													
+							}
 						}						
 					}
 				},
 				"Attacks": {
-					"Pierce": {
-						"frameCount": 8,
-						"frameWidth": 100,
-						"frameHeight": 64,
-						"frameDuration": 100,
+					"Pierce": {						
 						"textureFilePathBase": "Assets/Sprites/Character/A/Attacks/Pierce",
-						"equipmentSlotTextureFilePaths": {
-							"Down": {						
-								"Head": "head-pierce-down-spritesheet.png",
-								"Chest": "chest-pierce-down-spritesheet.png",
-								"Gloves": "gloves-pierce-down-spritesheet.png",
-								"Legs": "legs-pierce-down-spritesheet.png",
-								"Feet": "feet-pierce-down-spritesheet.png"							
+						"directionAnimationData": {
+							"Down": {	
+								"frameCount": 8,
+								"frameWidth": 64,
+								"frameHeight": 100,
+								"frameDuration": 100,
+								"hitboxOffsetX": 24,
+								"hitboxOffsetY": 16,
+								"hitFrame": 4,
+								"equipmentSlotTextureFilePaths": {
+									"Feet": "feet-pierce-down-spritesheet.png",
+									"Legs": "legs-pierce-down-spritesheet.png",
+									"Chest": "chest-pierce-down-spritesheet.png",
+									"Gloves": "gloves-pierce-down-spritesheet.png",
+									"Head": "head-pierce-down-spritesheet.png"
+								}															
 							},
 							"Right": {
-								"Head": "head-pierce-right-spritesheet.png",
-								"Chest": "chest-pierce-right-spritesheet.png",
-								"Gloves": "gloves-pierce-right-spritesheet.png",
-								"Legs": "legs-pierce-right-spritesheet.png",
-								"Feet": "feet-pierce-right-spritesheet.png"							
+								"frameCount": 8,
+								"frameWidth": 100,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"hitboxOffsetX": 24,
+								"hitboxOffsetY": 16,
+								"hitFrame": 4,
+								"equipmentSlotTextureFilePaths": {
+									"Feet": "feet-pierce-right-spritesheet.png",
+									"Legs": "legs-pierce-right-spritesheet.png",									
+									"Chest": "chest-pierce-right-spritesheet.png",
+									"Gloves": "gloves-pierce-right-spritesheet.png",
+									"Head": "head-pierce-right-spritesheet.png"
+								}															
 							},
 							"Up": {
-								"Head": "head-pierce-up-spritesheet.png",
-								"Chest": "chest-pierce-up-spritesheet.png",
-								"Gloves": "gloves-pierce-up-spritesheet.png",
-								"Legs": "legs-pierce-up-spritesheet.png",
-								"Feet": "feet-pierce-up-spritesheet.png"						
+								"frameCount": 8,
+								"frameWidth": 64,
+								"frameHeight": 100,
+								"frameDuration": 100,
+								"hitboxOffsetX": 24,
+								"hitboxOffsetY": 52,
+								"hitFrame": 4,
+								"equipmentSlotTextureFilePaths": {
+									"Feet": "feet-pierce-up-spritesheet.png",
+									"Legs": "legs-pierce-up-spritesheet.png",
+									"Chest": "chest-pierce-up-spritesheet.png",
+									"Gloves": "gloves-pierce-up-spritesheet.png",									
+									"Head": "head-pierce-up-spritesheet.png"
+								}														
 							},
 							"Left": {
-								"Head": "head-pierce-right-spritesheet.png",
-								"Chest": "chest-pierce-right-spritesheet.png",
-								"Gloves": "gloves-pierce-right-spritesheet.png",
-								"Legs": "legs-pierce-right-spritesheet.png",
-								"Feet": "feet-pierce-right-spritesheet.png"							
+								"frameCount": 8,
+								"frameWidth": 100,
+								"frameHeight": 64,
+								"frameDuration": 100,
+								"hitboxOffsetX": 62,
+								"hitboxOffsetY": 15,
+								"hitFrame": 4,
+								"equipmentSlotTextureFilePaths": {
+									"Feet": "feet-pierce-right-spritesheet.png",
+									"Legs": "legs-pierce-right-spritesheet.png",									
+									"Chest": "chest-pierce-right-spritesheet.png",
+									"Gloves": "gloves-pierce-right-spritesheet.png",
+									"Head": "head-pierce-right-spritesheet.png"
+								}															
 							}
 						}						
 					}

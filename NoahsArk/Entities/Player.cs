@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -25,6 +26,7 @@ namespace NoahsArk.Entities
         private float _attackingCooldown;
         private const float _attacking_cooldown_duration = 2.4f;
         private bool _isInteracting;
+        private bool _hasAppliedDamage;
         #endregion
 
         #region Properties
@@ -50,10 +52,20 @@ namespace NoahsArk.Entities
             HandleCameraControls();
             HandleMovement();
             UpdateAttackCooldownTimer(gameTime);
+
             if (!IsAttacking)
             {
                 HandleAttack();
             }            
+
+            if (IsAttacking && // we are attacking 
+                !_hasAppliedDamage && // we haven't applied damage yet
+                Animations[CurrentAnimation][CurrentDirection][EEquipmentSlot.Gloves].IsHitFrame) // at the hit frame                
+            {
+                ApplyDamage();
+                _hasAppliedDamage = true;
+            }
+
             if (!_isTransitioningMaps)
             {
                 HandleDoorTransitions();
@@ -139,6 +151,11 @@ namespace NoahsArk.Entities
                 {
                     _attackingCooldown = 0;
                     IsAttacking = false;
+                    for (int i = 0; i < Animations[CurrentAnimation][CurrentDirection].Keys.Count; i++)
+                    {
+                        EEquipmentSlot slot = Animations[CurrentAnimation][CurrentDirection].Keys.ElementAt(i);
+                        Animations[CurrentAnimation][CurrentDirection][slot].Reset();
+                    }
                     SetAnimation(EAnimationKey.Idle, CurrentDirection);
                 }
             }
@@ -196,18 +213,18 @@ namespace NoahsArk.Entities
         {
             GamePadState gamePadState = GamePad.GetState(_playerIndex);
             KeyboardState keyboardState = Keyboard.GetState();           
-            EDirection facingDirection = CurrentDirection;
-            EAnimationKey animationState = CurrentAnimation;
+            EDirection newFacingDirection = CurrentDirection;
+            EAnimationKey newAnimationState = CurrentAnimation;
             Vector2 direction = Vector2.Zero;
             _desiredMovement = Vector2.Zero;
-            float isRunningSpeed = 1f;
+            float speedMultiplier = 1f;
             if (gamePadState.DPad.Up == ButtonState.Pressed ||
                 keyboardState.IsKeyDown(Keys.W) ||
                 keyboardState.IsKeyDown(Keys.Up))
             {
                 direction.Y -= 1;
-                facingDirection = EDirection.Up;
-                animationState = EAnimationKey.Walking;
+                newFacingDirection = EDirection.Up;
+                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Right == ButtonState.Pressed ||
@@ -215,8 +232,8 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Right))
             {
                 direction.X += 1;
-                facingDirection = EDirection.Right;
-                animationState = EAnimationKey.Walking;
+                newFacingDirection = EDirection.Right;
+                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Down == ButtonState.Pressed ||
@@ -224,8 +241,8 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Down))
             {
                 direction.Y += 1;
-                facingDirection = EDirection.Down;
-                animationState = EAnimationKey.Walking;
+                newFacingDirection = EDirection.Down;
+                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Left == ButtonState.Pressed ||
@@ -233,27 +250,33 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Left))
             {
                 direction.X -= 1;
-                facingDirection = EDirection.Left;
-                animationState = EAnimationKey.Walking;
+                newFacingDirection = EDirection.Left;
+                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed ||
                 keyboardState.IsKeyDown(Keys.LeftShift))
             {
-                animationState = EAnimationKey.Running;
-                isRunningSpeed = 1.8f;
+                newAnimationState = EAnimationKey.Running;
+                speedMultiplier = 1.8f;
             }
 
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
-                SetAnimation(IsAttacking ? CurrentAnimation : animationState, facingDirection);
-                _desiredMovement = direction * Speed * isRunningSpeed;
+                if (IsAttacking)
+                {
+                    newAnimationState = CurrentAnimation;
+                    newFacingDirection = CurrentDirection;
+                    speedMultiplier = 0.5f;
+                }                
+                SetAnimation(newAnimationState, newFacingDirection);
+                _desiredMovement = direction * Speed * speedMultiplier;
                 return;
             }
             if (!IsAttacking)
             {
-                SetAnimation(EAnimationKey.Idle, facingDirection);
+                SetAnimation(EAnimationKey.Idle, newFacingDirection);
             }            
         }
         private void HandleDoorTransitions()
@@ -298,15 +321,20 @@ namespace NoahsArk.Entities
             if (InputHandler.KeyPressed(Keys.E) ||
                 InputHandler.ButtonPressed(Buttons.X, _playerIndex) ||
                 InputHandler.CheckMousePress(EMouseButton.Left))
-            {
-                IsAttacking = true;
+            {                
                 PerformAttack();
-                _attackingCooldown = _attacking_cooldown_duration; // start the attack cooldown
+                
             }
         }
         private void PerformAttack()
         {
+            IsAttacking = true;
             SetAnimation(EAnimationKey.Pierce, CurrentDirection);
+            _hasAppliedDamage = false;
+            _attackingCooldown = _attacking_cooldown_duration; // start the attack cooldown
+        }
+        private void ApplyDamage()
+        {
             Circle attackHitBox = GetAttackHitbox();
 
             for (int i = 0; i < CurrentMap.Entities.Count; i++)

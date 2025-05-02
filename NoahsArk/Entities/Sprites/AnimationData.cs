@@ -6,28 +6,16 @@ namespace NoahsArk.Entities.Sprites
 {
     public class AnimationData
     {
-        #region Fields
-        private int _frameCount;
-        private int _frameWidth;
-        private int _frameHeight;
-        private float _frameDuration;
+        #region Fields        
         private string _textureFilePathBase;
-        private Dictionary<EDirection, Dictionary<EEquipmentSlot, string>> _equipmentSlotTextureFilePaths;
+        private Dictionary<EDirection, AnimationFrameData> _directionAnimationData;
         #endregion
 
-        #region Properties
-        [JsonProperty("frameCount")]
-        public int FrameCount { get { return _frameCount; } set { _frameCount = value; } }
-        [JsonProperty("frameWidth")]
-        public int FrameWidth { get { return _frameWidth; } set { _frameWidth = value; } }
-        [JsonProperty("frameHeight")]
-        public int FrameHeight { get { return _frameHeight; } set { _frameHeight = value; } }
-        [JsonProperty("frameDuration")]
-        public float FrameDuration { get { return _frameDuration; } set { _frameDuration = value; } }
+        #region Properties        
         [JsonProperty("textureFilePathBase")]
         public string TextureFilePathBase { get { return _textureFilePathBase; } set { _textureFilePathBase = value; } }
-        [JsonProperty("equipmentSlotTextureFilePaths")]
-        public Dictionary<EDirection, Dictionary<EEquipmentSlot, string>> EquipmentSlotTextureFilePaths {  get { return _equipmentSlotTextureFilePaths; } set { _equipmentSlotTextureFilePaths = value; } }
+        [JsonProperty("directionAnimationData")]
+        public Dictionary<EDirection, AnimationFrameData> DirectionAnimationData {  get { return _directionAnimationData; } set { _directionAnimationData = value; } }
         #endregion
 
         #region Constructor

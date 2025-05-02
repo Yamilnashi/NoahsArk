@@ -22,15 +22,16 @@ namespace NoahsArk.Utilities
                     EAnimationKey animationKey = data[animationType].Keys.ElementAt(j);
                     animations.Add(animationKey, new Dictionary<EDirection, Dictionary<EEquipmentSlot, AnimatedSprite>>());
                     AnimationData animationData = data[animationType][animationKey];
-                    for (int k = 0; k < animationData.EquipmentSlotTextureFilePaths.Keys.Count; k++)
+                    for (int k = 0; k < animationData.DirectionAnimationData.Keys.Count; k++)
                     {
-                        EDirection direction = animationData.EquipmentSlotTextureFilePaths.Keys.ElementAt(k);
+                        EDirection direction = animationData.DirectionAnimationData.Keys.ElementAt(k);
                         animations[animationKey][direction] = new Dictionary<EEquipmentSlot, AnimatedSprite>();
-                        for (int l = 0; l < animationData.EquipmentSlotTextureFilePaths[direction].Keys.Count; l++)
+                        AnimationFrameData frameData = animationData.DirectionAnimationData[direction];
+                        for (int l = 0; l < frameData.EquipmentSlotTextureFilePaths.Keys.Count; l++)
                         {
-                            EEquipmentSlot slot = animationData.EquipmentSlotTextureFilePaths[direction].Keys.ElementAt(l);
-                            string slotFileName = animationData.EquipmentSlotTextureFilePaths[direction][slot];
-                            animations[animationKey][direction][slot] = CreateAnimatedSprite(content, animationData, slotFileName);
+                            EEquipmentSlot slot = frameData.EquipmentSlotTextureFilePaths.Keys.ElementAt(l);
+                            string slotFileName = frameData.EquipmentSlotTextureFilePaths[slot];
+                            animations[animationKey][direction][slot] = CreateAnimatedSprite(content, frameData, animationData.TextureFilePathBase, slotFileName);
                         }
                     }
                 }
@@ -38,13 +39,14 @@ namespace NoahsArk.Utilities
             return animations;
         }
         #region Private
-        private static AnimatedSprite CreateAnimatedSprite(ContentManager content, AnimationData animationData, string slotFileName)
+        private static AnimatedSprite CreateAnimatedSprite(ContentManager content, AnimationFrameData frameData, string textureFilePathBase, string slotFileName)
         {
-            string completeFilePath = Path.Combine(animationData.TextureFilePathBase, slotFileName);
+            string completeFilePath = Path.Combine(textureFilePathBase, slotFileName);
             string formattedFilePath = DirectoryPathHelper.GetFormattedFilePath(completeFilePath);
             Texture2D texture = content.Load<Texture2D>(DirectoryPathHelper.GetFormattedFilePath(formattedFilePath));
-            AnimatedSprite sprite = new AnimatedSprite(texture, animationData.FrameCount, animationData.FrameWidth, 
-                animationData.FrameHeight, animationData.FrameDuration);
+            AnimatedSprite sprite = new AnimatedSprite(texture, frameData.FrameCount, frameData.FrameWidth, 
+                frameData.FrameHeight, frameData.FrameDuration, frameData.HitboxOffsetX, frameData.HitboxOffsetY,
+                frameData.HitFrame);
             return sprite;
         }
         #endregion
