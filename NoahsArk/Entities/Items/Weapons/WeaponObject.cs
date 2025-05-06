@@ -12,6 +12,7 @@ namespace NoahsArk.Entities.Items.Weapons
         private string _name;
         private EWeaponType _weaponType;
         private EMaterialType _materialType;
+        private float _attackHitboxOffset;
         private WeaponStats _baseStats;
         private Dictionary<EAnimationKey, Dictionary<EDirection, string>> _animations;
         #endregion
@@ -23,6 +24,8 @@ namespace NoahsArk.Entities.Items.Weapons
         public EWeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
         [JsonProperty("materialType")]
         public EMaterialType MaterialType { get { return _materialType; } set { _materialType = value; } }
+        [JsonProperty("attackHitboxOffset")]
+        public float AttackHitboxOffset { get { return _attackHitboxOffset; } set { _attackHitboxOffset = value; } }
         [JsonProperty("baseStats")]
         public WeaponStats BaseStats { get { return _baseStats; } set { _baseStats = value; } }
         [JsonProperty("animations")]

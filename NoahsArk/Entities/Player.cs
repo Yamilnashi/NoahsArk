@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
@@ -27,6 +29,7 @@ namespace NoahsArk.Entities
         private const float _attacking_cooldown_duration = 2.4f;
         private bool _isInteracting;
         private bool _hasAppliedDamage;
+        private EAnimationKey _animationState;
         #endregion
 
         #region Properties
@@ -48,6 +51,12 @@ namespace NoahsArk.Entities
         #region Methods
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+            Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
+            Vector2 mouseWorldPosition = Vector2.Transform(mouseScreenPosition, Matrix.Invert(Camera.Transformation));
+            Vector2 toMouse = mouseWorldPosition - Position;
+            EDirection facingDirection = CalculateDirection(toMouse);
+
             UpdateTransitionCooldownTimer(gameTime);
             HandleCameraControls();
             HandleMovement();
@@ -57,6 +66,14 @@ namespace NoahsArk.Entities
             {
                 HandleAttack();
             }            
+
+            if (IsAttacking)
+            {
+
+            } else
+            {
+                SetAnimation(_animationState, facingDirection);
+            }
 
             if (IsAttacking && // we are attacking 
                 !_hasAppliedDamage && // we haven't applied damage yet
@@ -79,8 +96,7 @@ namespace NoahsArk.Entities
                     Camera.LockToPosition(Position, CurrentMap);
                 }
             }
-            UpdateInteractionState();
-            base.Update(gameTime);
+            UpdateInteractionState();            
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -105,22 +121,46 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Private
+        private EDirection CalculateDirection(Vector2 toMouse)
+        {
+            if (Math.Abs(toMouse.X) > Math.Abs(toMouse.Y))
+            {
+                return toMouse.X > 0
+                    ? EDirection.Right
+                    : EDirection.Left;
+            }
+            else
+            {
+                return toMouse.Y > 0
+                    ? EDirection.Down
+                    : EDirection.Up;
+            }
+        }
         private Circle GetAttackHitbox()
         {
             Vector2 attackOffset;
+            float offset = 0;
+            if (EquippedItems.TryGetValue(EEquipmentSlot.MainHand, out Item item) &&
+                item != null)
+            {
+                if (item is WeaponObject weapon)
+                {
+                    offset = weapon.AttackHitboxOffset;
+                }
+            }
             switch (CurrentDirection)
             {
                 case EDirection.Right:
-                    attackOffset = new Vector2(26, 24);
+                    attackOffset = new Vector2(26 + offset, 24);
                     break;
                 case EDirection.Left:
-                    attackOffset = new Vector2(-10, 24);
+                    attackOffset = new Vector2(-10 - offset, 24);
                     break;
                 case EDirection.Up:
-                    attackOffset = new Vector2(8, 6);
+                    attackOffset = new Vector2(8, 6 - offset);
                     break;
                 case EDirection.Down:
-                    attackOffset = new Vector2(8, 42);
+                    attackOffset = new Vector2(8, 42 + offset);
                     break;
                 default:
                     attackOffset = Vector2.Zero;
@@ -213,18 +253,13 @@ namespace NoahsArk.Entities
         {
             GamePadState gamePadState = GamePad.GetState(_playerIndex);
             KeyboardState keyboardState = Keyboard.GetState();           
-            EDirection newFacingDirection = CurrentDirection;
-            EAnimationKey newAnimationState = CurrentAnimation;
             Vector2 direction = Vector2.Zero;
-            _desiredMovement = Vector2.Zero;
             float speedMultiplier = 1f;
             if (gamePadState.DPad.Up == ButtonState.Pressed ||
                 keyboardState.IsKeyDown(Keys.W) ||
                 keyboardState.IsKeyDown(Keys.Up))
             {
                 direction.Y -= 1;
-                newFacingDirection = EDirection.Up;
-                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Right == ButtonState.Pressed ||
@@ -232,8 +267,6 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Right))
             {
                 direction.X += 1;
-                newFacingDirection = EDirection.Right;
-                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Down == ButtonState.Pressed ||
@@ -241,8 +274,6 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Down))
             {
                 direction.Y += 1;
-                newFacingDirection = EDirection.Down;
-                newAnimationState = EAnimationKey.Walking;
             }
 
             if (gamePadState.DPad.Left == ButtonState.Pressed ||
@@ -250,34 +281,38 @@ namespace NoahsArk.Entities
                 keyboardState.IsKeyDown(Keys.Left))
             {
                 direction.X -= 1;
-                newFacingDirection = EDirection.Left;
-                newAnimationState = EAnimationKey.Walking;
             }
 
-            if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed ||
-                keyboardState.IsKeyDown(Keys.LeftShift))
+            if (!IsAttacking)
             {
-                newAnimationState = EAnimationKey.Running;
-                speedMultiplier = 1.8f;
-            }
+                if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed ||
+                keyboardState.IsKeyDown(Keys.LeftShift))
+                {
+                    _animationState = EAnimationKey.Running;
+                    speedMultiplier = 1.8f;
+                }
+                else if (direction != Vector2.Zero)
+                {
+                    _animationState = EAnimationKey.Walking;
+                }
+                else
+                {
+                    _animationState = EAnimationKey.Idle;
+                }
+            }            
 
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
                 if (IsAttacking)
                 {
-                    newAnimationState = CurrentAnimation;
-                    newFacingDirection = CurrentDirection;
                     speedMultiplier = 0.5f;
-                }                
-                SetAnimation(newAnimationState, newFacingDirection);
+                }
                 _desiredMovement = direction * Speed * speedMultiplier;
-                return;
-            }
-            if (!IsAttacking)
+            } else
             {
-                SetAnimation(EAnimationKey.Idle, newFacingDirection);
-            }            
+                _desiredMovement = Vector2.Zero;
+            }       
         }
         private void HandleDoorTransitions()
         {
@@ -318,18 +353,22 @@ namespace NoahsArk.Entities
         }
         private void HandleAttack()
         {
-            if (InputHandler.KeyPressed(Keys.E) ||
-                InputHandler.ButtonPressed(Buttons.X, _playerIndex) ||
+            if (InputHandler.ButtonPressed(Buttons.X, _playerIndex) ||
                 InputHandler.CheckMousePress(EMouseButton.Left))
             {                
-                PerformAttack();
-                
+                PerformAttack();                
             }
         }
         private void PerformAttack()
         {
+            Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
+            Vector2 mouseWorldPosition = Vector2.Transform(mouseScreenPosition, Matrix.Invert(Camera.Transformation));
+            Vector2 toMouse = mouseWorldPosition - Position;
+            EDirection facingDirection = CalculateDirection(toMouse);
+
             IsAttacking = true;
-            SetAnimation(EAnimationKey.Pierce, CurrentDirection);
+            _animationState = EAnimationKey.Pierce;
+            SetAnimation(EAnimationKey.Pierce, facingDirection);
             _hasAppliedDamage = false;
             _attackingCooldown = _attacking_cooldown_duration; // start the attack cooldown
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="11">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="11">
  <tileset firstgid="1" source="../Tilesets/tileset_floors.tsx"/>
  <tileset firstgid="651" source="../Tilesets/tileset_vegetation.tsx"/>
  <tileset firstgid="1326" source="../Tilesets/tileset_clouds.tsx"/>
@@ -216,9 +216,11 @@
 0,0,0,0,0,0,0,1329,1330,1331,0,0,0,0,0,0,0,0,0,1332,1333,1334,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="10" name="Rain" width="30" height="20" opacity="0.4">
+ <layer id="14" name="aboveallrain" width="30" height="20" opacity="0.6">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
+   <property name="weatherSpeed" type="int" value="3"/>
+   <property name="weatherTypeCode" value="clouds"/>
   </properties>
   <data encoding="csv">
 3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,3398,

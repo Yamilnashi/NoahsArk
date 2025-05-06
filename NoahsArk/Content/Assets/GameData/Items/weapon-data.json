@@ -4,8 +4,9 @@
 			"name": "Wooden Dagger",
 			"weaponType": "Dagger",
 			"materialType": "Wooden",
+			"attackHitboxOffset": 10,
 			"baseStats": {
-				"damage": 5,
+				"damage": 25,
 				"attackSpeed": 1.5,
 				"criticalStrikeChance": 0.15,
 				"criticalStrikeDamage": 1.25,

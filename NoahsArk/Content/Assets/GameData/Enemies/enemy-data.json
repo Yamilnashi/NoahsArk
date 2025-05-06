@@ -141,7 +141,7 @@
 			"level": 1,
 			"healthPoints": 200,
 			"manaPoints": 10,
-			"speed": 35,
+			"speed": 0,
 			"rarityType": "Magic",
 			"animations": {
 				"Movements": {
@@ -277,7 +277,7 @@
 			"level": 1,
 			"healthPoints": 300,
 			"manaPoints": 10,
-			"speed": 38,
+			"speed": 0,
 			"rarityType": "Rare",
 			"animations": {
 				"Movements": {
@@ -413,7 +413,7 @@
 			"level": 1,
 			"healthPoints": 450,
 			"manaPoints": 10,
-			"speed": 40,
+			"speed": 0,
 			"rarityType": "Epic",
 			"animations": {
 				"Movements": {
@@ -549,7 +549,7 @@
 			"level": 1,
 			"healthPoints": 850,
 			"manaPoints": 10,
-			"speed": 42,
+			"speed": 0,
 			"rarityType": "Legendary",
 			"animations": {
 				"Movements": {

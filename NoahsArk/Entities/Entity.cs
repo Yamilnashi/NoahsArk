@@ -172,7 +172,7 @@ namespace NoahsArk.Entities
             Vector2 textPosition = target.GetHitbox(target.Position).Center + new Vector2(0, -30);
             Color color = isCrit
                 ? Color.Yellow
-                : Color.Red;
+                : Color.White;
             float lifetime = isCrit
                 ? 2.0f
                 : 1.0f;
