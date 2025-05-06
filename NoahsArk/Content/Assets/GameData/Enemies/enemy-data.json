@@ -5,7 +5,7 @@
 			"level": 1,
 			"healthPoints": 100,
 			"manaPoints": 10,
-			"speed": 25,
+			"speed": 0,
 			"rarityType": "Normal",
 			"animations": {
 				"Movements": {

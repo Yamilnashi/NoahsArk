@@ -220,6 +220,8 @@
 									"Feet": "feet-pierce-down-spritesheet.png",
 									"Legs": "legs-pierce-down-spritesheet.png",
 									"Chest": "chest-pierce-down-spritesheet.png",
+									"MainHand": "gloves-pierce-down-spritesheet.png",
+									"OffHand": "gloves-pierce-down-spritesheet.png",
 									"Gloves": "gloves-pierce-down-spritesheet.png",
 									"Head": "head-pierce-down-spritesheet.png"
 								}															
@@ -236,6 +238,8 @@
 									"Feet": "feet-pierce-right-spritesheet.png",
 									"Legs": "legs-pierce-right-spritesheet.png",									
 									"Chest": "chest-pierce-right-spritesheet.png",
+									"MainHand": "gloves-pierce-right-spritesheet.png",
+									"OffHand": "gloves-pierce-right-spritesheet.png",
 									"Gloves": "gloves-pierce-right-spritesheet.png",
 									"Head": "head-pierce-right-spritesheet.png"
 								}															
@@ -252,6 +256,8 @@
 									"Feet": "feet-pierce-up-spritesheet.png",
 									"Legs": "legs-pierce-up-spritesheet.png",
 									"Chest": "chest-pierce-up-spritesheet.png",
+									"MainHand": "gloves-pierce-up-spritesheet.png",
+									"OffHand": "gloves-pierce-up-spritesheet.png",
 									"Gloves": "gloves-pierce-up-spritesheet.png",									
 									"Head": "head-pierce-up-spritesheet.png"
 								}														
@@ -268,6 +274,8 @@
 									"Feet": "feet-pierce-right-spritesheet.png",
 									"Legs": "legs-pierce-right-spritesheet.png",									
 									"Chest": "chest-pierce-right-spritesheet.png",
+									"MainHand": "gloves-pierce-right-spritesheet.png",
+									"OffHand": "gloves-pierce-right-spritesheet.png",
 									"Gloves": "gloves-pierce-right-spritesheet.png",
 									"Head": "head-pierce-right-spritesheet.png"
 								}															

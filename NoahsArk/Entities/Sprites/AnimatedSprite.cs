@@ -26,7 +26,7 @@ namespace NoahsArk.Entities.Sprites
         public int CurrentFrame { get { return _currentFrame; } }
         public int TotalFrames { get { return _frames.Count; } }
         public int HitFrame { get { return _hitFrame; } }
-        public bool IsHitFrame => CurrentFrame == HitFrame;
+        public bool IsHitFrame => CurrentFrame == HitFrame;        
         #endregion
 
         #region Constructor
@@ -100,6 +100,10 @@ namespace NoahsArk.Entities.Sprites
             _currentFrame = 0;
             _timer = 0;
         }        
+        public void SetTexture(Texture2D texture)
+        {
+            _texture = texture;
+        }
         #endregion
     }
 }

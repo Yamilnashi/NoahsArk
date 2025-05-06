@@ -11,6 +11,8 @@ using NoahsArk.Controls;
 using NoahsArk.Entities;
 using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items;
+using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Players;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
@@ -31,6 +33,7 @@ namespace NoahsArk.States
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
         public static ContentManager _contentRef;
+        private static Dictionary<(EWeaponType, EMaterialType), WeaponObject> _weaponObjectDict = new Dictionary<(EWeaponType, EMaterialType), WeaponObject>();
         private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
         #endregion
 
@@ -40,6 +43,7 @@ namespace NoahsArk.States
         public World World { get { return _world; } }
         public bool IsPaused { get { return _isPaused; } }  
         public static Texture2D DebugTexture { get { return _debugTexture; } }
+        public static Dictionary<(EWeaponType, EMaterialType), WeaponObject> WeaponObjectDict { get  { return _weaponObjectDict; } }
         public static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> EnemyEntityDict {  get  { return _enemyEntityDict; } }
         public static ContentManager ContentRef { get { return _contentRef; } }
         public static bool IsDebugEnabled { get { return _isDebugEnabled; } }
@@ -57,6 +61,7 @@ namespace NoahsArk.States
         protected override void LoadContent()
         {
             base.LoadContent();
+            LoadItems();
             LoadWorld();
             LoadEnemies();
             CreatePlayers();            
@@ -126,6 +131,22 @@ namespace NoahsArk.States
         #endregion
 
         #region Private
+        private void LoadItems()
+        {
+            LoadWeapons();
+        }
+        private void LoadWeapons()
+        {
+            string weaponDataFilePath = Path.Combine(_gameRef.Content.RootDirectory, "Assets/GameData/Items/weapon-data.json");
+            string jsonContent = File.ReadAllText(weaponDataFilePath);
+            WeaponData data = JsonConvert.DeserializeObject<WeaponData>(jsonContent);
+            _weaponObjectDict = new Dictionary<(EWeaponType, EMaterialType), WeaponObject>();
+            for (int i = 0; i < data.weaponObjects.Count; i++)
+            {
+                WeaponObject w = data.weaponObjects[i];
+                _weaponObjectDict[(w.WeaponType, w.MaterialType)] = w;
+            }
+        }
         private void LoadWorld()
         {
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
@@ -217,6 +238,7 @@ namespace NoahsArk.States
             Vector2 initialPosition = new Vector2(295, 240);
             Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
             _player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, p.Animations, _camera, PlayerIndex.One, shadow, _world);
+            _player.EquipWeapon(EWeaponType.Dagger, EMaterialType.Wooden);
             _world.CurrentMap.AddPlayer(_player);
             _camera.LockToPosition(initialPosition, _player.CurrentMap);
         }

@@ -5,7 +5,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Entities;
 using NoahsArk.Entities.Enemies;
+using NoahsArk.Entities.GameObjects;
 using NoahsArk.Levels.Maps;
+using NoahsArk.Managers;
 using NoahsArk.Rendering;
 
 namespace NoahsArk.Levels
@@ -18,6 +20,7 @@ namespace NoahsArk.Levels
         private List<Player> _players = new List<Player>();
         private Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>> _enemies = new Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>>();
         private List<Entity> _entities = new List<Entity>();
+        private List<FloatingText> _floatingTexts = new List<FloatingText>();
         private Texture2D _debugTexture;
         private Game1 _gameRef;
         #endregion
@@ -83,12 +86,22 @@ namespace NoahsArk.Levels
                 ILayer layer = _tileMap.MapLayers[i];
                 layer.Update(gameTime);
             }
+
+            for (int i = 0; i < _floatingTexts.Count; i++)
+            {
+                _floatingTexts[i].Update(gameTime);
+                if (_floatingTexts[i].Lifetime <= 0)
+                {
+                    _floatingTexts.RemoveAt(i);
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
         {
             DrawLayersBeforeCharacter(spriteBatch, gameTime, camera, out List<ILayer> layersToDrawAfterCharacter);
             DrawEntities(spriteBatch);
             DrawLayersAfterCharacter(spriteBatch, gameTime, camera, layersToDrawAfterCharacter);
+            DrawFloatingTexts(spriteBatch);
         }
         public void AddPlayer(Player player)
         {
@@ -114,7 +127,12 @@ namespace NoahsArk.Levels
             _entities.Remove(enemy);
             enemy.CurrentMap = null;    
         }
-
+        public void AddFloatingText(string text, Vector2 position, Color color, float lifetime, int size)
+        {
+            FloatingText ft = new FloatingText(text, position, new Vector2(0, -10),
+                color, lifetime, ControlManager.SpriteFont("Monogram", size));
+            _floatingTexts.Add(ft);
+        }
         #endregion
         #region Private
         private void DrawLayersBeforeCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera,out List<ILayer> layersToDrawAfterCharacter)
@@ -153,6 +171,13 @@ namespace NoahsArk.Levels
             {
                 ILayer layer = layersToDrawAfterCharacter[i];
                 layer.Draw(spriteBatch, gameTime, camera, _tileMap.TileSets);
+            }
+        }
+        private void DrawFloatingTexts(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < _floatingTexts.Count; i++)
+            {
+                _floatingTexts[i].Draw(spriteBatch);
             }
         }
         #endregion

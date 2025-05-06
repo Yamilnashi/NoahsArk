@@ -347,7 +347,7 @@ namespace NoahsArk.Entities
                 if (!entity.IsDying &&
                     CollisionHelper.CircleIntersectsCircle(attackHitBox, entity.GetHitbox(entity.Position)))
                 {
-                    DealDamage(entity);
+                    DealDamage(entity);                    
                 }
             }
         }

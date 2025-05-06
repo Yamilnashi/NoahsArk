@@ -37,7 +37,9 @@ namespace NoahsArk.States
             ContentManager Content = Game.Content;
             Dictionary<(string font, int size), SpriteFont> spriteFontsDict = new Dictionary<(string font, int size), SpriteFont>()
             {
-                {("Silver", 28), Content.Load<SpriteFont>("Assets/Fonts/Silver28")}
+                {("Silver", 28), Content.Load<SpriteFont>("Assets/Fonts/Silver28")},
+                {("Monogram", 12), Content.Load<SpriteFont>("Assets/Fonts/Monogram12")},
+                {("Monogram", 10), Content.Load<SpriteFont>("Assets/Fonts/Monogram10")}
             };
             _controlManager = new ControlManager(spriteFontsDict);
             base.LoadContent();

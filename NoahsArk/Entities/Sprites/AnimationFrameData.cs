@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using NoahsArk.Entities.Items;
+using NoahsArk.Entities.Items.Weapons;
 
 namespace NoahsArk.Entities.Sprites
 {
@@ -30,7 +32,7 @@ namespace NoahsArk.Entities.Sprites
         [JsonProperty("hitboxOffsetY")]
         public float HitboxOffsetY { get { return _hitboxOffsetY; } set { _hitboxOffsetY = value; } }
         [JsonProperty("hitFrame")]
-        public int HitFrame { get { return _hitFrame; } set { _hitFrame = value; } }    
+        public int HitFrame { get { return _hitFrame; } set { _hitFrame = value; } }      
         [JsonProperty("equipmentSlotTextureFilePaths")]
         public Dictionary<EEquipmentSlot, string> EquipmentSlotTextureFilePaths { get { return _equipmentSlotTextureFilePaths; } set { _equipmentSlotTextureFilePaths = value; } }
         #endregion

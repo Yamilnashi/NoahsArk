@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items;
+using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
 using NoahsArk.Rendering;
@@ -15,11 +17,11 @@ namespace NoahsArk.Entities
     public abstract class Entity
     {
         #region Fields
-        private int _healthPoints;
-        private int _maxHealthPoints;
-        private int _manaPoints;
-        private int _maxManaPoints;
-        private int _experiencePoints;
+        private float _healthPoints;
+        private float _maxHealthPoints;
+        private float _manaPoints;
+        private float _maxManaPoints;
+        private float _experiencePoints;
         private float _speed;
         private Inventory _inventory;
         private Dictionary<EEquipmentSlot, Item> _equippedItems;
@@ -38,11 +40,11 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Properties
-        public int HealthPoints {  get { return _healthPoints; } protected set { _healthPoints = value; } }
-        public int MaxHealthPoints { get { return _maxHealthPoints; } protected set { _maxHealthPoints = value; } }
-        public int ManaPoints { get { return _manaPoints; } protected set { _manaPoints = value; } }
-        public int MaxManaPoints { get { return _maxManaPoints; } protected set { _maxManaPoints = value; } }
-        public int ExperiencePoints { get { return _experiencePoints; } protected set { _experiencePoints = value; } }
+        public float HealthPoints {  get { return _healthPoints; } protected set { _healthPoints = value; } }
+        public float MaxHealthPoints { get { return _maxHealthPoints; } protected set { _maxHealthPoints = value; } }
+        public float ManaPoints { get { return _manaPoints; } protected set { _manaPoints = value; } }
+        public float MaxManaPoints { get { return _maxManaPoints; } protected set { _maxManaPoints = value; } }
+        public float ExperiencePoints { get { return _experiencePoints; } protected set { _experiencePoints = value; } }
         public float Speed { get { return _speed; } protected set { _speed = value; } }
         public Inventory Inventory { get { return _inventory; } protected set { _inventory = value; } } 
         public Dictionary<EAnimationKey, Dictionary<EDirection, Dictionary<EEquipmentSlot, AnimatedSprite>>> Animations { get { return _animations; } }
@@ -149,9 +151,9 @@ namespace NoahsArk.Entities
                 }                             
             }
         }
-        public virtual void TakeDamage(int amount)
+        public virtual void TakeDamage(float amount)
         {
-            _healthPoints = MathHelper.Max(0, _healthPoints - amount);
+            _healthPoints = MathHelper.Max(0f, _healthPoints - amount);
             if (_healthPoints == 0)
             {
                 _isDying = true;
@@ -165,8 +167,19 @@ namespace NoahsArk.Entities
         }
         public void DealDamage(Entity target)
         {
-            int damage = CalculateDamage();
+            float damage = CalculateDamage(out bool isCrit);
             target.TakeDamage(damage);
+            Vector2 textPosition = target.GetHitbox(target.Position).Center + new Vector2(0, -30);
+            Color color = isCrit
+                ? Color.Yellow
+                : Color.Red;
+            float lifetime = isCrit
+                ? 2.0f
+                : 1.0f;
+            int size = isCrit
+                ? 12
+                : 10;
+            CurrentMap.AddFloatingText(damage.ToString(), textPosition, color, lifetime, size);
         }
         public void Move(Vector2 direction)
         {
@@ -213,10 +226,18 @@ namespace NoahsArk.Entities
             newPosition += totalDisplacement;
             CompleteMove(newPosition);
         }
-        protected virtual int CalculateDamage()
+        protected virtual float CalculateDamage(out bool isCrit)
         {
-            // todo: customize calculation based on weapon, armor, stats, type, etc
-            return 10;
+            if (_equippedItems.TryGetValue(EEquipmentSlot.MainHand, out Item item) && 
+                item != null)
+            {
+                if (item is WeaponObject weapon)
+                {
+                    return weapon.CalculateDamage(out isCrit);   
+                }
+            }
+            isCrit = false;
+            return 0;
         }
         public void LockToMap()
         {
@@ -227,6 +248,30 @@ namespace NoahsArk.Entities
         public virtual Color GetFlashColor()
         {
             return Color.Lerp(Color.Red, Color.Black, _flashTimer / _flashDuration);
+        }
+        public void EquipWeapon(EWeaponType weaponType, EMaterialType materialType)
+        {
+            if (GamePlayScreen.WeaponObjectDict.TryGetValue((weaponType, materialType), out WeaponObject weapon) && 
+                weapon != null)
+            {
+                _equippedItems[EEquipmentSlot.MainHand] = weapon;
+                UpdateWeaponAnimations(weapon);
+            }
+        }
+        public virtual void UpdateWeaponAnimations(WeaponObject weapon)
+        {
+            for (int i = 0; i < weapon.Animations.Keys.Count; i++)
+            {
+                EAnimationKey animationKey = weapon.Animations.Keys.ElementAt(i);
+                for (int j = 0; j < weapon.Animations[animationKey].Keys.Count; j++)
+                {
+                    EDirection direction = weapon.Animations[animationKey].Keys.ElementAt(j);
+                    string filePath = weapon.Animations[animationKey][direction];
+                    string formattedFilePath = DirectoryPathHelper.GetFormattedFilePath(filePath);
+                    Texture2D texture = GamePlayScreen.ContentRef.Load<Texture2D>(formattedFilePath);
+                    _animations[animationKey][direction][EEquipmentSlot.MainHand].SetTexture(texture);
+                }
+            }
         }
         #endregion
 

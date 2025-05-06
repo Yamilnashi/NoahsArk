@@ -81,7 +81,10 @@ namespace NoahsArk.Entities
                     if (currentFrame == totalFrames)
                     {
                         IsDying = false;
-                        CurrentMap.RemoveEnemy(this);
+                        if (CurrentMap != null)
+                        {
+                            CurrentMap.RemoveEnemy(this);
+                        }                        
                     }
                 }                         
             }
@@ -147,7 +150,7 @@ namespace NoahsArk.Entities
             }
 
         }
-        public override void TakeDamage(int amount)
+        public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
         }

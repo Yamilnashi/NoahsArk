@@ -25,6 +25,27 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Backgrounds/title_background.png
 
+#begin Assets/Fonts/Monogram10.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/Monogram10.spritefont
+
+#begin Assets/Fonts/Monogram12.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/Monogram12.spritefont
+
+#begin Assets/Fonts/Silver28.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/Silver28.spritefont
+
 #begin Assets/Fonts/Silver28.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -259,6 +280,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Character/A/Attacks/Pierce/legs-pierce-up-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-down-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-down-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-right-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-right-spritesheet.png
+
+#begin Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-up-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-up-spritesheet.png
 
 #begin Assets/Sprites/Character/A/Movement/idle-down-spritesheet.png
 /importer:TextureImporter

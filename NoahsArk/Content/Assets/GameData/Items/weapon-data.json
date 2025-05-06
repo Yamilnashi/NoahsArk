@@ -1,0 +1,23 @@
+{
+	"weaponData": [
+		{
+			"name": "Wooden Dagger",
+			"weaponType": "Dagger",
+			"materialType": "Wooden",
+			"baseStats": {
+				"damage": 5,
+				"attackSpeed": 1.5,
+				"criticalStrikeChance": 0.15,
+				"criticalStrikeDamage": 1.25,
+			},
+			"animations": {
+				"Pierce": {
+					"Up": "Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-up-spritesheet.png",
+					"Down": "Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-Down-spritesheet.png",
+					"Right": "Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-right-spritesheet.png",
+					"Left": "Assets/Sprites/Character/A/Attacks/Pierce/weapon-wood-dagger-pierce-right-spritesheet.png",
+				}
+			}
+		}
+	]
+}
