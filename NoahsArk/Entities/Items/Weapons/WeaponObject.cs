@@ -38,9 +38,11 @@ namespace NoahsArk.Entities.Items.Weapons
         public override float CalculateDamage(out bool isCrit)
         {
             isCrit = false;
-            float baseDamage = _baseStats.Damage;
+            float minimumDamage = _baseStats.MinimumDamage;
+            float maximumDamage = _baseStats.MaximumDamage;
             float critChance = _baseStats.CriticalStrikeChance;
             float critMultiplier = _baseStats.CriticalStrikeDamage;
+            float baseDamage = minimumDamage + (float)Random.NextDouble() * (maximumDamage - minimumDamage);
 
             // roll randomly
             float roll = (float)Random.NextDouble();

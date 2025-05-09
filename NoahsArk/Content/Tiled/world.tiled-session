@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/homeinside.tmx",
+    "activeFile": "GameMaps/development.tmx",
     "expandedProjectPaths": [
         ".",
-        "GameMaps",
-        "Tilesets"
+        "Tilesets",
+        "GameMaps"
     ],
     "fileStates": {
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
@@ -31,14 +31,14 @@
         },
         "GameMaps/development.tmx": {
             "expandedObjectLayers": [
-                7,
-                12
+                12,
+                7
             ],
-            "scale": 3,
-            "selectedLayer": 8,
+            "scale": 1.5,
+            "selectedLayer": 9,
             "viewCenter": {
                 "x": 240,
-                "y": 160.16666666666669
+                "y": 159.66666666666666
             }
         },
         "GameMaps/full.tsx": {
@@ -58,14 +58,14 @@
         },
         "GameMaps/homeinside.tmx": {
             "expandedObjectLayers": [
-                5,
-                10
+                10,
+                5
             ],
             "scale": 4,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 70.25,
-                "y": 78.5
+                "x": 80,
+                "y": 88.125
             }
         },
         "GameMaps/homeoutside.tmx": {
@@ -278,10 +278,10 @@
     "recentFiles": [
         "GameMaps/restaurant.tmx",
         "Tilesets/tileset_kitchen.tsx",
+        "GameMaps/homeinside.tmx",
+        "GameMaps/homeoutside.tmx",
         "GameMaps/test.tmx",
         "GameMaps/development.tmx",
-        "GameMaps/homeoutside.tmx",
-        "GameMaps/homeinside.tmx",
         "GameMaps/obstacles.tmx",
         "Tilesets/tileset_clouds.tsx",
         "Tilesets/tileset_lightrain.tsx",

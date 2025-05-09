@@ -6,6 +6,7 @@ using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Extensions;
 using NoahsArk.Rendering;
+using NoahsArk.States;
 
 namespace NoahsArk.Entities
 {   
@@ -16,17 +17,17 @@ namespace NoahsArk.Entities
         private Texture2D _rarityMarker;
         private static Dictionary<ERarity, Texture2D> _healthBarTexture;
         private static Dictionary<ERarity, Rectangle> _healthBarRectangle;
-        private static Dictionary<ERarity, List<Rectangle>> _healthBarFrames;
         private IAIBehavior _behavior;
         private float _healthBarOpacity = 0.8f;
         private ERarity _rarityType;
+        private Rectangle _healthBarFill;
+        private Texture2D _healthBarFillTexture;
         #endregion
 
         #region Properties
         public IAIBehavior Behavior { get; private set; }
         public static Dictionary<ERarity, Texture2D> HealthBarTexture {  get { return _healthBarTexture; } set { _healthBarTexture = value; } }
         public static Dictionary<ERarity, Rectangle> HealthBarRectangle { get { return _healthBarRectangle; } set { _healthBarRectangle = value; } }
-        public static Dictionary<ERarity, List<Rectangle>> HealthBarFrames { get { return _healthBarFrames; } set { _healthBarFrames = value; } }
         public EEnemyType EnemyType { get { return _enemyType; } }
         public ERarity Rarity { get { return _rarityType; } }
         #endregion
@@ -40,6 +41,9 @@ namespace NoahsArk.Entities
             _behavior = behavior;
             _rarityType = rarity;
             _rarityMarker = rarityMarker;
+            _healthBarFillTexture = new Texture2D(GamePlayScreen.GraphicsDeviceRef, 1, 1);
+            _healthBarFillTexture.SetData(new[] { Color.Red });
+            UpdateHealthBar();
         }
         #endregion
 
@@ -95,67 +99,101 @@ namespace NoahsArk.Entities
             base.Draw(spriteBatch);
             Vector2 barPosition = GetHealthBarPosition();
             Vector2 rarityMarkerPosition = GetRarityMarkerPosition();
-            if (_healthBarTexture != null &&
-                    _healthBarFrames.Count > 0 &&
-                    HealthPoints < MaxHealthPoints)
-            {
+            
+            if (HealthPoints < MaxHealthPoints &&
+                _healthBarTexture != null)
+            {                
+                if (HealthPoints > 0)
+                {
+                    spriteBatch.Draw(_healthBarFillTexture, _healthBarFill, Color.Red * _healthBarOpacity);
+                }
                 spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarRectangle[_rarityType], Color.White * _healthBarOpacity);
-                if (HealthPoints <= 0)
-                {
-                    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarFrames[_rarityType][6], Color.White * _healthBarOpacity);
-                    return;
-                }
-
-                float healthPercent = (float)HealthPoints / MaxHealthPoints;
-                int frameIndex = 0;
-                if (healthPercent > 0.80f)
-                {
-                    frameIndex = 0;
-                }
-                else if (healthPercent >= 0.6f)
-                {
-                    frameIndex = 1;
-                }
-                else if (healthPercent >= 0.5f)
-                {
-                    frameIndex = 2;
-                }
-                else if (healthPercent >= 0.4f)
-                {
-                    frameIndex = 3;
-                }
-                else if (healthPercent >= 0.2f)
-                {
-                    frameIndex = 4;
-                }
-                else
-                {
-                    frameIndex = 5;
-                }
-                Rectangle sourceRect = _healthBarFrames[_rarityType][frameIndex];
-                spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, sourceRect, Color.White * _healthBarOpacity);
             }
+
             int markerCount = _rarityType.GetRarityMarkerCount();
             if (markerCount > 0)
             {
-                int markerWidth = 4;    // Width of each marker
-                int totalWidth = (markerCount * markerWidth) + ((markerCount - 1)); // Total space needed
-                float startX = rarityMarkerPosition.X - (totalWidth / 2f); // Center the markers
-
+                int markerWidth = 4;
+                int totalWidth = (markerCount * markerWidth) + (markerCount - 1); // total space needed
+                float startX = rarityMarkerPosition.X - (totalWidth / 2f); // center the markers
+                
                 for (int i = 0; i < markerCount; i++)
                 {
                     Vector2 markerPosition = new Vector2(startX + (i * (markerWidth)), rarityMarkerPosition.Y);
                     spriteBatch.Draw(_rarityMarker, markerPosition, new Rectangle(0, 0, 4, 8), Color.White);
                 }
             }
+            
+            
+            
+            //if (_healthBarTexture != null &&
+            //        _healthBarFrames.Count > 0 &&
+            //        HealthPoints < MaxHealthPoints)
+            //{
+            //    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarRectangle[_rarityType], Color.White * _healthBarOpacity);
+            //    if (HealthPoints <= 0)
+            //    {
+            //        spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarFrames[_rarityType][6], Color.White * _healthBarOpacity);
+            //        return;
+            //    }
+
+            //    float healthPercent = (float)HealthPoints / MaxHealthPoints;
+            //    int frameIndex = 0;
+            //    if (healthPercent > 0.80f)
+            //    {
+            //        frameIndex = 0;
+            //    }
+            //    else if (healthPercent >= 0.6f)
+            //    {
+            //        frameIndex = 1;
+            //    }
+            //    else if (healthPercent >= 0.5f)
+            //    {
+            //        frameIndex = 2;
+            //    }
+            //    else if (healthPercent >= 0.4f)
+            //    {
+            //        frameIndex = 3;
+            //    }
+            //    else if (healthPercent >= 0.2f)
+            //    {
+            //        frameIndex = 4;
+            //    }
+            //    else
+            //    {
+            //        frameIndex = 5;
+            //    }
+            //    Rectangle sourceRect = _healthBarFrames[_rarityType][frameIndex];
+            //    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, sourceRect, Color.White * _healthBarOpacity);
+            //}
+            //int markerCount = _rarityType.GetRarityMarkerCount();
+            //if (markerCount > 0)
+            //{
+            //    int markerWidth = 4;    // Width of each marker
+            //    int totalWidth = (markerCount * markerWidth) + ((markerCount - 1)); // Total space needed
+            //    float startX = rarityMarkerPosition.X - (totalWidth / 2f); // Center the markers
+
+            //    for (int i = 0; i < markerCount; i++)
+            //    {
+            //        Vector2 markerPosition = new Vector2(startX + (i * (markerWidth)), rarityMarkerPosition.Y);
+            //        spriteBatch.Draw(_rarityMarker, markerPosition, new Rectangle(0, 0, 4, 8), Color.White);
+            //    }
+            //}
 
         }
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
+            UpdateHealthBar();
         }
         #endregion
         #region Private
+        private void UpdateHealthBar()
+        {
+            Vector2 barPosition = GetHealthBarPosition();
+            float healthPercent = (float)HealthPoints / MaxHealthPoints;
+            _healthBarFill = GetHealthBarFillbyRarityType(barPosition, healthPercent);
+        }
         private Vector2 GetHealthBarPosition()
         {
             return GetHitbox(Position).Center + new Vector2(-25, -38); // on a 64x64 sprite
@@ -164,6 +202,30 @@ namespace NoahsArk.Entities
         private Vector2 GetRarityMarkerPosition()
         {
             return GetHitbox(Position).Center + new Vector2(12, -28);
+        }
+        private Rectangle GetHealthBarFillbyRarityType(Vector2 barPosition, float healthPercent)
+        {
+            int width = 30;
+            int height = 4;
+            int barPositionX = (int)barPosition.X;
+            int barPositionY = (int)barPosition.Y;
+            switch (_rarityType) {
+                case ERarity.Normal:
+                case ERarity.Magic:
+                case ERarity.Rare:
+                case ERarity.Epic:
+                    barPositionX += 10;
+                    barPositionY += 6;
+                    break;
+                case ERarity.Legendary:
+                    width = 42;
+                    height = 5;
+                    barPositionY += 7;
+                    barPositionX += 4;
+                        break;
+            }
+            int fillWidth = (int)(width * healthPercent);            
+            return new Rectangle(barPositionX, barPositionY, fillWidth, height);
         }
         #endregion
     }

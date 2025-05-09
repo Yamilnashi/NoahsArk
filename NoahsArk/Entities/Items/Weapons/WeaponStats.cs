@@ -5,15 +5,18 @@ namespace NoahsArk.Entities.Items.Weapons
     public class WeaponStats
     {
         #region Fields        
-        private float _damage;        
+        private float _minimumDamage;
+        private float _maximumDamage;
         private float _attackSpeed;        
         private float _criticalStrikeChance;        
         private float _criticalStrikeDamage;
         #endregion
 
         #region Properties
-        [JsonProperty("damage")]
-        public float Damage { get { return _damage; } set { _damage = value; } }
+        [JsonProperty("minimumDamage")]
+        public float MinimumDamage { get { return _minimumDamage; } set { _minimumDamage = value; } }
+        [JsonProperty("maximumDamage")]
+        public float MaximumDamage { get { return _maximumDamage; } set { _maximumDamage = value; } }   
         [JsonProperty("attackSpeed")]
         public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
         [JsonProperty("criticalStrikeChance")]

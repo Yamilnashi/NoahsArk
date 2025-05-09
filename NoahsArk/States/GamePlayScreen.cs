@@ -26,13 +26,14 @@ namespace NoahsArk.States
         #region Fields
         private Engine _engine = new Engine(16, 16);
         private World _world;
-        private Camera _camera;
-        private static Texture2D _debugTexture;
-        private static bool _isDebugEnabled = false;
+        private Camera _camera;        
         private Player _player;
         private PauseMenuScreen _pauseMenuScreen;
         private bool _isPaused = false;
-        public static ContentManager _contentRef;
+        private static ContentManager _contentRef;
+        private static GraphicsDevice _graphicsDevice;
+        private static Texture2D _debugTexture;
+        private static bool _isDebugEnabled = false;        
         private static Dictionary<(EWeaponType, EMaterialType), WeaponObject> _weaponObjectDict = new Dictionary<(EWeaponType, EMaterialType), WeaponObject>();
         private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
         #endregion
@@ -46,6 +47,7 @@ namespace NoahsArk.States
         public static Dictionary<(EWeaponType, EMaterialType), WeaponObject> WeaponObjectDict { get  { return _weaponObjectDict; } }
         public static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> EnemyEntityDict {  get  { return _enemyEntityDict; } }
         public static ContentManager ContentRef { get { return _contentRef; } }
+        public static GraphicsDevice GraphicsDeviceRef { get { return _graphicsDevice; } }
         public static bool IsDebugEnabled { get { return _isDebugEnabled; } }
         #endregion
 
@@ -66,6 +68,7 @@ namespace NoahsArk.States
             LoadEnemies();
             CreatePlayers();            
             _pauseMenuScreen = new PauseMenuScreen(_gameRef, _gameStateManager, _player, _camera);
+            _graphicsDevice = _gameRef.GraphicsDevice;
         }
         public override void Update(GameTime gameTime)
         {
@@ -163,8 +166,7 @@ namespace NoahsArk.States
             Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
             Texture2D rarityMarker = _contentRef.Load<Texture2D>("Assets/Sprites/Enemies/Rarity/marker");
             Enemy.HealthBarTexture = new Dictionary<ERarity, Texture2D>();
-            Enemy.HealthBarRectangle = new Dictionary<ERarity, Rectangle>();            
-            Enemy.HealthBarFrames = new Dictionary<ERarity, List<Rectangle>>();
+            Enemy.HealthBarRectangle = new Dictionary<ERarity, Rectangle>();
 
             ERarity[] rarities = Enum.GetValues(typeof(ERarity))
                 .Cast<ERarity>()
@@ -179,7 +181,6 @@ namespace NoahsArk.States
                 ERarity r = rarities[i];
                 Enemy.HealthBarTexture[r] = GetHealthBarTexture(r);
                 Enemy.HealthBarRectangle[r] = GetHealthBarRectangle(r);
-                Enemy.HealthBarFrames[r] = GetHealthBarFrames(r);
             }
 
             for (int i = 0; i < enemyTypes.Length; i++)
@@ -214,20 +215,7 @@ namespace NoahsArk.States
         }
         private Rectangle GetHealthBarRectangle(ERarity r)
         {
-            return new Rectangle(0, 0, 48, 16);            
-        }
-        private List<Rectangle> GetHealthBarFrames(ERarity r)
-        {
-            return new List<Rectangle>()
-            {
-                new Rectangle(48, 0, 48, 16), // full health
-                new Rectangle(96, 0, 48, 16), // 80% health
-                new Rectangle(144, 0, 48, 16), // 60% health
-                new Rectangle(192, 0, 48, 16), // 50% health
-                new Rectangle(240, 0, 48, 16), // 40% health
-                new Rectangle(288, 0, 48, 16), // 20% health
-                new Rectangle(336, 0, 48, 16), // 0% health
-            };
+            return new Rectangle(0, 0, 48, 16);
         }
         private void CreatePlayers()
         {

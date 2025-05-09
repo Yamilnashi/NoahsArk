@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="11">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="12">
  <tileset firstgid="1" source="../Tilesets/tileset_floors.tsx"/>
  <tileset firstgid="651" source="../Tilesets/tileset_vegetation.tsx"/>
  <tileset firstgid="1326" source="../Tilesets/tileset_clouds.tsx"/>
@@ -132,6 +132,13 @@
     <property name="rarity" value="epic"/>
    </properties>
   </object>
+  <object id="11" name="orcs magic" x="333.333" y="120" width="8" height="10.6667">
+   <properties>
+    <property name="enemyTypeCode" value="orc"/>
+    <property name="maxSpawnCount" type="int" value="1"/>
+    <property name="rarity" value="magic"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="obstacles">
   <object id="6" name="treelower" x="84.3333" y="238" width="26" height="16.33"/>
@@ -216,7 +223,7 @@
 0,0,0,0,0,0,0,1329,1330,1331,0,0,0,0,0,0,0,0,0,1332,1333,1334,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="14" name="aboveallrain" width="30" height="20" opacity="0.6">
+ <layer id="14" name="aboveallrain" width="30" height="20" opacity="0.1">
   <properties>
    <property name="drawAfterCharacter" type="bool" value="true"/>
    <property name="weatherSpeed" type="int" value="3"/>

@@ -6,7 +6,8 @@
 			"materialType": "Wooden",
 			"attackHitboxOffset": 10,
 			"baseStats": {
-				"damage": 25,
+				"minimumDamage": 3,
+				"maximumDamage": 5,
 				"attackSpeed": 1.5,
 				"criticalStrikeChance": 0.15,
 				"criticalStrikeDamage": 1.25,

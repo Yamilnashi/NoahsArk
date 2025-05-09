@@ -210,7 +210,7 @@ namespace NoahsArk.Entities
                     for (int i = 0; i < _currentMap.Entities.Count; i++)
                     {
                         Entity entity = _currentMap.Entities[i];
-                        if (entity != this) // don't check against yourself
+                        if (entity != this && !entity.IsDying) // don't check against yourself and dont check against dying enemies
                         {
                             Circle enemyHitbox = entity.GetHitbox(entity.Position);
                             if (CollisionHelper.CircleIntersectsCircle(newHitBox, enemyHitbox, out Vector2 displacement))
@@ -226,14 +226,14 @@ namespace NoahsArk.Entities
             newPosition += totalDisplacement;
             CompleteMove(newPosition);
         }
-        protected virtual float CalculateDamage(out bool isCrit)
+        protected virtual int CalculateDamage(out bool isCrit)
         {
             if (_equippedItems.TryGetValue(EEquipmentSlot.MainHand, out Item item) && 
                 item != null)
             {
                 if (item is WeaponObject weapon)
                 {
-                    return weapon.CalculateDamage(out isCrit);   
+                    return (int)weapon.CalculateDamage(out isCrit);   
                 }
             }
             isCrit = false;
