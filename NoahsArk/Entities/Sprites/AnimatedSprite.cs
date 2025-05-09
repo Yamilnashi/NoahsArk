@@ -18,6 +18,7 @@ namespace NoahsArk.Entities.Sprites
         private float _hitboxOffsetX;
         private float _hitboxOffsetY;
         private int _hitFrame;
+        private bool _isLooping;
         #endregion
 
         #region Properties
@@ -26,12 +27,14 @@ namespace NoahsArk.Entities.Sprites
         public int CurrentFrame { get { return _currentFrame; } }
         public int TotalFrames { get { return _frames.Count; } }
         public int HitFrame { get { return _hitFrame; } }
+        public bool IsLooping { get { return _isLooping; } set { _isLooping = value; } }
         public bool IsHitFrame => CurrentFrame == HitFrame;        
+        public float FrameDurection { get { return _frameDuration; } }
         #endregion
 
         #region Constructor
         public AnimatedSprite(Texture2D texture, int frameCount, int frameWidth, int frameHeight, 
-            float frameDuration, float hitboxOffsetX, float hitboxOffsetY, int hitFrame)
+            float frameDuration, float hitboxOffsetX, float hitboxOffsetY, int hitFrame, bool isLooping = true)
         {
             _texture = texture;
             _frameDuration = frameDuration;
@@ -40,6 +43,7 @@ namespace NoahsArk.Entities.Sprites
             _hitboxOffsetX = hitboxOffsetX;
             _hitboxOffsetY = hitboxOffsetY; 
             _hitFrame = hitFrame;
+            _isLooping = isLooping;
             _frames = new List<Rectangle>();
             for (int i = 0; i < frameCount; i++)
             {
@@ -57,18 +61,30 @@ namespace NoahsArk.Entities.Sprites
         #endregion
 
         #region Methods
-        public void Update(GameTime gameTime, EAnimationKey currentAnimation)
+        public void Update(GameTime gameTime, EAnimationKey currentAnimation, float speedMultiplier = 1.0f)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            float frameMultiplier = 3f;
+            float frameMultiplier = currentAnimation != EAnimationKey.Pierce
+                ? 3f
+                : 1f;
             if (currentAnimation == EAnimationKey.Running)
             {
                 frameMultiplier -= 1f;
             }
-            if (_timer >= _frameDuration * frameMultiplier)
+            float effectiveDuration = (_frameDuration * frameMultiplier) / speedMultiplier;
+            if (_timer > effectiveDuration)
             {
                 _timer = 0f;
-                _currentFrame = (_currentFrame + 1) % _frames.Count;
+                int nextFrame = _currentFrame + 1;
+                if (nextFrame < _frames.Count)
+                {
+                    _currentFrame = nextFrame;
+                }
+                else if (_isLooping)
+                {
+                    _currentFrame = 0; // Loop only if IsLooping is true
+                }
+                // If not looping, stay on the last frame
             }
         }
 

@@ -81,7 +81,7 @@ namespace NoahsArk.Entities
 
         #region Methods
         public virtual void Update(GameTime gameTime)
-        {
+        {            
             if (_isFlashing)
             {
                 _flashTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -90,6 +90,7 @@ namespace NoahsArk.Entities
                     _isFlashing = false;
                 }
             }
+            float speedMultiplier = GetSpeedMultiplier();
             if (_animations.ContainsKey(_currentAnimationKey))
             {
                 if (_animations[_currentAnimationKey].ContainsKey(_currentDirection))
@@ -97,7 +98,7 @@ namespace NoahsArk.Entities
                     for (int i = 0; i < _animations[_currentAnimationKey][_currentDirection].Keys.Count; i++)
                     {
                         EEquipmentSlot slot = _animations[_currentAnimationKey][_currentDirection].Keys.ElementAt(i);
-                        _animations[_currentAnimationKey][_currentDirection][slot].Update(gameTime, _currentAnimationKey);
+                        _animations[_currentAnimationKey][_currentDirection][slot].Update(gameTime, _currentAnimationKey, speedMultiplier);
                     }
                 }
             }
@@ -132,7 +133,7 @@ namespace NoahsArk.Entities
             Circle hitbox = GetHitbox(Position);
             return hitbox.Center.Y;
         }
-        public void SetAnimation(EAnimationKey key, EDirection direction)
+        public void SetAnimation(EAnimationKey key, EDirection direction, bool isLooping = true)
         {
             if (_animations.ContainsKey(key))
             {
@@ -144,6 +145,7 @@ namespace NoahsArk.Entities
                         for (int i = 0; i < _animations[key][direction].Keys.Count; i++)
                         {
                             EEquipmentSlot slot = _animations[key][direction].Keys.ElementAt(i);
+                            _animations[key][direction][slot].IsLooping = isLooping;
                             _animations[key][direction][slot].Reset();
                         }                        
                     }                    
@@ -272,6 +274,10 @@ namespace NoahsArk.Entities
                     _animations[animationKey][direction][EEquipmentSlot.MainHand].SetTexture(texture);
                 }
             }
+        }
+        protected virtual float GetSpeedMultiplier()
+        {
+            return 1.0f;
         }
         #endregion
 

@@ -26,7 +26,7 @@ namespace NoahsArk.Entities
         private float _transitionCooldown;
         private const float _transition_cooldown_duration = 0.5f;
         private float _attackingCooldown;
-        private const float _attacking_cooldown_duration = 2.4f;
+        private float _attacking_cooldown_duration = 2.4f;
         private bool _isInteracting;
         private bool _hasAppliedDamage;
         private EAnimationKey _animationState;
@@ -54,7 +54,7 @@ namespace NoahsArk.Entities
             base.Update(gameTime);
             Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
             Vector2 mouseWorldPosition = Vector2.Transform(mouseScreenPosition, Matrix.Invert(Camera.Transformation));
-            Vector2 toMouse = mouseWorldPosition - Position;
+            Vector2 toMouse = mouseWorldPosition - GetHitbox(Position).Center;
             EDirection facingDirection = CalculateDirection(toMouse);
 
             UpdateTransitionCooldownTimer(gameTime);
@@ -117,6 +117,16 @@ namespace NoahsArk.Entities
         {
             Vector2 feetPosition = desiredMovement + new Vector2(8, 24); // 16px = bottom half, add another 8px to be at center of bottom 16px = 24px
             return new Circle(feetPosition, 10f); // radius of 8 makes a circle 16px wide
+        }
+        protected override float GetSpeedMultiplier()
+        {
+            if (_animationState == EAnimationKey.Pierce &&
+                EquippedItems.TryGetValue(EEquipmentSlot.MainHand, out Item item) &&
+                item is WeaponObject weapon)
+            {
+                return weapon.BaseStats.AttackSpeed;
+            }
+            return base.GetSpeedMultiplier();
         }
         #endregion
 
@@ -196,7 +206,7 @@ namespace NoahsArk.Entities
                         EEquipmentSlot slot = Animations[CurrentAnimation][CurrentDirection].Keys.ElementAt(i);
                         Animations[CurrentAnimation][CurrentDirection][slot].Reset();
                     }
-                    SetAnimation(EAnimationKey.Idle, CurrentDirection);
+                    SetAnimation(EAnimationKey.Idle, CurrentDirection, true);
                 }
             }
         }
@@ -368,8 +378,17 @@ namespace NoahsArk.Entities
 
             IsAttacking = true;
             _animationState = EAnimationKey.Pierce;
-            SetAnimation(EAnimationKey.Pierce, facingDirection);
+            SetAnimation(EAnimationKey.Pierce, facingDirection, false);
             _hasAppliedDamage = false;
+            CalculateAnimationTimeBasedOnSpeed(facingDirection);
+            
+        }
+        private void CalculateAnimationTimeBasedOnSpeed(EDirection facingDirection)
+        {
+            float speedMultiplier = GetSpeedMultiplier();
+            int frameCount = Animations[EAnimationKey.Pierce][facingDirection][EEquipmentSlot.MainHand].TotalFrames;
+            float baseFrameDuration = Animations[EAnimationKey.Pierce][facingDirection][EEquipmentSlot.MainHand].FrameDurection;
+            _attacking_cooldown_duration = (frameCount * baseFrameDuration) / speedMultiplier / 1000f; // convert ms to seconds
             _attackingCooldown = _attacking_cooldown_duration; // start the attack cooldown
         }
         private void ApplyDamage()

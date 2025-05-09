@@ -99,7 +99,7 @@ namespace NoahsArk.Entities
             base.Draw(spriteBatch);
             Vector2 barPosition = GetHealthBarPosition();
             Vector2 rarityMarkerPosition = GetRarityMarkerPosition();
-            
+            UpdateHealthBar();
             if (HealthPoints < MaxHealthPoints &&
                 _healthBarTexture != null)
             {                
@@ -123,63 +123,6 @@ namespace NoahsArk.Entities
                     spriteBatch.Draw(_rarityMarker, markerPosition, new Rectangle(0, 0, 4, 8), Color.White);
                 }
             }
-            
-            
-            
-            //if (_healthBarTexture != null &&
-            //        _healthBarFrames.Count > 0 &&
-            //        HealthPoints < MaxHealthPoints)
-            //{
-            //    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarRectangle[_rarityType], Color.White * _healthBarOpacity);
-            //    if (HealthPoints <= 0)
-            //    {
-            //        spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, _healthBarFrames[_rarityType][6], Color.White * _healthBarOpacity);
-            //        return;
-            //    }
-
-            //    float healthPercent = (float)HealthPoints / MaxHealthPoints;
-            //    int frameIndex = 0;
-            //    if (healthPercent > 0.80f)
-            //    {
-            //        frameIndex = 0;
-            //    }
-            //    else if (healthPercent >= 0.6f)
-            //    {
-            //        frameIndex = 1;
-            //    }
-            //    else if (healthPercent >= 0.5f)
-            //    {
-            //        frameIndex = 2;
-            //    }
-            //    else if (healthPercent >= 0.4f)
-            //    {
-            //        frameIndex = 3;
-            //    }
-            //    else if (healthPercent >= 0.2f)
-            //    {
-            //        frameIndex = 4;
-            //    }
-            //    else
-            //    {
-            //        frameIndex = 5;
-            //    }
-            //    Rectangle sourceRect = _healthBarFrames[_rarityType][frameIndex];
-            //    spriteBatch.Draw(_healthBarTexture[_rarityType], barPosition, sourceRect, Color.White * _healthBarOpacity);
-            //}
-            //int markerCount = _rarityType.GetRarityMarkerCount();
-            //if (markerCount > 0)
-            //{
-            //    int markerWidth = 4;    // Width of each marker
-            //    int totalWidth = (markerCount * markerWidth) + ((markerCount - 1)); // Total space needed
-            //    float startX = rarityMarkerPosition.X - (totalWidth / 2f); // Center the markers
-
-            //    for (int i = 0; i < markerCount; i++)
-            //    {
-            //        Vector2 markerPosition = new Vector2(startX + (i * (markerWidth)), rarityMarkerPosition.Y);
-            //        spriteBatch.Draw(_rarityMarker, markerPosition, new Rectangle(0, 0, 4, 8), Color.White);
-            //    }
-            //}
-
         }
         public override void TakeDamage(float amount)
         {

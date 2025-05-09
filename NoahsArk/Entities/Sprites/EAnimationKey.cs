@@ -6,6 +6,6 @@
         Walking,
         Running,
         Death,
-        Pierce
+        Pierce      
     }
 }

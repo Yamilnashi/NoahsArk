@@ -6,11 +6,11 @@
 			"materialType": "Wooden",
 			"attackHitboxOffset": 10,
 			"baseStats": {
-				"minimumDamage": 3,
-				"maximumDamage": 5,
-				"attackSpeed": 1.5,
-				"criticalStrikeChance": 0.15,
-				"criticalStrikeDamage": 1.25,
+				"minimumDamage": 8,
+				"maximumDamage": 14,
+				"attackSpeed": 1.1,
+				"criticalStrikeChance": 0.35,
+				"criticalStrikeDamage": 1.4325,
 			},
 			"animations": {
 				"Pierce": {
