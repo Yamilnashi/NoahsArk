@@ -2,7 +2,7 @@
 
 namespace NoahsArk.Extensions
 {
-    public static class RarityTypeExtension
+    public static class RarityTypeExtensions
     {
         public static int GetRarityMarkerCount(this ERarity rarity)
         {

@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
+using NoahsArk.Entities.GameObjects;
+using NoahsArk.Extensions;
 using NoahsArk.Levels;
 using NoahsArk.Managers;
 using NoahsArk.Rendering;
@@ -17,6 +19,7 @@ namespace NoahsArk.States
         #region Fields
         private List<EMapCode> _mapCodes;
         private PictureBox _backgroundImage;
+        private Dictionary<EMenuCategoryType, MenuCategoryItem> _pauseMenuCategoryDict;
         private PictureBox _arrowRightImage;
         private PictureBox _arrowLeftImage;
         private int _selectedIndex = 0;
@@ -37,6 +40,7 @@ namespace NoahsArk.States
                 .ToList();
             _player = player;
             _camera = camera;
+            _pauseMenuCategoryDict = new Dictionary<EMenuCategoryType, MenuCategoryItem>();
             GamePlayScreen screen = (GamePlayScreen)_gameStateManager.CurrentState;
             _currentMap = screen.World.CurrentMapCode;
             LoadContent();
@@ -48,7 +52,7 @@ namespace NoahsArk.States
         {
             base.LoadContent();
             ContentManager content = _gameRef.Content;
-            Texture2D backgroundImage = content.Load<Texture2D>("Assets/Menus/pause-menu-base");
+            Texture2D backgroundImage = content.Load<Texture2D>("Assets/Menus/pause-menu-book");
             Texture2D arrowRightTexture = content.Load<Texture2D>("Assets/Menus/selector_right");
             Texture2D arrowLeftTexture = content.Load<Texture2D>("Assets/Menus/selector_left");
             _backgroundImage = new PictureBox(
@@ -66,6 +70,9 @@ namespace NoahsArk.States
             _controlManager.Add(_backgroundImage);
             _controlManager.Add(_arrowRightImage);
             _controlManager.Add(_arrowLeftImage);
+
+            CreateCategoryItems();
+
 
             string[] menuOptions = _mapCodes.Select(x => x.ToString()).ToArray();
             for (int i = 0;  i < menuOptions.Length; i++)
@@ -91,11 +98,42 @@ namespace NoahsArk.States
         {
             _gameRef.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             _controlManager.Draw(_gameRef.SpriteBatch);
+            for (int i = 0; i < _pauseMenuCategoryDict.Keys.Count; i++)
+            {
+                EMenuCategoryType categoryType = _pauseMenuCategoryDict.Keys.ElementAt(i);
+                _pauseMenuCategoryDict[categoryType].Draw(_gameRef.SpriteBatch, gameTime);
+            }
             _gameRef.SpriteBatch.End();
         }
         #endregion
 
         #region Private
+        private void CreateCategoryItems()
+        {
+            Texture2D activeCategoryItemTexture = _gameRef.Content.Load<Texture2D>("Assets/Menus/menu-category-active");
+            Texture2D inactiveCategoryItemTexture = _gameRef.Content.Load<Texture2D>("Assets/Menus/menu-category-inactive");
+
+            EMenuCategoryType[] categoryTypes = Enum.GetValues(typeof(EMenuCategoryType))
+                .Cast<EMenuCategoryType>()
+                .ToArray();
+
+            int positionOffsetX = 340;
+            for (int i = 0; i < categoryTypes.Length; i++)
+            {
+                EMenuCategoryType category = categoryTypes[i];
+                (string activeIconTexturePath, string inactiveIconTexturePath) = category.GetIconFilePath();
+                Texture2D activeIconTexture = _gameRef.Content.Load<Texture2D>(activeIconTexturePath);
+                Texture2D inactiveIconTexture = _gameRef.Content.Load<Texture2D>(inactiveIconTexturePath);
+                Vector2 menuItemPosition = new Vector2(positionOffsetX, 106);
+                MenuCategoryItem menuItem = new MenuCategoryItem(category, menuItemPosition, i == 0,
+                    activeCategoryItemTexture,
+                    inactiveCategoryItemTexture,
+                    activeIconTexture,
+                    inactiveIconTexture);
+                _pauseMenuCategoryDict[category] = menuItem;
+                positionOffsetX += activeCategoryItemTexture.Width + 3; // spacing
+            }
+        }
         private LinkLabel CreateMenuOption(string optionText)
         {
             LinkLabel label = new LinkLabel("Silver", 28, optionText, Color.Black, Color.Red);

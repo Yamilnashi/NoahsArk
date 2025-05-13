@@ -2,7 +2,7 @@
 
 namespace NoahsArk.Extensions
 {
-    public static class MapCodeExtension
+    public static class MapCodeExtensions
     {
         public static string TileMapFilePath(this EMapCode mapCode)
         {
