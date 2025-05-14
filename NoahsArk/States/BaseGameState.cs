@@ -38,6 +38,9 @@ namespace NoahsArk.States
             Dictionary<(string font, int size), SpriteFont> spriteFontsDict = new Dictionary<(string font, int size), SpriteFont>()
             {
                 {("Silver", 28), Content.Load<SpriteFont>("Assets/Fonts/Silver28")},
+                {("Monogram", 18), Content.Load<SpriteFont>("Assets/Fonts/Monogram18")},
+                {("Monogram", 16), Content.Load<SpriteFont>("Assets/Fonts/Monogram16")},
+                {("Monogram", 14), Content.Load<SpriteFont>("Assets/Fonts/Monogram14")},
                 {("Monogram", 12), Content.Load<SpriteFont>("Assets/Fonts/Monogram12")},
                 {("Monogram", 10), Content.Load<SpriteFont>("Assets/Fonts/Monogram10")}
             };

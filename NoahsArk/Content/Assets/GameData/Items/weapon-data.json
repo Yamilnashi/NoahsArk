@@ -8,7 +8,7 @@
 			"baseStats": {
 				"minimumDamage": 8,
 				"maximumDamage": 14,
-				"attackSpeed": 1.0,
+				"attackSpeed": 1.2,
 				"criticalStrikeChance": 0.15,
 				"criticalStrikeDamage": 1.4325,
 			},

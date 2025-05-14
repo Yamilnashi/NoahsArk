@@ -1,4 +1,4 @@
-﻿namespace NoahsArk.Entities.GameObjects
+﻿namespace NoahsArk.Entities.Menus
 {
     public enum EMenuCategoryType
     {

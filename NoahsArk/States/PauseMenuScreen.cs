@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Controls;
 using NoahsArk.Entities;
-using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Menus;
 using NoahsArk.Extensions;
 using NoahsArk.Levels;
 using NoahsArk.Managers;
@@ -20,6 +20,7 @@ namespace NoahsArk.States
         private List<EMapCode> _mapCodes;
         private PictureBox _backgroundImage;
         private Dictionary<EMenuCategoryType, MenuCategoryItem> _pauseMenuCategoryDict;
+        private Dictionary<EMenuCategoryType, IMenuCategoryContent> _contentRenderers;
         private PictureBox _arrowRightImage;
         private PictureBox _arrowLeftImage;
         private int _selectedIndex = 0;
@@ -27,6 +28,7 @@ namespace NoahsArk.States
         private Player _player;
         private Camera _camera;
         private EMapCode _currentMap;
+        private EMenuCategoryType _activeCategory;
         #endregion
 
         #region Properties
@@ -41,8 +43,9 @@ namespace NoahsArk.States
             _player = player;
             _camera = camera;
             _pauseMenuCategoryDict = new Dictionary<EMenuCategoryType, MenuCategoryItem>();
+            
             GamePlayScreen screen = (GamePlayScreen)_gameStateManager.CurrentState;
-            _currentMap = screen.World.CurrentMapCode;
+            _currentMap = screen.World.CurrentMapCode;            
             LoadContent();
         }
         #endregion
@@ -92,6 +95,31 @@ namespace NoahsArk.States
         public override void Update(GameTime gameTime)
         {
             _controlManager.Update(gameTime, _playerIndex);
+
+            Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
+            bool tabClicked = InputHandler.CheckMousePress(EMouseButton.Left);
+
+            for (int i = 0; i < _pauseMenuCategoryDict.Keys.Count; i++)
+            {
+                EMenuCategoryType category = _pauseMenuCategoryDict.Keys.ElementAt(i);
+                MenuCategoryItem tab = _pauseMenuCategoryDict[category];
+                if (tab.Bounds.Contains(mouseScreenPosition))
+                {
+                    if (tabClicked)
+                    {
+                        // deactivate all tabs
+                        for (int j = 0; j < _pauseMenuCategoryDict.Keys.Count; j++)
+                        {
+                            EMenuCategoryType categoryToDeactivate = _pauseMenuCategoryDict.Keys.ElementAt(j);
+                            MenuCategoryItem tabToDeactivate = _pauseMenuCategoryDict[categoryToDeactivate];
+                            tabToDeactivate.IsActive = false;
+                        }
+                        tab.IsActive = true;
+                        _activeCategory = category;
+                    }
+                }
+            }
+
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -103,6 +131,20 @@ namespace NoahsArk.States
                 EMenuCategoryType categoryType = _pauseMenuCategoryDict.Keys.ElementAt(i);
                 _pauseMenuCategoryDict[categoryType].Draw(_gameRef.SpriteBatch, gameTime);
             }
+
+            int pageStartY = 150;
+            int pageWidth = 578;
+            int pageHeight = 400;
+            Rectangle leftPage = new Rectangle(350, pageStartY, pageWidth, pageHeight);
+            int rightPageStartX = leftPage.X + 320;
+            Rectangle rightPage = new Rectangle(rightPageStartX, pageStartY, pageWidth, pageHeight);
+
+            if (_contentRenderers.TryGetValue(_activeCategory, out IMenuCategoryContent renderer))
+            {
+                renderer.DrawLeftPage(_gameRef.SpriteBatch, gameTime, leftPage);
+                renderer.DrawRightPage(_gameRef.SpriteBatch, gameTime, rightPage);
+            }
+
             _gameRef.SpriteBatch.End();
         }
         #endregion
@@ -110,8 +152,12 @@ namespace NoahsArk.States
         #region Private
         private void CreateCategoryItems()
         {
-            Texture2D activeCategoryItemTexture = _gameRef.Content.Load<Texture2D>("Assets/Menus/menu-category-active");
-            Texture2D inactiveCategoryItemTexture = _gameRef.Content.Load<Texture2D>("Assets/Menus/menu-category-inactive");
+            _contentRenderers = new Dictionary<EMenuCategoryType, IMenuCategoryContent>()
+            {
+                { EMenuCategoryType.Equipment, new EquipmentMenuContent(_player, _gameRef.Content) }
+            };
+
+            Texture2D categoryitemContainerTexture = _gameRef.Content.Load<Texture2D>("Assets/Menus/menu-category-active");
 
             EMenuCategoryType[] categoryTypes = Enum.GetValues(typeof(EMenuCategoryType))
                 .Cast<EMenuCategoryType>()
@@ -121,19 +167,25 @@ namespace NoahsArk.States
             for (int i = 0; i < categoryTypes.Length; i++)
             {
                 EMenuCategoryType category = categoryTypes[i];
-                (string activeIconTexturePath, string inactiveIconTexturePath) = category.GetIconFilePath();
-                Texture2D activeIconTexture = _gameRef.Content.Load<Texture2D>(activeIconTexturePath);
-                Texture2D inactiveIconTexture = _gameRef.Content.Load<Texture2D>(inactiveIconTexturePath);
+                string iconFilePath = category.GetIconFilePath();
+                Texture2D icon = _gameRef.Content.Load<Texture2D>(iconFilePath);
                 Vector2 menuItemPosition = new Vector2(positionOffsetX, 106);
                 MenuCategoryItem menuItem = new MenuCategoryItem(category, menuItemPosition, i == 0,
-                    activeCategoryItemTexture,
-                    inactiveCategoryItemTexture,
-                    activeIconTexture,
-                    inactiveIconTexture);
+                    categoryitemContainerTexture, icon);
                 _pauseMenuCategoryDict[category] = menuItem;
-                positionOffsetX += activeCategoryItemTexture.Width + 3; // spacing
+                positionOffsetX += categoryitemContainerTexture.Width + 3; // spacing
             }
+
+            _activeCategory = EMenuCategoryType.Equipment;
         }
+
+        private void CreateEquipmentSlots()
+        {
+            Texture2D equipmentSlotTexture = _gameRef.Content.Load<Texture2D>("Assets/Menu/menu-equipment-slot");
+            Texture2D equipmentSlotSelectedTexture = _gameRef.Content.Load<Texture2D>("Assets/Menu/menu-equipment-slot-selected");
+            
+        }
+
         private LinkLabel CreateMenuOption(string optionText)
         {
             LinkLabel label = new LinkLabel("Silver", 28, optionText, Color.Black, Color.Red);
