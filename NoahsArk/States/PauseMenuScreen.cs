@@ -77,20 +77,20 @@ namespace NoahsArk.States
             CreateCategoryItems();
 
 
-            string[] menuOptions = _mapCodes.Select(x => x.ToString()).ToArray();
-            for (int i = 0;  i < menuOptions.Length; i++)
-            {
-                LinkLabel option = CreateMenuOption(menuOptions[i]);
-                _controlManager.Add(option);
-            }
+            //string[] menuOptions = _mapCodes.Select(x => x.ToString()).ToArray();
+            //for (int i = 0;  i < menuOptions.Length; i++)
+            //{
+            //    LinkLabel option = CreateMenuOption(menuOptions[i]);
+            //    _controlManager.Add(option);
+            //}
             
-            _controlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
-            SetInitialControlPosition();
-            ControlManager_FocusChanged(_controlManager
-                .Where(x => !string.IsNullOrEmpty(x.Text))
-                .FirstOrDefault(x => x.Text
-                                    .Equals(_currentMap.ToString(), StringComparison.OrdinalIgnoreCase)),
-                                    null);
+            //_controlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
+            //SetInitialControlPosition();
+            //ControlManager_FocusChanged(_controlManager
+            //    .Where(x => !string.IsNullOrEmpty(x.Text))
+            //    .FirstOrDefault(x => x.Text
+            //                        .Equals(_currentMap.ToString(), StringComparison.OrdinalIgnoreCase)),
+            //                        null);
         }
         public override void Update(GameTime gameTime)
         {
@@ -119,6 +119,10 @@ namespace NoahsArk.States
                     }
                 }
             }
+            if (_contentRenderers.TryGetValue(_activeCategory, out IMenuCategoryContent renderer))
+            {
+                renderer.Update(gameTime);
+            }            
 
             base.Update(gameTime);
         }

@@ -99,13 +99,13 @@ namespace NoahsArk.Entities.Sprites
                 SpriteEffects.None, 
                 0f);
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, Color color)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, EDirection direction, Color color, float scale = 1.0f)
         {   
             Vector2 topLeftPosition = position - new Vector2(_hitboxOffsetX, _hitboxOffsetY);
             SpriteEffects spriteEffects = direction == EDirection.Left
                 ? SpriteEffects.FlipHorizontally
                 : SpriteEffects.None;
-            spriteBatch.Draw(_texture, topLeftPosition, _frames[_currentFrame], color, 0f, new Vector2(0, 0), 1f, spriteEffects, 0f);
+            spriteBatch.Draw(_texture, topLeftPosition, _frames[_currentFrame], color, 0f, new Vector2(0, 0), scale, spriteEffects, 0f);
         }
         public void UpdatePosition(Vector2 newPosition)
         {
