@@ -373,7 +373,7 @@ namespace NoahsArk.Entities
         {
             Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
             Vector2 mouseWorldPosition = Vector2.Transform(mouseScreenPosition, Matrix.Invert(Camera.Transformation));
-            Vector2 toMouse = mouseWorldPosition - Position;
+            Vector2 toMouse = mouseWorldPosition - GetHitbox(Position).Center;
             EDirection facingDirection = CalculateDirection(toMouse);
 
             IsAttacking = true;

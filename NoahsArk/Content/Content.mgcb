@@ -163,6 +163,30 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Menus/menu-category-wrench.png
 
+#begin Assets/Menus/menu-equipment-large-slot-selected.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Menus/menu-equipment-large-slot-selected.png
+
+#begin Assets/Menus/menu-equipment-large-slot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Menus/menu-equipment-large-slot.png
+
 #begin Assets/Menus/menu-equipment-slot-selected.png
 /importer:TextureImporter
 /processor:TextureProcessor
