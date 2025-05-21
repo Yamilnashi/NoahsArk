@@ -52,11 +52,7 @@ namespace NoahsArk.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Vector2 mouseScreenPosition = InputHandler.MouseAsVector2;
-            Vector2 mouseWorldPosition = Vector2.Transform(mouseScreenPosition, Matrix.Invert(Camera.Transformation));
-            Vector2 toMouse = mouseWorldPosition - GetHitbox(Position).Center;
-            EDirection facingDirection = CalculateDirection(toMouse);
-
+            EDirection facingDirection = HandleFacingDirection();
             UpdateTransitionCooldownTimer(gameTime);
             HandleCameraControls();
             HandleMovement();
@@ -259,6 +255,40 @@ namespace NoahsArk.Entities
                 }
             }
         }
+        private EDirection HandleFacingDirection()
+        {
+            GamePadState gamePadState = GamePad.GetState(_playerIndex);
+            KeyboardState keyboardState = Keyboard.GetState();
+            EDirection facingDirection = CurrentDirection;
+            if (gamePadState.DPad.Up == ButtonState.Pressed ||
+                keyboardState.IsKeyDown(Keys.W) ||
+                keyboardState.IsKeyDown(Keys.Up))
+            {
+                facingDirection = EDirection.Up;
+            }
+
+            if (gamePadState.DPad.Right == ButtonState.Pressed ||
+                keyboardState.IsKeyDown(Keys.D) ||
+                keyboardState.IsKeyDown(Keys.Right))
+            {
+                facingDirection = EDirection.Right;
+            }
+
+            if (gamePadState.DPad.Down == ButtonState.Pressed ||
+                keyboardState.IsKeyDown(Keys.S) ||
+                keyboardState.IsKeyDown(Keys.Down))
+            {
+                facingDirection = EDirection.Down;
+            }
+
+            if (gamePadState.DPad.Left == ButtonState.Pressed ||
+                keyboardState.IsKeyDown(Keys.A) ||
+                keyboardState.IsKeyDown(Keys.Left))
+            {
+                facingDirection = EDirection.Left;
+            }
+            return facingDirection;
+        }
         private void HandleMovement()
         {
             GamePadState gamePadState = GamePad.GetState(_playerIndex);
@@ -296,7 +326,8 @@ namespace NoahsArk.Entities
             if (!IsAttacking)
             {
                 if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed ||
-                keyboardState.IsKeyDown(Keys.LeftShift))
+                keyboardState.IsKeyDown(Keys.LeftShift) &&
+                direction != Vector2.Zero)
                 {
                     _animationState = EAnimationKey.Running;
                     speedMultiplier = 1.8f;
