@@ -20,6 +20,7 @@ namespace NoahsArk.Levels
         private List<Player> _players = new List<Player>();
         private Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>> _enemies = new Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>>();
         private List<Entity> _entities = new List<Entity>();
+        private List<Particle> _particles = new List<Particle>();
         private List<FloatingText> _floatingTexts = new List<FloatingText>();
         private Texture2D _debugTexture;
         private Game1 _gameRef;
@@ -82,6 +83,16 @@ namespace NoahsArk.Levels
                 entity.Update(gameTime);
             }
 
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                Particle particle = _particles[i];
+                particle.Update(gameTime);
+                if (!particle.IsActive)
+                {
+                    RemoveParticle(particle);
+                }
+            }
+
             for (int i = 0; i < _tileMap.MapLayers.Count; i++)
             {
                 ILayer layer = _tileMap.MapLayers[i];
@@ -100,7 +111,7 @@ namespace NoahsArk.Levels
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
         {
             DrawLayersBeforeCharacter(spriteBatch, gameTime, camera, out List<ILayer> layersToDrawAfterCharacter);
-            DrawEntities(spriteBatch);
+            DrawSortables(spriteBatch);
             DrawLayersAfterCharacter(spriteBatch, gameTime, camera, layersToDrawAfterCharacter);
             DrawFloatingTexts(spriteBatch);
         }
@@ -127,6 +138,14 @@ namespace NoahsArk.Levels
             _enemies[enemy.EnemyType][enemy.Rarity].Remove(enemy);
             _entities.Remove(enemy);
             enemy.CurrentMap = null;    
+        }
+        public void AddParticle(Particle particle)
+        {
+            _particles.Add(particle);
+        }
+        public void RemoveParticle(Particle particle)
+        {
+            _particles.Remove(particle);
         }
         public void AddFloatingText(string text, Vector2 position, Color color, float lifetime, int size)
         {
@@ -157,13 +176,17 @@ namespace NoahsArk.Levels
                 layer.Draw(spriteBatch, gameTime, camera, _tileMap.TileSets);
             }
         }
-        private void DrawEntities(SpriteBatch spriteBatch)
+        private void DrawSortables(SpriteBatch spriteBatch)
         {
-            List<Entity> sortedEntities = _entities.OrderBy(x => x.GetDepthY()).ToList();
-            for (int i = 0; i < sortedEntities.Count; i++)
+            List<IDrawableSortable> sortables = new List<IDrawableSortable>();
+            sortables.AddRange(_entities.Cast<IDrawableSortable>());
+            sortables.AddRange(_particles.Cast<IDrawableSortable>());
+
+            sortables = sortables.OrderBy(x => x.GetDepthY()).ToList();
+            for (int i = 0; i < sortables.Count; i++)
             {
-                Entity entity = sortedEntities[i];
-                entity.Draw(spriteBatch);
+                IDrawableSortable sortable = sortables[i];
+                sortable.Draw(spriteBatch);
             }
         }
         private void DrawLayersAfterCharacter(SpriteBatch spriteBatch, GameTime gameTime, Camera camera, List<ILayer> layersToDrawAfterCharacter)

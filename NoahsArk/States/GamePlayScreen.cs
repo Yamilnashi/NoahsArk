@@ -37,7 +37,6 @@ namespace NoahsArk.States
         private static bool _isDebugEnabled = false;        
         private static Dictionary<(EWeaponType, EMaterialType), WeaponObject> _weaponObjectDict = new Dictionary<(EWeaponType, EMaterialType), WeaponObject>();
         private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
-        private List<Particle> _particles = new List<Particle>();
         private Texture2D _particleTexture;
         private Random _random = new Random();
         #endregion
@@ -93,15 +92,6 @@ namespace NoahsArk.States
                 _world.Update(gameTime);
             }
 
-            for (int i = 0; i < _particles.Count; i++)
-            {
-                _particles[i].Update(gameTime);
-                if (!_particles[i].IsActive)
-                {
-                    _particles.RemoveAt(i);
-                }
-            }
-
             if (InputHandler.KeyPressed(Keys.F1))
             {
                 _isDebugEnabled = !_isDebugEnabled;
@@ -115,11 +105,6 @@ namespace NoahsArk.States
             base.Draw(gameTime);
             _controlManager.Draw(_gameRef.SpriteBatch);
             _world.Draw(_gameRef.SpriteBatch, gameTime, _camera);
-
-            for (int i = 0; i < _particles.Count;i++)
-            {
-                _particles[i].Draw(_gameRef.SpriteBatch);
-            }
 
             if (_isDebugEnabled)
             {
@@ -164,7 +149,7 @@ namespace NoahsArk.States
                 float rotationSpeed = (float)(_random.NextDouble() * 2 - 1) * MathHelper.Pi; // random spin
                 Color gradient = Color.Lerp(Color.DarkRed, Color.Red, (float)_random.NextDouble());
                 Particle p = new Particle(_particleTexture, position, velocity, lifetime, gradient, size, rotationSpeed);
-                _particles.Add(p);
+                _world.CurrentMap.AddParticle(p);
             }
         }
         #endregion
@@ -195,7 +180,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
-            _world.SetCurrentMap(EMapCode.Act1);
+            _world.SetCurrentMap(EMapCode.Test);
             Game.Components.Add(_world);
         }
         private void LoadEnemies()

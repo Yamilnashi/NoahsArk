@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace NoahsArk.Entities
 {
-    public class Particle
+    public class Particle : IDrawableSortable
     {
         #region Fields
         private Vector2 _position;
@@ -22,6 +22,7 @@ namespace NoahsArk.Entities
 
         #region Properties
         public bool IsActive { get { return _isActive; } }
+        public Vector2 Position { get { return _position; } }
         #endregion
 
         #region Constructor
@@ -51,7 +52,7 @@ namespace NoahsArk.Entities
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _timeAlive += deltaTime;
             _position += _velocity * deltaTime;
-            _velocity += new Vector2(0, 150f) * deltaTime; // gravity, might need tweaking
+            _velocity += new Vector2(0, 50f) * deltaTime; // gravity, might need tweaking
             _rotation += _rotationSpeed * deltaTime;
             if (_timeAlive >= _lifetime)
             {
@@ -73,6 +74,11 @@ namespace NoahsArk.Entities
             Color drawColor = new Color(_color.R, _color.G, _color.B, alpha);
             Vector2 origin = new Vector2(_texture.Width / 2f, _texture.Height / 2f);
             spriteBatch.Draw(_texture, _position, null, drawColor, _rotation, origin, sizeJitter, SpriteEffects.None, 0f);
+        }
+
+        public float GetDepthY()
+        {
+            return _position.Y;
         }
         #endregion
     }

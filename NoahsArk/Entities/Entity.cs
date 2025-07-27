@@ -14,7 +14,7 @@ using NoahsArk.Utilities;
 
 namespace NoahsArk.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : IDrawableSortable
     {
         #region Fields
         private float _healthPoints;
