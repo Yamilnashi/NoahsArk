@@ -433,10 +433,13 @@ namespace NoahsArk.Entities
                 {
                     continue;
                 }
+
+                Circle entityHitbox = entity.GetHitbox(entity.Position);
+
                 if (!entity.IsDying &&
-                    CollisionHelper.CircleIntersectsCircle(attackHitBox, entity.GetHitbox(entity.Position)))
+                    CollisionHelper.PlayerIntersectsCircle(attackHitBox, entityHitbox, out Vector2 contactPoint))
                 {
-                    DealDamage(entity);                    
+                    DealDamage(entity, contactPoint);
                 }
             }
         }

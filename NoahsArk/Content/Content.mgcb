@@ -691,6 +691,42 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Enemies/Orc/Movements/idle-right-spritesheet.png
 
+#begin Assets/Sprites/Enemies/Orc/Movements/run-right-epic-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/Orc/Movements/run-right-epic-spritesheet.png
+
+#begin Assets/Sprites/Enemies/Orc/Movements/run-right-legendary-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/Orc/Movements/run-right-legendary-spritesheet.png
+
+#begin Assets/Sprites/Enemies/Orc/Movements/run-right-rare-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Enemies/Orc/Movements/run-right-rare-spritesheet.png
+
 #begin Assets/Sprites/Enemies/Orc/Movements/run-right-spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -714,6 +750,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Enemies/Rarity/marker.png
+
+#begin Assets/Sprites/Environment/blood.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Environment/blood.png
+
+#begin Assets/Sprites/Environment/smoke-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Environment/smoke-spritesheet.png
 
 #begin Tiled/Tilesets/full.png
 /importer:TextureImporter

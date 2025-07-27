@@ -36,6 +36,7 @@ namespace NoahsArk.Levels
         #region Constructor
         public Map(Game1 gameRef, TileMap tileMap, Texture2D debugTexture)
         {
+            _gameRef = gameRef;
             _tileMap = tileMap;
             _debugTexture = debugTexture;
             ERarity[] rarities = Enum.GetValues(typeof(ERarity))

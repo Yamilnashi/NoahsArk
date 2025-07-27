@@ -14,6 +14,7 @@
     <None Remove="Content\Assets\GameData\Enemies\enemy-data.json" />
     <None Remove="Content\Assets\GameData\Items\weapon-data.json" />
     <None Remove="Content\Assets\GameData\Players\player-data.json" />
+    <None Remove="Content\Tiled\GameMaps\act-1.tmx" />
     <None Remove="Content\Tiled\GameMaps\development.tmx" />
     <None Remove="Content\Tiled\GameMaps\home.tmx" />
     <None Remove="Content\Tiled\GameMaps\homeinside.tmx" />
@@ -70,6 +71,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Assets\GameData\Players\player-data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiled\GameMaps\act-1.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiled\GameMaps\development.tmx">

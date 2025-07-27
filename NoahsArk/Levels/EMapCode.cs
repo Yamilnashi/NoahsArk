@@ -7,6 +7,7 @@
         Obstacles,
         HomeOutside,
         HomeInside,
-        Restaurant
+        Restaurant,
+        Act1
     }
 }

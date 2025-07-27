@@ -70,12 +70,32 @@ namespace NoahsArk.Utilities
             }
             return false;
         }
-        public static bool CircleIntersectsCircle(Circle circle1, Circle circle2)
+        public static bool PlayerIntersectsCircle(Circle circle1, Circle circle2, out Vector2 contactPoint)
         {
-            Vector2 vectorBetweenCenters = circle2.Center - circle1.Center;
-            float distanceSquared = vectorBetweenCenters.LengthSquared();
+            contactPoint = Vector2.Zero;
+            Vector2 direction = circle2.Center - circle1.Center;
+            float distanceSquared = direction.LengthSquared();
             float sumRadii = circle1.Radius + circle2.Radius;
-            return distanceSquared < sumRadii * sumRadii;
+
+            if (distanceSquared >= sumRadii * sumRadii)
+            {
+                return false; // no intersection
+            }
+
+            float distance = (float)Math.Sqrt(distanceSquared);
+            if (distance == 0f)
+            {
+                contactPoint = circle1.Center;
+                return true;
+            }
+
+            Vector2 unitDirection = direction / distance;
+            contactPoint = circle1.Center + unitDirection * circle1.Radius;
+            return true;
+            //Vector2 vectorBetweenCenters = circle2.Center - circle1.Center;
+            //float distanceSquared = vectorBetweenCenters.LengthSquared();
+            //float sumRadii = circle1.Radius + circle2.Radius;
+            //return distanceSquared < sumRadii * sumRadii;
         }
     }
 }

@@ -14,6 +14,7 @@ using NoahsArk.Entities.GameObjects;
 using NoahsArk.Entities.Items;
 using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Players;
+using NoahsArk.Extensions;
 using NoahsArk.Levels;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Managers;
@@ -36,6 +37,9 @@ namespace NoahsArk.States
         private static bool _isDebugEnabled = false;        
         private static Dictionary<(EWeaponType, EMaterialType), WeaponObject> _weaponObjectDict = new Dictionary<(EWeaponType, EMaterialType), WeaponObject>();
         private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
+        private List<Particle> _particles = new List<Particle>();
+        private Texture2D _particleTexture;
+        private Random _random = new Random();
         #endregion
 
         #region Properties
@@ -63,6 +67,7 @@ namespace NoahsArk.States
         protected override void LoadContent()
         {
             base.LoadContent();
+            LoadEntities();
             LoadItems();
             LoadWorld();
             LoadEnemies();
@@ -88,6 +93,15 @@ namespace NoahsArk.States
                 _world.Update(gameTime);
             }
 
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                _particles[i].Update(gameTime);
+                if (!_particles[i].IsActive)
+                {
+                    _particles.RemoveAt(i);
+                }
+            }
+
             if (InputHandler.KeyPressed(Keys.F1))
             {
                 _isDebugEnabled = !_isDebugEnabled;
@@ -101,6 +115,12 @@ namespace NoahsArk.States
             base.Draw(gameTime);
             _controlManager.Draw(_gameRef.SpriteBatch);
             _world.Draw(_gameRef.SpriteBatch, gameTime, _camera);
+
+            for (int i = 0; i < _particles.Count;i++)
+            {
+                _particles[i].Draw(_gameRef.SpriteBatch);
+            }
+
             if (_isDebugEnabled)
             {
                 Rectangle playerBox = new Rectangle(
@@ -131,9 +151,29 @@ namespace NoahsArk.States
                 DrawDebug();
             }
         }
+        public void SpawnBloodParticles(Vector2 position, int count = 10)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                float angle = (float)(_random.NextDouble() * Math.PI * 2 - Math.PI / 2);
+                float speed = (float)(_random.NextDouble() * 40 + 10); // adjust for speed hopefulyl gravity has time to act
+                Vector2 velocity = new Vector2((float)Math.Cos(angle) * speed, (float)Math.Sin(angle) * speed);
+
+                float lifetime = (float)(_random.NextDouble() * 0.8 + 0.6); // 0.6-1.4 sec
+                float size = (float)(_random.NextDouble() * 0.6 + 0.4); // 0.4-1 scale
+                float rotationSpeed = (float)(_random.NextDouble() * 2 - 1) * MathHelper.Pi; // random spin
+                Color gradient = Color.Lerp(Color.DarkRed, Color.Red, (float)_random.NextDouble());
+                Particle p = new Particle(_particleTexture, position, velocity, lifetime, gradient, size, rotationSpeed);
+                _particles.Add(p);
+            }
+        }
         #endregion
 
         #region Private
+        private void LoadEntities()
+        {
+            _particleTexture = _contentRef.Load<Texture2D>("Assets/Sprites/Environment/blood");
+        }
         private void LoadItems()
         {
             LoadWeapons();
@@ -155,7 +195,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
-            _world.SetCurrentMap(EMapCode.Test);
+            _world.SetCurrentMap(EMapCode.Act1);
             Game.Components.Add(_world);
         }
         private void LoadEnemies()
@@ -223,7 +263,7 @@ namespace NoahsArk.States
             string jsonContent = File.ReadAllText(playerDataFilePath);
             PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(jsonContent);
             PlayerObject p = playerData.PlayerObjects.FirstOrDefault(x => x.ClassType == EClassType.Rogue);
-            Vector2 initialPosition = new Vector2(295, 240);
+            Vector2 initialPosition = _world.CurrentMapCode.GetInitialPosition();
             Texture2D shadow = _contentRef.Load<Texture2D>("Assets/Sprites/Character/shadow");
             _player = new Player(p.HealthPoints, p.ManaPoints, initialPosition, p.Speed, p.Animations, _camera, PlayerIndex.One, shadow, _world);
             _player.EquipWeapon(EWeaponType.Dagger, EMaterialType.Wooden);
@@ -259,7 +299,7 @@ namespace NoahsArk.States
             debugLabel.Draw(_gameRef.SpriteBatch);
 
             _gameRef.SpriteBatch.End();
-        }
+        }        
         #endregion
     }
 }

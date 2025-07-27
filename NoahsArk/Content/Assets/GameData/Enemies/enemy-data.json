@@ -290,11 +290,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-rare-spritesheet.png",
+									"Chest": "run-right-rare-spritesheet.png",
+									"Gloves": "run-right-rare-spritesheet.png",
+									"Legs": "run-right-rare-spritesheet.png",
+									"Feet": "run-right-rare-spritesheet.png"	
 								}
 							},
 							"Left": {
@@ -303,11 +303,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-rare-spritesheet.png",
+									"Chest": "run-right-rare-spritesheet.png",
+									"Gloves": "run-right-rare-spritesheet.png",
+									"Legs": "run-right-rare-spritesheet.png",
+									"Feet": "run-right-rare-spritesheet.png"	
 								}									
 							}
 						}											
@@ -352,11 +352,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-rare-spritesheet.png",
+									"Chest": "run-right-rare-spritesheet.png",
+									"Gloves": "run-right-rare-spritesheet.png",
+									"Legs": "run-right-rare-spritesheet.png",
+									"Feet": "run-right-rare-spritesheet.png"	
 								}								
 							},
 							"Left": {
@@ -365,11 +365,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"
+									"Head": "run-right-rare-spritesheet.png",
+									"Chest": "run-right-rare-spritesheet.png",
+									"Gloves": "run-right-rare-spritesheet.png",
+									"Legs": "run-right-rare-spritesheet.png",
+									"Feet": "run-right-rare-spritesheet.png"
 								}								
 							}								
 						}											
@@ -426,11 +426,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-epic-spritesheet.png",
+									"Chest": "run-right-epic-spritesheet.png",
+									"Gloves": "run-right-epic-spritesheet.png",
+									"Legs": "run-right-epic-spritesheet.png",
+									"Feet": "run-right-epic-spritesheet.png"	
 								}
 							},
 							"Left": {
@@ -439,11 +439,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-epic-spritesheet.png",
+									"Chest": "run-right-epic-spritesheet.png",
+									"Gloves": "run-right-epic-spritesheet.png",
+									"Legs": "run-right-epic-spritesheet.png",
+									"Feet": "run-right-epic-spritesheet.png"	
 								}									
 							}
 						}											
@@ -488,11 +488,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-epic-spritesheet.png",
+									"Chest": "run-right-epic-spritesheet.png",
+									"Gloves": "run-right-epic-spritesheet.png",
+									"Legs": "run-right-epic-spritesheet.png",
+									"Feet": "run-right-epic-spritesheet.png"	
 								}								
 							},
 							"Left": {
@@ -501,11 +501,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"
+									"Head": "run-right-epic-spritesheet.png",
+									"Chest": "run-right-epic-spritesheet.png",
+									"Gloves": "run-right-epic-spritesheet.png",
+									"Legs": "run-right-epic-spritesheet.png",
+									"Feet": "run-right-epic-spritesheet.png"
 								}								
 							}								
 						}											
@@ -562,11 +562,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-legendary-spritesheet.png",
+									"Chest": "run-right-legendary-spritesheet.png",
+									"Gloves": "run-right-legendary-spritesheet.png",
+									"Legs": "run-right-legendary-spritesheet.png",
+									"Feet": "run-right-legendary-spritesheet.png"	
 								}
 							},
 							"Left": {
@@ -575,11 +575,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-legendary-spritesheet.png",
+									"Chest": "run-right-legendary-spritesheet.png",
+									"Gloves": "run-right-legendary-spritesheet.png",
+									"Legs": "run-right-legendary-spritesheet.png",
+									"Feet": "run-right-legendary-spritesheet.png"	
 								}									
 							}
 						}											
@@ -624,11 +624,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"	
+									"Head": "run-right-legendary-spritesheet.png",
+									"Chest": "run-right-legendary-spritesheet.png",
+									"Gloves": "run-right-legendary-spritesheet.png",
+									"Legs": "run-right-legendary-spritesheet.png",
+									"Feet": "run-right-legendary-spritesheet.png"	
 								}								
 							},
 							"Left": {
@@ -637,11 +637,11 @@
 								"frameHeight": 64,
 								"frameDuration": 100,
 								"equipmentSlotTextureFilePaths": {
-									"Head": "run-right-spritesheet.png",
-									"Chest": "run-right-spritesheet.png",
-									"Gloves": "run-right-spritesheet.png",
-									"Legs": "run-right-spritesheet.png",
-									"Feet": "run-right-spritesheet.png"
+									"Head": "run-right-legendary-spritesheet.png",
+									"Chest": "run-right-legendary-spritesheet.png",
+									"Gloves": "run-right-legendary-spritesheet.png",
+									"Legs": "run-right-legendary-spritesheet.png",
+									"Feet": "run-right-legendary-spritesheet.png"
 								}								
 							}								
 						}											

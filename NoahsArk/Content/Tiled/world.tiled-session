@@ -5,8 +5,8 @@
     },
     "activeFile": "GameMaps/development.tmx",
     "expandedProjectPaths": [
-        ".",
         "Tilesets",
+        ".",
         "GameMaps"
     ],
     "fileStates": {
@@ -19,6 +19,17 @@
             "viewCenter": {
                 "x": 536.1682536360784,
                 "y": 360.062781207492
+            }
+        },
+        "GameMaps/act-1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 715.3333333333333,
+                "y": 834.6666666666665
             }
         },
         "GameMaps/development..tmx": {
@@ -35,10 +46,10 @@
                 7
             ],
             "scale": 1.5,
-            "selectedLayer": 9,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 159.66666666666666
+                "x": 337.33333333333337,
+                "y": 125.33333333333334
             }
         },
         "GameMaps/full.tsx": {
@@ -65,7 +76,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 80,
-                "y": 88.125
+                "y": 88
             }
         },
         "GameMaps/homeoutside.tmx": {
@@ -76,8 +87,8 @@
             "scale": 1.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 240,
-                "y": 159.66666666666666
+                "x": 239.99999999999997,
+                "y": 159.33333333333334
             }
         },
         "GameMaps/infinite.tmx": {
@@ -95,7 +106,7 @@
             "scale": 2.078125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.8796992481203,
+                "x": 240.12030075187968,
                 "y": 159.75939849624058
             }
         },
@@ -103,8 +114,8 @@
             "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 80.125,
-                "y": 63.875
+                "x": 80,
+                "y": 63.75
             }
         },
         "GameMaps/test.tmx": {
@@ -115,7 +126,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 536,
-                "y": 360.25
+                "y": 360.5
             }
         },
         "GameMaps/tileset_buildings_shadows.tsx": {
@@ -274,7 +285,7 @@
         "GameMaps/test.tmx"
     ],
     "project": "world.tiled-project",
-    "property.type": "string",
+    "property.type": "bool",
     "recentFiles": [
         "GameMaps/restaurant.tmx",
         "Tilesets/tileset_kitchen.tsx",

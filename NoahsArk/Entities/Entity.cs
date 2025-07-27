@@ -167,10 +167,11 @@ namespace NoahsArk.Entities
                 _flashTimer = _flashDuration; // reset timer
             }
         }
-        public void DealDamage(Entity target)
+        public void DealDamage(Entity target, Vector2 contactPoint)
         {
             float damage = CalculateDamage(out bool isCrit);
             target.TakeDamage(damage);
+            CurrentMap.GameRef.GamePlayScreen.SpawnBloodParticles(contactPoint, (int)damage); // spawn as many particles as damage value
             Vector2 textPosition = target.GetHitbox(target.Position).Center + new Vector2(0, -30);
             Color color = isCrit
                 ? Color.Yellow
@@ -182,6 +183,7 @@ namespace NoahsArk.Entities
                 ? 12
                 : 10;
             CurrentMap.AddFloatingText(damage.ToString(), textPosition, color, lifetime, size);
+            
         }
         public void Move(Vector2 direction)
         {
