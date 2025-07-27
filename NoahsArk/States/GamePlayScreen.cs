@@ -180,7 +180,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
-            _world.SetCurrentMap(EMapCode.Test);
+            _world.SetCurrentMap(EMapCode.Development);
             Game.Components.Add(_world);
         }
         private void LoadEnemies()
