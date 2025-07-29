@@ -38,7 +38,7 @@ namespace NoahsArk.Entities
         #region Constructor
         public Player(int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed,
             Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Camera camera, PlayerIndex playerIndex,
-            Texture2D shadow, World world) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
+            Texture2D shadow, World world) : base(maxHealthPoints, maxManaPoints, 0, initialPosition, speed, animations, shadow, camera)
         {
             _playerIndex = playerIndex;
             _world = world;
@@ -123,6 +123,10 @@ namespace NoahsArk.Entities
                 return weapon.BaseStats.AttackSpeed;
             }
             return base.GetSpeedMultiplier();
+        }
+        protected override void AddExperiencePoints(float experiencePoints)
+        {
+            base.AddExperiencePoints(experiencePoints);
         }
         #endregion
 

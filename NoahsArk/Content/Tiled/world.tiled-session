@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GameMaps/development.tmx",
+    "activeFile": "GameMaps/act-1.tmx",
     "expandedProjectPaths": [
         "Tilesets",
-        ".",
-        "GameMaps"
+        "GameMaps",
+        "."
     ],
     "fileStates": {
         "C:/Users/Yamil/source/repos/MonoGameRpg/Content/Tiled/full.tsx": {
@@ -25,11 +25,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 715.3333333333333,
-                "y": 834.6666666666665
+                "x": 804,
+                "y": 808
             }
         },
         "GameMaps/development..tmx": {
@@ -165,7 +165,7 @@
             "scaleInEditor": 5.5
         },
         "Tilesets/tileset_dungeon_props.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 3,
             "scaleInEditor": 1
         },
         "Tilesets/tileset_esoteric.tsx": {
@@ -205,7 +205,7 @@
             "scaleInEditor": 5.5
         },
         "Tilesets/tileset_resources.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 3,
             "scaleInEditor": 1
         },
         "Tilesets/tileset_rocks.tsx": {
@@ -282,7 +282,9 @@
         "GameMaps/homeinside.tmx",
         "GameMaps/homeoutside.tmx",
         "GameMaps/development.tmx",
-        "GameMaps/test.tmx"
+        "GameMaps/test.tmx",
+        "GameMaps/obstacles.tmx",
+        "GameMaps/act-1.tmx"
     ],
     "project": "world.tiled-project",
     "property.type": "bool",
@@ -291,14 +293,14 @@
         "Tilesets/tileset_kitchen.tsx",
         "GameMaps/homeinside.tmx",
         "GameMaps/homeoutside.tmx",
-        "GameMaps/test.tmx",
         "GameMaps/development.tmx",
+        "GameMaps/test.tmx",
         "GameMaps/obstacles.tmx",
+        "GameMaps/act-1.tmx",
         "Tilesets/tileset_clouds.tsx",
         "Tilesets/tileset_lightrain.tsx",
         "Tilesets/tileset_rainimpact.tsx",
-        "Tilesets/tileset_smoke.tsx",
-        "Tilesets/full.tsx"
+        "Tilesets/tileset_smoke.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

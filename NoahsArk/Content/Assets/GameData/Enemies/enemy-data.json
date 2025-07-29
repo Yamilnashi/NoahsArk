@@ -5,6 +5,7 @@
 			"level": 1,
 			"healthPoints": 45,
 			"manaPoints": 10,
+			"experienceRewardPoints": 12,
 			"speed": 12,
 			"rarityType": "Normal",
 			"animations": {
@@ -141,6 +142,7 @@
 			"level": 1,
 			"healthPoints": 200,
 			"manaPoints": 10,
+			"experienceRewardPoints": 25,
 			"speed": 12,
 			"rarityType": "Magic",
 			"animations": {
@@ -277,6 +279,7 @@
 			"level": 1,
 			"healthPoints": 300,
 			"manaPoints": 10,
+			"experienceRewardPoints": 40,
 			"speed": 12,
 			"rarityType": "Rare",
 			"animations": {
@@ -413,6 +416,7 @@
 			"level": 1,
 			"healthPoints": 450,
 			"manaPoints": 10,
+			"experienceRewardPoints": 68,
 			"speed": 12,
 			"rarityType": "Epic",
 			"animations": {
@@ -549,6 +553,7 @@
 			"level": 1,
 			"healthPoints": 850,
 			"manaPoints": 10,
+			"experienceRewardPoints": 90,
 			"speed": 12,
 			"rarityType": "Legendary",
 			"animations": {

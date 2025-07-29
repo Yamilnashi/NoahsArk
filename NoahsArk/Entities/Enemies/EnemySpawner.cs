@@ -66,7 +66,7 @@ namespace NoahsArk.Entities.Enemies
                 if (entityDict.TryGetValue(_rarity, out EnemyEntity e))
                 {
                     Vector2 spawnPosition = GetRandomSpawnPosition();
-                    Enemy enemy = new Enemy(e.EnemyType, e.MaxHealthPoints, e.MaxManaPoints, spawnPosition, e.Speed, e.RarityType, e.Animations,
+                    Enemy enemy = new Enemy(e.EnemyType, e.MaxHealthPoints, e.MaxManaPoints, e.ExperienceRewardPoints, spawnPosition, e.Speed, e.RarityType, e.Animations,
                         e.Shadow, e.RarityMarker, e.Camera, new PatrolAI());
                     currentMap.AddEnemy(enemy);
                 }             

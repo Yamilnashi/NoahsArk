@@ -14,6 +14,8 @@ namespace NoahsArk.Entities.Enemies
         public int HealthPoints { get; set; }
         [JsonProperty("manaPoints")]
         public int ManaPoints { get; set; }
+        [JsonProperty("experienceRewardPoints")]
+        public int ExperienceRewardPoints { get; set; }
         [JsonProperty("speed")]
         public float Speed { get; set; }
         [JsonProperty("rarityType")]

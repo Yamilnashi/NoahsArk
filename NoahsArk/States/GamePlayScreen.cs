@@ -217,8 +217,8 @@ namespace NoahsArk.States
             for (int i = 0; i < data.EnemyObjects.Count; i++)
             {
                 EnemyObject obj = data.EnemyObjects[i];
-                EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.Speed, obj.RarityType,
-                    obj.Animations, _camera, rarityMarker, shadow);
+                EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.ExperienceRewardPoints, 
+                    obj.Speed, obj.RarityType, obj.Animations, _camera, rarityMarker, shadow);
                 if (!_enemyEntityDict[obj.EnemyType].TryGetValue(obj.RarityType, out EnemyEntity found))
                 {
                     _enemyEntityDict[obj.EnemyType][obj.RarityType] = entity;

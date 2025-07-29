@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +23,7 @@ namespace NoahsArk.Entities
         private float _manaPoints;
         private float _maxManaPoints;
         private float _experiencePoints;
+        private float _experienceRewardPoints;
         private float _speed;
         private Inventory _inventory;
         private Dictionary<EEquipmentSlot, Item> _equippedItems;
@@ -37,6 +39,7 @@ namespace NoahsArk.Entities
         private float _flashTimer;
         private const float _flashDuration = 0.25f;
         private bool _isAttacking = false;
+        private List<Entity> _myAttackers;
         #endregion
 
         #region Properties
@@ -56,10 +59,11 @@ namespace NoahsArk.Entities
         public Camera Camera { get { return _camera; } }
         public bool IsDying { get { return _isDying; } protected set { _isDying = value; } }
         public bool IsAttacking { get { return _isAttacking; } protected set { _isAttacking = value; } }
+        public List<Entity> MyAttackers { get { return _myAttackers; } }
         #endregion
 
         #region Constructor
-        public Entity(int maxHealthPoints, int maxManaPoints, Vector2 initialTopLeftPosition, float speed,
+        public Entity(float maxHealthPoints, float maxManaPoints, float experienceRewardPoints, Vector2 initialTopLeftPosition, float speed,
             Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, Camera camera)
         {
             _maxHealthPoints = maxHealthPoints;
@@ -67,6 +71,7 @@ namespace NoahsArk.Entities
             _maxManaPoints = maxManaPoints;
             _manaPoints = maxManaPoints;
             _experiencePoints = 0;
+            _experienceRewardPoints = experienceRewardPoints;
             _speed = speed;
             _inventory = new Inventory();
             _equippedItems = new Dictionary<EEquipmentSlot, Item>();
@@ -76,6 +81,7 @@ namespace NoahsArk.Entities
             _currentDirection = EDirection.Right;
             _camera = camera;
             _shadow = shadow;
+            _myAttackers = new List<Entity>();
         }
         #endregion
 
@@ -167,12 +173,49 @@ namespace NoahsArk.Entities
                 _flashTimer = _flashDuration; // reset timer
             }
         }
+        public virtual void ExchangeExperienceRewards()
+        {
+            if (_healthPoints == 0 && // has health
+                _experienceRewardPoints > 0) // has experience points to give
+            {
+                Entity[] attackers = _myAttackers.ToArray();
+                float experienceSpreadChunks = _experienceRewardPoints / attackers.Length;
+                for (int i = 0; i <  attackers.Length; i++)
+                {
+                    Entity attacker = attackers[i];
+                    RemoveExperiencePoints(experienceSpreadChunks);
+                    attacker.AddExperiencePoints(experienceSpreadChunks);                                       
+                }
+            }
+        }
+        protected virtual void RemoveExperiencePoints(float experiencePoints)
+        {
+            float newExperiencePoints = _experienceRewardPoints - experiencePoints;
+            _experienceRewardPoints = MathHelper.Max(0, newExperiencePoints);
+        }
+        protected virtual void AddExperiencePoints(float experiencePoints)
+        {
+            _experiencePoints += experiencePoints;
+            Vector2 textPosition = GetHitbox(_position).Center + new Vector2(0, -30); // slightly above the head
+            Color textColor = Color.MidnightBlue;
+            float lifetime = 2.0f;
+            int size = 10;
+            CurrentMap.AddFloatingText($"{experiencePoints} XP", textPosition, Color.MidnightBlue, lifetime, size);
+        }
+        protected virtual void AddAttacker(Entity attacker)
+        {
+            if (!_myAttackers.Contains(attacker))
+            {
+                _myAttackers.Add(attacker);
+            }            
+        }
         public void DealDamage(Entity target, Vector2 contactPoint)
         {
+            target.AddAttacker(this);
             float damage = CalculateDamage(out bool isCrit);
             target.TakeDamage(damage);
             CurrentMap.GameRef.GamePlayScreen.SpawnBloodParticles(contactPoint, (int)damage); // spawn as many particles as damage value
-            Vector2 textPosition = target.GetHitbox(target.Position).Center + new Vector2(0, -30);
+            Vector2 textPosition = target.GetHitbox(target.Position).Center + new Vector2(0, -30);  // slightly above the head
             Color color = isCrit
                 ? Color.Yellow
                 : Color.White;
@@ -183,7 +226,7 @@ namespace NoahsArk.Entities
                 ? 12
                 : 10;
             CurrentMap.AddFloatingText(damage.ToString(), textPosition, color, lifetime, size);
-            
+            target.ExchangeExperienceRewards();
         }
         public void Move(Vector2 direction)
         {

@@ -13,6 +13,7 @@ namespace NoahsArk.Entities
     public class Enemy : Entity
     {
         #region Fields
+        private float _experienceRewardPoints;
         private EEnemyType _enemyType;
         private Texture2D _rarityMarker;
         private static Dictionary<ERarity, Texture2D> _healthBarTexture;
@@ -33,10 +34,11 @@ namespace NoahsArk.Entities
         #endregion
 
         #region Constructor
-        public Enemy(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, Vector2 initialPosition, float speed, ERarity rarity,
-            Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, Texture2D rarityMarker, Camera camera,
-            IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, initialPosition, speed, animations, shadow, camera)
+        public Enemy(EEnemyType enemyType, float maxHealthPoints, float maxManaPoints, float experienceRewardPoints, Vector2 initialPosition, float speed, 
+            ERarity rarity, Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, Texture2D shadow, 
+            Texture2D rarityMarker, Camera camera, IAIBehavior behavior) : base(maxHealthPoints, maxManaPoints, experienceRewardPoints, initialPosition, speed, animations, shadow, camera)
         {
+            _experienceRewardPoints = experienceRewardPoints;
             _enemyType = enemyType;
             _behavior = behavior;
             _rarityType = rarity;
