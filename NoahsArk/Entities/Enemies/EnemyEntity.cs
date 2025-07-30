@@ -18,6 +18,7 @@ namespace NoahsArk.Entities.Enemies
         private Texture2D _rarityMarker;
         private Camera _camera;
         private ERarity _rarityType;
+        private List<LootDrop> _lootTable;
         #endregion
 
         #region Properties
@@ -31,12 +32,13 @@ namespace NoahsArk.Entities.Enemies
         public Texture2D RarityMarker { get { return _rarityMarker; } }
         public Camera Camera { get { return _camera; } }
         public ERarity RarityType { get { return _rarityType; } }
+        public List<LootDrop> LootTable { get { return _lootTable; } }
         #endregion
 
         #region Constructor
         public EnemyEntity(EEnemyType enemyType, int maxHealthPoints, int maxManaPoints, float experienceRewardPoints, float speed, ERarity rarityType,
             Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> animations, 
-            Camera camera, Texture2D rarityMarker, Texture2D shadow = null)
+            Camera camera, Texture2D rarityMarker, Texture2D shadow = null, List<LootDrop> lootTable = null)
         {
             _enemyType = enemyType;
             _maxHealthPoints = maxHealthPoints;
@@ -48,6 +50,7 @@ namespace NoahsArk.Entities.Enemies
             _camera = camera;
             _shadow = shadow;
             _rarityMarker = rarityMarker;
+            _lootTable = lootTable;
         }
         #endregion
     }

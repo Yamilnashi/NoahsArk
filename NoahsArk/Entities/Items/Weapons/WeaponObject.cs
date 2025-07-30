@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NoahsArk.Controls;
@@ -12,6 +13,8 @@ namespace NoahsArk.Entities.Items.Weapons
         private string _name;
         private EWeaponType _weaponType;
         private EMaterialType _materialType;
+        private string _groundTexturePath;
+        private Texture2D _groundTexture;
         private float _attackHitboxOffset;
         private WeaponStats _baseStats;
         private Dictionary<EAnimationKey, Dictionary<EDirection, string>> _animations;
@@ -19,17 +22,21 @@ namespace NoahsArk.Entities.Items.Weapons
 
         #region Properties
         [JsonProperty("name")]
-        public string Name { get { return _name; }  set { _name = value; } }
+        public override string Name { get { return _name; }  set { _name = value; } }
         [JsonProperty("weaponType")]
         public EWeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
         [JsonProperty("materialType")]
         public EMaterialType MaterialType { get { return _materialType; } set { _materialType = value; } }
+        [JsonProperty("groundTexturePath")]
+        public string GroundTexturePath { get { return _groundTexturePath; } set { _groundTexturePath = value; }}
         [JsonProperty("attackHitboxOffset")]
         public float AttackHitboxOffset { get { return _attackHitboxOffset; } set { _attackHitboxOffset = value; } }
         [JsonProperty("baseStats")]
         public WeaponStats BaseStats { get { return _baseStats; } set { _baseStats = value; } }
         [JsonProperty("animations")]
         public Dictionary<EAnimationKey, Dictionary<EDirection, string>> Animations { get { return _animations; } set { _animations = value; } }
+        [JsonIgnore]
+        public Texture2D GroundTexture { get { return _groundTexture; } set { _groundTexture = value; } }
         #endregion
 
         #region Constructor

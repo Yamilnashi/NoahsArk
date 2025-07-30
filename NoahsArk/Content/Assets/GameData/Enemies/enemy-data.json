@@ -8,6 +8,14 @@
 			"experienceRewardPoints": 12,
 			"speed": 12,
 			"rarityType": "Normal",
+			"lootTable": [
+				{
+					"itemType": "gold",
+					"dropChance": 1,
+					"minQuantity": 1,
+					"maxQuantity": 10
+				}
+			],
 			"animations": {
 				"Movements": {
 					"Walking": {						
@@ -145,6 +153,14 @@
 			"experienceRewardPoints": 25,
 			"speed": 12,
 			"rarityType": "Magic",
+			"lootTable": [
+				{
+					"itemType": "gold",
+					"dropChance": 1,
+					"minQuantity": 10,
+					"maxQuantity": 15
+				}
+			],
 			"animations": {
 				"Movements": {
 					"Walking": {						
@@ -282,6 +298,14 @@
 			"experienceRewardPoints": 40,
 			"speed": 12,
 			"rarityType": "Rare",
+			"lootTable": [
+				{
+					"itemType": "gold",
+					"dropChance": 1,
+					"minQuantity": 25,
+					"maxQuantity": 45
+				}
+			],
 			"animations": {
 				"Movements": {
 					"Walking": {						
@@ -419,6 +443,14 @@
 			"experienceRewardPoints": 68,
 			"speed": 12,
 			"rarityType": "Epic",
+			"lootTable": [
+				{
+					"itemType": "gold",
+					"dropChance": 1,
+					"minQuantity": 65,
+					"maxQuantity": 85
+				}
+			],
 			"animations": {
 				"Movements": {
 					"Walking": {						
@@ -556,6 +588,14 @@
 			"experienceRewardPoints": 90,
 			"speed": 12,
 			"rarityType": "Legendary",
+			"lootTable": [
+				{
+					"itemType": "gold",
+					"dropChance": 1,
+					"minQuantity": 120,
+					"maxQuantity": 300
+				}
+			],
 			"animations": {
 				"Movements": {
 					"Walking": {						

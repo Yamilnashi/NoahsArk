@@ -4,6 +4,7 @@
 			"name": "Wooden Dagger",
 			"weaponType": "Dagger",
 			"materialType": "Wooden",
+			"groundTexturePath": "Assets/Sprites/Items/Weapons/Wood/dagger-ground",
 			"attackHitboxOffset": 10,
 			"baseStats": {
 				"minimumDamage": 8,

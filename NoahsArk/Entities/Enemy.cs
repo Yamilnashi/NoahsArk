@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items;
+using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Extensions;
 using NoahsArk.Rendering;
@@ -85,10 +89,11 @@ namespace NoahsArk.Entities
                     int currentFrame = Animations[CurrentAnimation][CurrentDirection][slot].CurrentFrame;
                     int totalFrames = Animations[CurrentAnimation][CurrentDirection][slot].TotalFrames - 1;
                     if (currentFrame == totalFrames)
-                    {
+                    {                        
                         IsDying = false;
                         if (CurrentMap != null)
                         {
+                            GenerateLoot();
                             CurrentMap.RemoveEnemy(this);
                         }                        
                     }
@@ -133,6 +138,59 @@ namespace NoahsArk.Entities
         }
         #endregion
         #region Private
+        private void GenerateLoot()
+        {
+            if (GamePlayScreen.EnemyEntityDict.TryGetValue(_enemyType, out Dictionary<ERarity, EnemyEntity> enemyDict) &&
+                enemyDict.TryGetValue(_rarityType, out EnemyEntity entity) &&
+                entity.LootTable != null)
+            {
+                Random random = new Random();
+                for (int i = 0; i < entity.LootTable.Count; i++)
+                {
+                    LootDrop drop = entity.LootTable[i];
+                    if (random.NextDouble() < drop.DropChance)
+                    {
+                        Item item = null;
+                        int quantity = random.Next(drop.MinQuantity, drop.MaxQuantity + 1);
+                        if (drop.ItemType == EItemType.Gold)
+                        {
+                            item = new Gold() { Amount = quantity };
+                        }
+                        else if (drop.ItemType == EItemType.Weapon && 
+                            drop.WeaponType != null &&
+                            drop.MaterialType != null) {
+                            if (GamePlayScreen.WeaponObjectDict.TryGetValue((drop.WeaponType.Value, drop.MaterialType.Value), out WeaponObject weapon))
+                            {
+                                item = weapon;
+                                quantity = 1; // cannot stack weapons
+                            }
+                        }
+
+                        if (item != null)
+                        {
+                            Vector2 scatterOffset = new Vector2(
+                                (float)(random.NextDouble() * 64 - 16),
+                                (float)(random.NextDouble() * 64 - 16)
+                            );
+                            DroppedItem droppedItem = new DroppedItem(item, quantity, Position + scatterOffset, GetTextureForItem(item));
+                            CurrentMap.AddDroppedItem(droppedItem);
+                        }
+                    }
+                }
+            }
+        }
+        private Texture2D GetTextureForItem(Item item)
+        {
+            if (item is Gold)
+            {
+                return GamePlayScreen.GoldSpriteSheet;
+            }
+            else if (item is WeaponObject weapon)
+            {
+                return weapon.GroundTexture;
+            }
+            return null;
+        }
         private void UpdateHealthBar()
         {
             Vector2 barPosition = GetHealthBarPosition();

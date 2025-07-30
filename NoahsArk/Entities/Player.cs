@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NoahsArk.Controls;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items;
 using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Entities.Sprites;
 using NoahsArk.Levels;
@@ -92,7 +93,8 @@ namespace NoahsArk.Entities
                     Camera.LockToPosition(Position, CurrentMap);
                 }
             }
-            UpdateInteractionState();            
+            UpdateInteractionState();
+            HandlePickupInteractions();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -446,6 +448,41 @@ namespace NoahsArk.Entities
                     DealDamage(entity, contactPoint);
                 }
             }
+        }
+        private void HandlePickupInteractions()
+        {
+            Circle playerHitbox = GetHitbox(Position);
+            for (int i = CurrentMap.DroppedItems.Count - 1; i >= 0; i--)
+            {
+                DroppedItem drop = CurrentMap.DroppedItems[i];
+                Rectangle dropRect = new Rectangle(
+                    (int)drop.Position.X,
+                    (int)drop.Position.Y,
+                    drop.Texture.Width,
+                    drop.Texture.Height
+                );
+
+                if (CollisionHelper.CircleIntersectsRectangle(playerHitbox, dropRect))
+                {
+                    PickupItem(drop);
+                    CurrentMap.RemoveDroppedItem(drop);
+                }
+            }
+        }
+        private void PickupItem(DroppedItem drop)
+        {
+            //_inventory.AddItem(drop.Item, drop.Quantity);
+            string itemName = drop.Item.Name ?? "Item";
+            CurrentMap.RemoveDroppedItem(drop);
+
+            Vector2 textPosition = GetHitbox(Position).Center + new Vector2(0, -30); // slightly above the head
+            Color textColor = drop.Item is Gold 
+                ? Color.Gold 
+                : Color.MonoGameOrange;
+            float lifetime = 2.0f;
+            int size = 10;
+
+            CurrentMap.AddFloatingText($"+{drop.Quantity} {itemName}", textPosition, textColor, lifetime, size);
         }
         #endregion
     }

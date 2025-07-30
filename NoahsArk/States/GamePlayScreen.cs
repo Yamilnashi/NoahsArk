@@ -39,6 +39,8 @@ namespace NoahsArk.States
         private static Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>> _enemyEntityDict = new Dictionary<EEnemyType, Dictionary<ERarity, EnemyEntity>>();
         private Texture2D _particleTexture;
         private Random _random = new Random();
+        private static Texture2D _goldSpriteSheet;
+        private static List<GoldTier> _goldTiers = new List<GoldTier>();
         #endregion
 
         #region Properties
@@ -52,6 +54,8 @@ namespace NoahsArk.States
         public static ContentManager ContentRef { get { return _contentRef; } }
         public static GraphicsDevice GraphicsDeviceRef { get { return _graphicsDevice; } }
         public static bool IsDebugEnabled { get { return _isDebugEnabled; } }
+        public static Texture2D GoldSpriteSheet { get { return _goldSpriteSheet; } }
+        public static List<GoldTier> GoldTiers { get { return _goldTiers; } }
         #endregion
 
         #region Constructor
@@ -162,6 +166,28 @@ namespace NoahsArk.States
         private void LoadItems()
         {
             LoadWeapons();
+            LoadGold();
+        }
+        private void LoadGold()
+        {
+            _goldSpriteSheet = _contentRef.Load<Texture2D>("Assets/Sprites/Items/Gold/gold-spritesheet");
+            int frameHeight = 32;
+            int frameWidth = 32;
+            GoldTier tinyPile = new GoldTier(1, 15, new Rectangle(0 * frameWidth, 0, frameWidth, frameHeight));
+            GoldTier smallPile = new GoldTier(16, 30, new Rectangle(1 * frameWidth, 0, frameWidth, frameHeight));
+            GoldTier averagePile = new GoldTier(31, 60, new Rectangle(2 * frameWidth, 0, frameWidth, frameHeight));
+            GoldTier aboveAveragePile = new GoldTier(61, 120, new Rectangle(3 * frameWidth, 0, frameWidth, frameHeight));
+            GoldTier largePile = new GoldTier(121, 240, new Rectangle(4 * frameWidth, 0, frameWidth, frameHeight));
+            GoldTier enormousPile = new GoldTier(241, int.MaxValue, new Rectangle(5 * frameWidth, 0, frameWidth, frameHeight));
+            _goldTiers = new List<GoldTier>
+            {
+                tinyPile,
+                smallPile,
+                averagePile,
+                aboveAveragePile,
+                largePile,
+                enormousPile
+            };
         }
         private void LoadWeapons()
         {
@@ -172,6 +198,7 @@ namespace NoahsArk.States
             for (int i = 0; i < data.weaponObjects.Count; i++)
             {
                 WeaponObject w = data.weaponObjects[i];
+                w.GroundTexture = _contentRef.Load<Texture2D>(w.GroundTexturePath);
                 _weaponObjectDict[(w.WeaponType, w.MaterialType)] = w;
             }
         }
@@ -180,7 +207,7 @@ namespace NoahsArk.States
             _debugTexture = new Texture2D(_gameRef.GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
             _world = new World(_gameRef, _debugTexture);
-            _world.SetCurrentMap(EMapCode.Development);
+            _world.SetCurrentMap(EMapCode.Test);
             Game.Components.Add(_world);
         }
         private void LoadEnemies()
@@ -218,7 +245,7 @@ namespace NoahsArk.States
             {
                 EnemyObject obj = data.EnemyObjects[i];
                 EnemyEntity entity = new EnemyEntity(obj.EnemyType, obj.HealthPoints, obj.ManaPoints, obj.ExperienceRewardPoints, 
-                    obj.Speed, obj.RarityType, obj.Animations, _camera, rarityMarker, shadow);
+                    obj.Speed, obj.RarityType, obj.Animations, _camera, rarityMarker, shadow, obj.LootTable);
                 if (!_enemyEntityDict[obj.EnemyType].TryGetValue(obj.RarityType, out EnemyEntity found))
                 {
                     _enemyEntityDict[obj.EnemyType][obj.RarityType] = entity;

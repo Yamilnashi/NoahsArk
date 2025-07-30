@@ -6,9 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 using NoahsArk.Entities;
 using NoahsArk.Entities.Enemies;
 using NoahsArk.Entities.GameObjects;
+using NoahsArk.Entities.Items;
+using NoahsArk.Entities.Items.Weapons;
 using NoahsArk.Levels.Maps;
 using NoahsArk.Managers;
 using NoahsArk.Rendering;
+using NoahsArk.States;
 
 namespace NoahsArk.Levels
 {
@@ -22,6 +25,7 @@ namespace NoahsArk.Levels
         private List<Entity> _entities = new List<Entity>();
         private List<Particle> _particles = new List<Particle>();
         private List<FloatingText> _floatingTexts = new List<FloatingText>();
+        private List<DroppedItem> _droppedItems = new List<DroppedItem>();
         private Texture2D _debugTexture;
         private Game1 _gameRef;
         #endregion
@@ -32,6 +36,7 @@ namespace NoahsArk.Levels
         public Dictionary<EEnemyType, Dictionary<ERarity, List<Enemy>>> Enemies {  get { return _enemies; } }    
         public List<Entity> Entities { get { return _entities; } }
         public Game1 GameRef { get { return _gameRef; } }   
+        public List<DroppedItem> DroppedItems { get { return _droppedItems; } }
         #endregion
 
         #region Constructor
@@ -111,9 +116,10 @@ namespace NoahsArk.Levels
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Camera camera)
         {
             DrawLayersBeforeCharacter(spriteBatch, gameTime, camera, out List<ILayer> layersToDrawAfterCharacter);
+            DrawDroppedItems(spriteBatch);
             DrawSortables(spriteBatch);
             DrawLayersAfterCharacter(spriteBatch, gameTime, camera, layersToDrawAfterCharacter);
-            DrawFloatingTexts(spriteBatch);
+            DrawFloatingTexts(spriteBatch);            
         }
         public void AddPlayer(Player player)
         {
@@ -142,6 +148,14 @@ namespace NoahsArk.Levels
         public void AddParticle(Particle particle)
         {
             _particles.Add(particle);
+        }
+        public void AddDroppedItem(DroppedItem droppedItem)
+        {
+            _droppedItems.Add(droppedItem);
+        }
+        public void RemoveDroppedItem(DroppedItem droppedItem)
+        {
+            _droppedItems.Remove(droppedItem);
         }
         public void RemoveParticle(Particle particle)
         {
@@ -202,6 +216,27 @@ namespace NoahsArk.Levels
             for (int i = 0; i < _floatingTexts.Count; i++)
             {
                 _floatingTexts[i].Draw(spriteBatch);
+            }
+        }
+        private void DrawDroppedItems(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < _droppedItems.Count; i++)
+            {
+                DroppedItem droppedItem = _droppedItems[i];
+                if (droppedItem.Item is Gold gold)
+                {
+                    GoldTier tier = GamePlayScreen.GoldTiers.FirstOrDefault(x => x.IsInRange(gold.Amount));
+                    if (tier != null)
+                    {
+                        spriteBatch.Draw(GamePlayScreen.GoldSpriteSheet, droppedItem.Position, tier.SpriteRectangle, Color.White);
+                    }
+                } else if (droppedItem.Item is WeaponObject weapon)
+                {
+                    if (droppedItem.Texture != null)
+                    {
+                        spriteBatch.Draw(droppedItem.Texture, droppedItem.Position, Color.White);
+                    }
+                } 
             }
         }
         #endregion

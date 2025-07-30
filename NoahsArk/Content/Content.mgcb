@@ -775,6 +775,30 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Sprites/Environment/smoke-spritesheet.png
 
+#begin Assets/Sprites/Items/Gold/gold-spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Items/Gold/gold-spritesheet.png
+
+#begin Assets/Sprites/Items/Weapons/Wood/dagger-ground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Items/Weapons/Wood/dagger-ground.png
+
 #begin Tiled/Tilesets/full.png
 /importer:TextureImporter
 /processor:TextureProcessor

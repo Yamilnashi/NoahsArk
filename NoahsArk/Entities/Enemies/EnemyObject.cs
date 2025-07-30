@@ -22,5 +22,7 @@ namespace NoahsArk.Entities.Enemies
         public ERarity RarityType { get; set; }
         [JsonProperty("animations")]
         public Dictionary<EAnimationType, Dictionary<EAnimationKey, AnimationData>> Animations { get; set; }
+        [JsonProperty("lootTable")]
+        public List<LootDrop> LootTable { get; set; }
     }
 }
